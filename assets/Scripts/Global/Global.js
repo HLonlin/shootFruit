@@ -189,6 +189,7 @@ window.USERINFO = {
 		that.armpoweLevel = data.armpoweLevel;
 		that.bulletShop = data.bulletShop;
 		that.initScene = data.initScene;
+		this.Data_game = data.Data_game;
 	},
 };
 window.WECHAT = {

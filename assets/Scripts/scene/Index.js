@@ -124,7 +124,43 @@ cc.Class({
 			type: cc.Button,
 			displayName: '开启榴莲按钮',
 			tooltip: '开启榴莲按钮'
-		}
+		},
+		font_powerLevel: {
+			default: null,
+			type: cc.Label,
+			displayName: '武器威力等级',
+			tooltip: '武器威力等级'
+		},
+		font_critLevel: {
+			default: null,
+			type: cc.Label,
+			displayName: '武器暴击等级',
+			tooltip: '武器暴击等级'
+		},
+		font_powerNum: {
+			default: null,
+			type: cc.Label,
+			displayName: '武器威力',
+			tooltip: '武器威力'
+		},
+		font_critNum: {
+			default: null,
+			type: cc.Label,
+			displayName: '武器暴击',
+			tooltip: '武器暴击'
+		},
+		power_price: {
+			default: null,
+			type: cc.RichText,
+			displayName: '武器威力价格',
+			tooltip: '武器威力价格'
+		},
+		crit_price: {
+			default: null,
+			type: cc.RichText,
+			displayName: '武器暴击价格',
+			tooltip: '武器暴击价格'
+		},
 	},
 	onLoad() {
 		//播放背景音乐
@@ -145,7 +181,7 @@ cc.Class({
 	login: function () {
 		var data = {
 			// 用户信息
-			coin: 100,//金币
+			coin: 100000,//金币
 			diamond: 100,//钻石
 			durian: 1,//榴莲
 			highestScore: 0,//最高分
@@ -154,19 +190,24 @@ cc.Class({
 			armpoweLevel: 1,// 武器威力等级
 			bulletShop: this.bulletShop.fruit,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
 			initScene: '1001',// 初始场景值，用于区分从哪进入游戏
-			data_game: this.Data_game,//游戏数据
+			Data_game: this.Data_game,//游戏数据
 		};
 		USERINFO.init(data);
 	},
 	initUi: function () {
+		// 签到页弹出
 		var signInState = localStorage.getItem('signInState');
 		if (signInState != 2) {
 			this.redPoint_singnIn.node.active = true;
 			this.openSingnIn();
 		}
+		// 金币
 		this.font_coin.string = USERINFO.coin;
+		// 钻石
 		this.font_diamond.string = USERINFO.diamond;
+		// 最高分
 		this.font_highestScore.string = '<outline color=#af5f00 width=2><color=#ffffff>最高分' + USERINFO.highestScore + '</color>';
+		// 榴莲蛋
 		if (USERINFO.durian == 0) {
 			this.btn_openDurian.interactable = true;
 			this.redPoint_durian.node.active = false;
@@ -175,6 +216,10 @@ cc.Class({
 			this.redPoint_durian.node.active = true;
 			this.font_durianNum.string = USERINFO.durian;
 		}
+		// 升级面板
+		this.initPowerUi();
+		this.initCritUi();
+		// 微信
 		if (cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT) {
 			//初始化设备信息
 			WECHAT.initDeviceMaster();
@@ -224,6 +269,41 @@ cc.Class({
 			this.redPoint_durian.node.active = true;
 			this.font_durianNum.string = USERINFO.durian;
 		}
+	},
+	// 升级武器
+	updatalevel_power: function () {
+		// 威力
+		var currentLv = USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1];
+		if (USERINFO.coin >= currentLv.Price) {
+			USERINFO.coin -= currentLv.Price;
+			USERINFO.armpoweLevel += 1;
+			this.font_coin.string = USERINFO.coin;
+			this.initPowerUi();
+		} else {
+			console.log('金币不足');
+		}
+	},
+	initPowerUi: function () {
+		this.font_powerLevel.string = 'Lv.' + USERINFO.armpoweLevel;
+		this.font_powerNum.string = USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1].Power;
+		this.power_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1].Price + '</color></outline>';
+	},
+	updatalevel_crit: function () {
+		// 暴击
+		var currentLv = USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1];
+		if (USERINFO.coin >= currentLv.Price) {
+			USERINFO.coin -= currentLv.Price;
+			USERINFO.armCritLevel += 1;
+			this.font_coin.string = USERINFO.coin;
+			this.initCritUi();
+		} else {
+			console.log('金币不足');
+		}
+	},
+	initCritUi: function () {
+		this.font_critLevel.string = 'Lv.' + USERINFO.armCritLevel;
+		this.font_critNum.string = USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Power;
+		this.crit_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Price + '</color></outline>';
 	},
 	// 显示广告
 	openAd: function () {
