@@ -222,25 +222,20 @@ cc.Class({
     show: function () {
         this.node.active = true;
         this.node.emit('fade-in');
-        this.home.toggleHomeBtns(false);
     },
     hide: function () {
         this.node.emit('fade-out');
-        this.home.toggleHomeBtns(true);
     },
     startFadeIn: function () {
-        //      cc.eventManager.pauseTarget(this.node, true);
         this.node.position = cc.v2(0, 0);
         this.node.setScale(2);
         this.node.opacity = 0;
         this.node.runAction(this.actionFadeIn);
     },
     startFadeOut: function () {
-        //      cc.eventManager.pauseTarget(this.node, true);
         this.node.runAction(this.actionFadeOut);
     },
     onFadeInFinish: function () {
-        //      cc.eventManager.resumeTarget(this.node, true);
     },
     onFadeOutFinish: function () {
         this.node.position = this.outOfWorld;

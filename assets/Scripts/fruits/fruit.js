@@ -79,9 +79,9 @@ cc.Class({
 	injuryValue: function () {
 		var attackType = this.isCrit(this.armsProperty.critRate);
 		if (!attackType) {
-			return this.bulletProperty.attackPower;
+			return USERINFO.bulletShop[USERINFO.bulletsInUse - 1].power;
 		} else {
-			return (this.bulletProperty.attackPower + this.armsProperty.attackPower) * 2;
+			return (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].power + this.armsProperty.attackPower) * 2;
 		}
 	},
 	// 是否暴击
@@ -103,6 +103,9 @@ cc.Class({
 		anim.on('finished', this.showpage_over, this);
 	},
 	showpage_over: function () {
+		if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
+			USERINFO.bulletsInUse = 1;
+		}
 		this.page_Over.node.getComponent('Over').initUi();
 		this.page_Over.node.getComponent('tips').show()
 	}

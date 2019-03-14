@@ -467,7 +467,7 @@
         "__id__": 10
       },
       {
-        "__id__": 932
+        "__id__": 933
       }
     ],
     "_prefab": null,
@@ -601,10 +601,10 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 929
+        "__id__": 930
       },
       {
-        "__id__": 930
+        "__id__": 931
       }
     ],
     "_prefab": null,
@@ -780,7 +780,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "0aOB8jbpdFx7lz25UI6bOb"
+    "_id": "cds8WTCqJNC6CzNNsnMHhc"
   },
   {
     "__type__": "cc.Label",
@@ -806,7 +806,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "54ia6oG5FGs6ps2uw4ZK9P"
+    "_id": "49uVgqzsZKkrzdhzaR/60W"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -824,7 +824,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "46DJiXtYdCZ5bQ8DQ5hu/1"
+    "_id": "55fbKbKhBBmK6aPb96lSt4"
   },
   {
     "__type__": "cc.RichText",
@@ -1253,7 +1253,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "e4Cc0NRHxAZK1eRZqTu8Yp"
+    "_id": "d7rK8HIr1Ld6LsQ2fk1LtC"
   },
   {
     "__type__": "cc.Label",
@@ -1279,7 +1279,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "94cXesJLpDranTX60kbJ3I"
+    "_id": "38YyxmHnNCkq4Csxd+h7Jl"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -1297,7 +1297,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "a9gRBLToZEQZ84hlD0tuSV"
+    "_id": "7d+2DtvOlDoZJdGiNcvBj3"
   },
   {
     "__type__": "cc.RichText",
@@ -26031,7 +26031,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "45SjaFmK9C7q4uRK0noEuT"
+    "_id": "d2EkifMnNGw4wsKlvkDvSl"
   },
   {
     "__type__": "cc.Label",
@@ -26057,7 +26057,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "d6A0iwQ+NDT6fgYYn0FNDt"
+    "_id": "50Nf6LhZtJy4UWVE2ixg/j"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -26075,7 +26075,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "96K3TLpBFInab3kgApBIOP"
+    "_id": "95FSoerj9KO7XmiknfJiA0"
   },
   {
     "__type__": "cc.Widget",
@@ -26470,7 +26470,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "31vg3SbZxOZap6UmEG5+Oa"
+    "_id": "3cisqj4k1KJIvL1Ii0Po+b"
   },
   {
     "__type__": "cc.Label",
@@ -26496,7 +26496,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "21X8ZEjIBLN5tuaQA7xA6u"
+    "_id": "f53w65CIlBgLRPLOOzpFiM"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -26514,7 +26514,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "1dkNyfR49NyKNFZ+RsC5SJ"
+    "_id": "832uw8JGRMFZHaUbV4N5zh"
   },
   {
     "__type__": "cc.RichText",
@@ -28387,7 +28387,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "90uqMyvaxKs7iIW4vi9Evl"
+    "_id": "79pyIbdx1CqqH60XxLKuCM"
   },
   {
     "__type__": "cc.Label",
@@ -28413,7 +28413,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "74YkcPyipA7IgA7c2T7nIy"
+    "_id": "50Y0V/cshJJavkQxlUBpdt"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -28431,7 +28431,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "9ePaJY4q9BPZz/Zskf0zAy"
+    "_id": "d7L0SefiZNW51xQhg7+A4x"
   },
   {
     "__type__": "cc.RichText",
@@ -31876,10 +31876,10 @@
         "__id__": 836
       },
       {
-        "__id__": 904
+        "__id__": 905
       },
       {
-        "__id__": 915
+        "__id__": 916
       }
     ],
     "_active": false,
@@ -31889,10 +31889,10 @@
         "__id__": 887
       },
       {
-        "__id__": 927
+        "__id__": 928
       },
       {
-        "__id__": 928
+        "__id__": 929
       }
     ],
     "_prefab": null,
@@ -32946,10 +32946,10 @@
         "__id__": 844
       },
       {
-        "__id__": 902
+        "__id__": 903
       },
       {
-        "__id__": 903
+        "__id__": 904
       }
     ],
     "_prefab": null,
@@ -33273,6 +33273,9 @@
       },
       {
         "__id__": 901
+      },
+      {
+        "__id__": 902
       }
     ],
     "_N$interactable": true,
@@ -33338,7 +33341,7 @@
     "component": "",
     "_componentId": "79e46fmGXZHxJtVBi+WZTEv",
     "handler": "hide",
-    "customEventData": "tips_over"
+    "customEventData": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -33348,7 +33351,7 @@
     "component": "",
     "_componentId": "79e46fmGXZHxJtVBi+WZTEv",
     "handler": "hide",
-    "customEventData": "tips_game"
+    "customEventData": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -35700,6 +35703,16 @@
     "customEventData": ""
   },
   {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 671
+    },
+    "component": "",
+    "_componentId": "7fc67IB2cJCBJxbJmaMRR/l",
+    "handler": "initUi",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.BlockInputEvents",
     "_name": "",
     "_objFlags": 0,
@@ -35730,20 +35743,20 @@
     },
     "_children": [
       {
-        "__id__": 905
+        "__id__": 906
       },
       {
-        "__id__": 911
+        "__id__": 912
       }
     ],
     "_active": true,
     "_level": 3,
     "_components": [
       {
-        "__id__": 913
+        "__id__": 914
       },
       {
-        "__id__": 914
+        "__id__": 915
       }
     ],
     "_prefab": null,
@@ -35797,15 +35810,12 @@
     "_name": "btn_addcoins",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 904
+      "__id__": 905
     },
     "_children": [],
     "_active": true,
     "_level": 3,
     "_components": [
-      {
-        "__id__": 906
-      },
       {
         "__id__": 907
       },
@@ -35814,6 +35824,9 @@
       },
       {
         "__id__": 909
+      },
+      {
+        "__id__": 910
       }
     ],
     "_prefab": null,
@@ -35867,7 +35880,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 905
+      "__id__": 906
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -35897,7 +35910,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 905
+      "__id__": 906
     },
     "_enabled": true,
     "_id": "41YYyTOphPGpnDm/9ONDRP"
@@ -35907,7 +35920,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 905
+      "__id__": 906
     },
     "_enabled": true,
     "pressedScale": 0.85,
@@ -35919,14 +35932,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 905
+      "__id__": 906
     },
     "_enabled": true,
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 910
+        "__id__": 911
       }
     ],
     "_N$interactable": true,
@@ -35999,14 +36012,14 @@
     "_name": "font_coinNums",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 904
+      "__id__": 905
     },
     "_children": [],
     "_active": true,
     "_level": 3,
     "_components": [
       {
-        "__id__": 912
+        "__id__": 913
       }
     ],
     "_prefab": null,
@@ -36060,7 +36073,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 911
+      "__id__": 912
     },
     "_enabled": true,
     "_srcBlendFactor": 1,
@@ -36086,7 +36099,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 904
+      "__id__": 905
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -36116,7 +36129,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 904
+      "__id__": 905
     },
     "_enabled": true,
     "alignMode": 1,
@@ -36147,20 +36160,20 @@
     },
     "_children": [
       {
-        "__id__": 916
+        "__id__": 917
       },
       {
-        "__id__": 923
+        "__id__": 924
       }
     ],
     "_active": true,
     "_level": 3,
     "_components": [
       {
-        "__id__": 925
+        "__id__": 926
       },
       {
-        "__id__": 926
+        "__id__": 927
       }
     ],
     "_prefab": null,
@@ -36214,15 +36227,12 @@
     "_name": "btn_adddiams",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 915
+      "__id__": 916
     },
     "_children": [],
     "_active": true,
     "_level": 3,
     "_components": [
-      {
-        "__id__": 917
-      },
       {
         "__id__": 918
       },
@@ -36231,6 +36241,9 @@
       },
       {
         "__id__": 920
+      },
+      {
+        "__id__": 921
       }
     ],
     "_prefab": null,
@@ -36284,7 +36297,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 916
+      "__id__": 917
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -36314,7 +36327,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 916
+      "__id__": 917
     },
     "_enabled": true,
     "_id": "d6g1dGIDFFJYOVVqAZP9kk"
@@ -36324,7 +36337,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 916
+      "__id__": 917
     },
     "_enabled": true,
     "pressedScale": 0.85,
@@ -36336,17 +36349,17 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 916
+      "__id__": 917
     },
     "_enabled": true,
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 921
+        "__id__": 922
       },
       {
-        "__id__": 922
+        "__id__": 923
       }
     ],
     "_N$interactable": true,
@@ -36429,14 +36442,14 @@
     "_name": "font_diamNums",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 915
+      "__id__": 916
     },
     "_children": [],
     "_active": true,
     "_level": 3,
     "_components": [
       {
-        "__id__": 924
+        "__id__": 925
       }
     ],
     "_prefab": null,
@@ -36490,7 +36503,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 923
+      "__id__": 924
     },
     "_enabled": true,
     "_srcBlendFactor": 1,
@@ -36516,7 +36529,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 915
+      "__id__": 916
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -36546,7 +36559,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 915
+      "__id__": 916
     },
     "_enabled": true,
     "alignMode": 1,
@@ -36636,7 +36649,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 931
+        "__id__": 932
       }
     ],
     "_N$interactable": true,
