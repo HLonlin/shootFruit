@@ -181,7 +181,7 @@ cc.Class({
 	login: function () {
 		var data = {
 			// 用户信息
-			coin: 100000,//金币
+			coin: 0,//金币
 			diamond: 100,//钻石
 			durian: 1,//榴莲
 			highestScore: 100000,//最高分
@@ -216,6 +216,8 @@ cc.Class({
 			this.redPoint_durian.node.active = true;
 			this.font_durianNum.string = USERINFO.durian;
 		}
+		// 子弹库
+		this.bulletShop.init();
 		// 升级面板
 		this.initPowerUi();
 		this.initCritUi();
@@ -250,13 +252,13 @@ cc.Class({
 	},
 	// 开启签到
 	openSingnIn: function () {
-		this.tips_singnIn.node.getComponent('tips').show();
+		this.tips_singnIn.show();
 	},
 	// 开启榴莲蛋
 	openDurian: function () {
 		if (USERINFO.durian > 0) {
 			USERINFO.durian -= 1;
-			this.tips_openDurian.node.getComponent('tips').show();
+			this.tips_openDurian.show();
 		} else {
 			console.log('剩余次数不足');
 			USERINFO.durian += 1;
@@ -280,7 +282,8 @@ cc.Class({
 			this.font_coin.string = USERINFO.coin;
 			this.initPowerUi();
 		} else {
-			console.log('金币不足');
+			// 金币不足
+			this.tips_exchange.show();
 		}
 	},
 	initPowerUi: function () {
@@ -297,7 +300,8 @@ cc.Class({
 			this.font_coin.string = USERINFO.coin;
 			this.initCritUi();
 		} else {
-			console.log('金币不足');
+			// 金币不足
+			this.tips_exchange.show();
 		}
 	},
 	initCritUi: function () {

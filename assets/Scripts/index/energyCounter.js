@@ -99,7 +99,6 @@ cc.Class({
 		this.progressBar.progress = ratio;
 		let timeLeft = Math.floor(this.timeToRecover - this.timer);
 		//显示现在已经转几圈
-		//		this.labelCount.string = this.currentCount + '/' + this.totalCount;
 		this.labelTimer.string = Math.floor(timeLeft / 60).toString() + ':' + (timeLeft % 60 < 10 ? '0' : '') + timeLeft % 60;
 		this.timer += dt;
 		if (this.timer >= this.timeToRecover) {
