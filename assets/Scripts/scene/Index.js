@@ -127,14 +127,6 @@ cc.Class({
 			this.audioMng = this.audioMng.getComponent('AudioMaster');
 		}
 		if (this.audioMng) this.audioMng.playMusic();
-		// 初始化界面
-		this.initUi();
-		// 开始动作
-		this.startAction();
-		// 	//初始化设备信息
-		// 	WECHAT.initDeviceMaster();
-		// 	//初始化广告
-		// 	WECHAT.initAD();
 	},
 	start: function () {
 		this.bulletShop.init(this);
@@ -151,7 +143,7 @@ cc.Class({
 			// 用户信息
 			coin: 100,//金币
 			diamond: 100,//钻石
-			durian: 0,//榴莲
+			durian: 1,//榴莲
 			highestScore: 0,//最高分
 			bulletsInUse: 1,//正在使用的子弹
 			armCritLevel: 1,// 武器暴击等级
@@ -160,13 +152,16 @@ cc.Class({
 			initScene: '1001',// 初始场景值，用于区分从哪进入游戏
 		};
 		USERINFO.init(data);
+		// 初始化界面
+		this.initUi();
+		// 开始动作
+		this.startAction();
 	},
 	initUi: function () {
 		var signInState = localStorage.getItem('signInState');
 		if (signInState != 2) {
 			this.redPoint_singnIn.node.active = true;
-			this.tips_singnIn.node.getComponent('tips').show()
-			// console.log();
+			this.openSingnIn();
 		}
 		this.font_coin.string = USERINFO.coin;
 		this.font_diamond.string = USERINFO.diamond;
@@ -179,15 +174,13 @@ cc.Class({
 			this.redPoint_durian.node.active = true;
 			this.font_durianNum.string = USERINFO.durian;
 		}
+		// 	//初始化设备信息
+		// 	WECHAT.initDeviceMaster();
+		// 	//初始化广告
+		// 	WECHAT.initAD();
 	},
 	startAction: function () {
 		this.action_StartGame();
-	},
-	//根据传入参数type加载对应场景
-	LoadScene: function (event, type) {
-		cc.director.loadScene(type, function () {
-			console.log('loadScene ' + type + ' success!');
-		});
 	},
 	// 重复缩放动作
 	action_StartGame: function () {
@@ -206,6 +199,28 @@ cc.Class({
 		localStorage.setItem('isGotWelfare', 'true');
 		event.currentTarget.getComponent(cc.Button).interactable = false;
 		event.currentTarget.getChildByName("font_getWelfare").getComponent(cc.RichText).string = '<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>';
+	},
+	// 开启签到
+	openSingnIn: function () {
+		this.tips_singnIn.node.getComponent('tips').show();
+	},
+	// 开启榴莲蛋
+	openDurian: function () {
+		if (USERINFO.durian > 0) {
+			USERINFO.durian -= 1;
+			this.tips_openDurian.node.getComponent('tips').show();
+		} else {
+			console.log('剩余次数不足');
+			USERINFO.durian += 1;
+		}
+		if (USERINFO.durian <= 0) {
+			this.btn_openDurian.interactable = true;
+			this.redPoint_durian.node.active = false;
+		} else {
+			this.btn_openDurian.interactable = false;
+			this.redPoint_durian.node.active = true;
+			this.font_durianNum.string = USERINFO.durian;
+		}
 	},
 	// 显示广告
 	openAd: function () {
