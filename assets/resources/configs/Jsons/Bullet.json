@@ -1,0 +1,74 @@
+[
+  {
+    "bullet": "橘子",
+    "power": 30,
+    "price": 0,
+    "state": 2
+  },
+  {
+    "bullet": "西瓜",
+    "power": 40,
+    "price": 500,
+    "state": 1
+  },
+  {
+    "bullet": "苹果",
+    "power": 50,
+    "price": 1000,
+    "state": 0
+  },
+  {
+    "bullet": "葡萄",
+    "power": 60,
+    "price": 2000,
+    "state": 0
+  },
+  {
+    "bullet": "香蕉",
+    "power": 70,
+    "price": 3000,
+    "state": 1
+  },
+  {
+    "bullet": "山竹",
+    "power": 80,
+    "price": 4000,
+    "state": 2
+  },
+  {
+    "bullet": "石榴",
+    "power": 90,
+    "price": 5000,
+    "state": 0
+  },
+  {
+    "bullet": "番茄",
+    "power": 100,
+    "price": 5500,
+    "state": 1
+  },
+  {
+    "bullet": "雪梨",
+    "power": 110,
+    "price": 6000,
+    "state": 2
+  },
+  {
+    "bullet": "蜜桃",
+    "power": 120,
+    "price": 6500,
+    "state": 0
+  },
+  {
+    "bullet": "布林",
+    "power": 130,
+    "price": 7000,
+    "state": 1
+  },
+  {
+    "bullet": "蜜瓜",
+    "power": 140,
+    "price": 8000,
+    "state": 2
+  }
+]

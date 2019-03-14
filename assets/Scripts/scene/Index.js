@@ -7,6 +7,12 @@ cc.Class({
 			displayName: '音效控件',
 			tooltip: '游戏内各音效控制器'
 		},
+		Data_game: {
+			default: [],
+			type: cc.JsonAsset,
+			displayName: '游戏数据',
+			tooltip: '游戏内各数据'
+		},
 		page_Game: {
 			default: null,
 			type: require('tips'),
@@ -129,16 +135,6 @@ cc.Class({
 		if (this.audioMng) this.audioMng.playMusic();
 	},
 	start: function () {
-		this.bulletShop.init(this);
-		this.tips_welfare.init(this);
-		this.tips_openDurian.init(this);
-		this.tips_ranking.init(this);
-		this.tips_singnIn.init(this);
-		this.tips_getDiamonds.init(this);
-		this.tips_exchange.init(this);
-		this.page_Game.init(this);
-		this.page_Over.init(this);
-		this.panel_levelUp.init(this);
 		var data = {
 			// 用户信息
 			coin: 100,//金币
@@ -150,6 +146,7 @@ cc.Class({
 			armpoweLevel: 1,// 武器威力等级
 			bulletShop: this.bulletShop.fruit,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
 			initScene: '1001',// 初始场景值，用于区分从哪进入游戏
+			data_game: this.Data_game,//游戏数据
 		};
 		USERINFO.init(data);
 		// 初始化界面

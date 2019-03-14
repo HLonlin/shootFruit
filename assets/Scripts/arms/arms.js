@@ -37,34 +37,24 @@ cc.Class({
 			type: require('tips'),
 			displayName: '结束页面',
 		},
+		Data_arm: {
+			default: null,
+			type: cc.JsonAsset,
+			displayName: '武器信息',
+			tooltip: '武器各级别信息'
+		}
 	}),
 	onLoad: function () {
 		this.initStage();
 	},
 	initStage: function () {
-		// 监听拖动事件
-		//this.onDrag();
 		// 获取碰撞检测系统
 		let manager = cc.director.getCollisionManager();
 		// 开启碰撞检测系统
 		manager.enabled = true;
 		this.armHP = this.HP;
-	},
-	// 添加拖动监听
-	onDrag: function () {
-		this.node.on('touchmove', this.onHandleHeroTap, this);
-	},
-	// 去掉拖动监听
-	offDrag: function () {
-		this.node.off('touchmove', this.onHandleHeroTap, this);
-	},
-	// 武器拖动
-	onHandleHeroTap: function (event) {
-		// touchmove事件中 event.getLocation() 获取当前已左下角为锚点的触点位置（world point）
-		let position = event.getLocation();
-		// 实际hero是background的子元素，所以坐标应该是随自己的父元素进行的，所以我们要将“world point”转化为“node point”
-		let location = this.node.parent.convertToNodeSpaceAR(position);
-		this.node.setPosition(location);
+		console.log(this.Data_arm.json);
+		// USERINFO.arms = this.Data_arm.json
 	},
 	// 碰撞组件
 	onCollisionEnter: function (other, self) {

@@ -1,5 +1,122 @@
 window.Lodash = require("lodash");
+window.Md5Manager = require('md5');
 window.HL = {
+	ajax: {
+		// 域名
+		DOMAIN: 'http://114.55.25.63:3000/mock/135',
+		// token
+		TOKEN: '',
+		//混淆字符串
+		appSalt: '!@#$%^&*',
+		//请求方式
+		METHOD_POST: 'POST',
+		METHOD_GET: 'GET',
+		login: '/user/logins',//用户登录
+		updataHead: '/user/updateUser',//更新用户昵称头像
+		sendScore: '/user/getScore',//提交分数
+		ranking: '/user/rank_world',//世界排行榜
+		getGameData: '/user/getGameData',//获取游戏数据
+		setGameData: '/user/setGameData',//设置游戏数据
+		getConfig: '/other/getConfig',//获得配置
+		getGameList: '/other/getGameList',//游戏列表
+		gameClick: '/other/gameClick',//游戏列表点击统计
+		getEnergy: '/other/getEnergy',//可否领取钻石
+		getEnergyDo: '/other/getEnergyDo',//领一份奖励
+		/**
+		 * 对obj的 属性名进行sort排序 
+		 * 并返回属性名sort排序后的对象
+		 * @param object param 需要进行排序的对象
+		 * @return object newparam 排序完成的新对象
+		 */
+		objSort: function (param) {
+			var newkeyArray = Object.keys(param).sort();
+			var newParam = {};//创建一个新的对象，用于存放排好序的键值对(Object)
+			//遍历newkeyArray数组   
+			for (var i = 0; i < newkeyArray.length; i++) {
+				newParam[newkeyArray[i]] = param[newkeyArray[i]];//向新创建的对象中按照排好的顺序依次增加键值对
+			}
+			return newParam;//返回排好序的新对象
+		},
+		/**
+		 * 将请求参数转化字符串
+		 */
+		obj2str: function (param) {
+			let str = '';
+			for (let k in param) {
+				str += '&' + k + '=' + param[k]
+			}
+			return str.substring(1)
+		},
+		//生成token
+		createSign: function (param) {
+			for (let i in ['sign', 'id', 'action', 'api', 'version'])
+				if (typeof (param[i]) != "undefined")
+					delete param[i];
+			// console.log(param)
+			//对param进行sort排序
+			var newParam = this.objSort(param);
+			var signString = '';
+			for (var i in newParam) {
+				// signString += signString ? '&' : '';
+				signString += i + newParam[i];
+			}
+			signString += this.appSalt;//添加混淆字符串
+			// 通过 npm install js-md5 并require('md5')
+			return Md5Manager(signString);
+		},
+		/**
+		 *例：
+		HL.ajax.post(HL.ajax.getEnergy, { uid: 1, be_invitation_uid: 2, share_day: '2019-01-01' }, ((e) => {
+			// 请求成功
+			if (e.code == 1 && e.msg == "访问成功") {
+				console.log(e.data);
+			} else {
+				console.log('fail');
+			}
+		}));
+		 */
+		//发起请求
+		request: function (api, method, param, complete, error, progress) {
+			// console.log('************************************');
+			// console.log('发起请求', api, param);
+			var ajax = new XMLHttpRequest();
+			param.timestamp = Math.floor((new Date()).getTime() / 1000);
+			param.secret = this.createSign(param);
+			ajax.open(method, api);
+			ajax.send(this.obj2str(param));
+			ajax.onreadystatechange = function () {
+				if (ajax.readyState == 4 && (ajax.status >= 200 && ajax.status < 400)) {
+					if (complete) {
+						complete(JSON.parse(ajax.responseText));
+					}
+				} else {
+					console.log('ajax fail')
+				}
+			};
+		},
+		//发起POST请求
+		post: function (api, param, complete, error, progress) {
+			this.request(
+				this.DOMAIN + api,
+				this.METHOD_POST,
+				param,
+				complete,
+				error,
+				progress
+			)
+		},
+		//发起GET请求
+		get: function (api, param, complete, error, progress) {
+			this.request(
+				this.DOMAIN + api,
+				this.METHOD_GET,
+				param,
+				complete,
+				error,
+				progress
+			)
+		},
+	},
 	nodePool: {
 		// 批处理对象池
 		batchInitNodePool: function (that, objArray) {

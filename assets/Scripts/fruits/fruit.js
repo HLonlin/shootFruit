@@ -27,6 +27,12 @@ cc.Class({
 			type: require('tips'),
 			displayName: '结束页面',
 		},
+		minPercent: {
+			default: 0.3,
+			type: cc.Float,
+			displayName: '缩小比例',
+			tooltip: '水果最小的缩小比例'
+		}
 	},
 	onLoad: function () {
 		// 获取碰撞检测系统
@@ -53,7 +59,7 @@ cc.Class({
 	},
 	// 监听挂载此组件的节点碰撞检测
 	onCollisionEnter: function (other, self) {
-		if (other.node.group !== 'bullet') {
+		if (other.node.group !== 'bullet' || this.fruitHp <= 0) {
 			return;
 		}
 		var anim = self.node.getChildByName("fruit_wave").getComponent(cc.Animation);
@@ -67,9 +73,15 @@ cc.Class({
 		var injury = this.injuryValue();
 		// 扣除伤害
 		this.fruitHp = this.fruitHp - injury;
+		this.percent = this.fruitHp / this.HP;
+		if (this.percent >= this.minPercent) {
+			this.node.setScale(this.percent);
+		} else {
+			this.node.setScale(this.minPercent);
+		}
 		// 更新得分
 		this.Game.changeScore(Math.floor(injury));
-		// 判断是否过关
+		// 水果血量耗完
 		if (this.fruitHp <= 0) {
 			this.explodingAnim();
 			return;
@@ -100,9 +112,10 @@ cc.Class({
 		var anim = this.node.getComponent(cc.Animation);
 		let animName = this.node.getComponent(cc.Sprite).spriteFrame.name;
 		if (animName != null) anim.play(animName);
-		anim.on('finished', this.showpage_over, this);
+		anim.on('finished', this.showpage_victory, this);
 	},
-	showpage_over: function () {
+	// 显示胜利页面
+	showpage_victory: function () {
 		if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
 			USERINFO.bulletsInUse = 1;
 		}
