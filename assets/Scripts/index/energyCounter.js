@@ -61,20 +61,30 @@ cc.Class({
 			displayName: '钻石',
 			tooltip: '用户拥有钻石'
 		}
-		//		labelCount: {
-		//			default: null,
-		//			type: cc.Label,
-		//			displayName: '圈数',
-		//			tooltip: '显示已经转了几圈'
-		//		},
 	},
 	onLoad: function () {
-		this.timer = 0;
+		this.startTiming();
+		if (cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT) {
+			wx.onHide(() => {
+				localStorage.setItem('Timing', this.timer);
+				localStorage.setItem('currentCount', this.currentCount);
+				localStorage.setItem('gotCoin', this.gotCoin);
+			})
+		}
+	},
+	startTiming: function () {
+		this.timer = Number(localStorage.getItem('Timing')) || 0;
+		this.currentCount = Number(localStorage.getItem('currentCount')) || this.currentCount;
+		this.gotCoin = Number(localStorage.getItem('gotCoin')) || this.gotCoin;
+		this.font_coinNum.string = "<outline color=#755313 width=2><color=#fff881>" + this.gotCoin + "</color></outline>";
+		if (this.currentCount >= this.totalCount) {
+			this.font_coinNum.string = "<outline color=#755313 width=2><color=#fff881>明天再来</color></outline>";
+		}
 	},
 	getOnlineCoin: function () {
 		USERINFO.coin += this.gotCoin;
-		this.font_coinNums.string = USERINFO.coin;
 		this.gotCoin = 0;
+		this.font_coinNums.string = USERINFO.coin;
 		this.font_coinNum.string = "<outline color=#755313 width=2><color=#fff881>" + this.gotCoin + "</color></outline>";
 		if (this.currentCount >= this.totalCount) {
 			this.font_coinNum.string = "<outline color=#755313 width=2><color=#fff881>明天再来</color></outline>";
