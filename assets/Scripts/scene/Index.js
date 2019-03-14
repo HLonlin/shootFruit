@@ -101,11 +101,23 @@ cc.Class({
 			displayName: '榴莲红点',
 			tooltip: '榴莲红点'
 		},
+		redPoint_singnIn: {
+			default: null,
+			type: cc.Sprite,
+			displayName: '签到红点',
+			tooltip: '签到红点'
+		},
 		redPoint_bulletShop: {
 			default: null,
 			type: cc.Sprite,
 			displayName: '子弹库红点',
 			tooltip: '子弹库红点'
+		},
+		btn_openDurian: {
+			default: null,
+			type: cc.Button,
+			displayName: '开启榴莲按钮',
+			tooltip: '开启榴莲按钮'
 		}
 	},
 	onLoad() {
@@ -150,12 +162,20 @@ cc.Class({
 		USERINFO.init(data);
 	},
 	initUi: function () {
+		var signInState = localStorage.getItem('signInState');
+		if (signInState != 2) {
+			this.redPoint_singnIn.node.active = true;
+			this.tips_singnIn.node.getComponent('tips').show()
+			// console.log();
+		}
 		this.font_coin.string = USERINFO.coin;
 		this.font_diamond.string = USERINFO.diamond;
 		this.font_highestScore.string = '<outline color=#af5f00 width=2><color=#ffffff>最高分' + USERINFO.highestScore + '</color>';
 		if (USERINFO.durian == 0) {
+			this.btn_openDurian.interactable = true;
 			this.redPoint_durian.node.active = false;
 		} else {
+			this.btn_openDurian.interactable = false;
 			this.redPoint_durian.node.active = true;
 			this.font_durianNum.string = USERINFO.durian;
 		}
