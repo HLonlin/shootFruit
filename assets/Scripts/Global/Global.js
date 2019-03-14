@@ -1,5 +1,5 @@
 window.Lodash = require("lodash");
-window.Md5Manager = require('md5');
+window.Md5 = require('md5');
 window.HL = {
 	ajax: {
 		// 域名
@@ -62,7 +62,7 @@ window.HL = {
 			}
 			signString += this.appSalt;//添加混淆字符串
 			// 通过 npm install js-md5 并require('md5')
-			return Md5Manager(signString);
+			return Md5(signString);
 		},
 		/**
 		 *例：

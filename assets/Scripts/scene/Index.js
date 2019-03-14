@@ -135,6 +135,14 @@ cc.Class({
 		if (this.audioMng) this.audioMng.playMusic();
 	},
 	start: function () {
+		// 登录
+		this.login();
+		// 初始化界面
+		this.initUi();
+		// 开始动作
+		this.startAction();
+	},
+	login: function () {
 		var data = {
 			// 用户信息
 			coin: 100,//金币
@@ -149,10 +157,6 @@ cc.Class({
 			data_game: this.Data_game,//游戏数据
 		};
 		USERINFO.init(data);
-		// 初始化界面
-		this.initUi();
-		// 开始动作
-		this.startAction();
 	},
 	initUi: function () {
 		var signInState = localStorage.getItem('signInState');
@@ -171,10 +175,12 @@ cc.Class({
 			this.redPoint_durian.node.active = true;
 			this.font_durianNum.string = USERINFO.durian;
 		}
-		// 	//初始化设备信息
-		// 	WECHAT.initDeviceMaster();
-		// 	//初始化广告
-		// 	WECHAT.initAD();
+		if (cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT) {
+			//初始化设备信息
+			WECHAT.initDeviceMaster();
+			//初始化广告
+			WECHAT.initAD();
+		}
 	},
 	startAction: function () {
 		this.action_StartGame();
