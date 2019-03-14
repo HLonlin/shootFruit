@@ -27,6 +27,18 @@ cc.Class({
             displayName: '金币',
             tooltip: '用户金币数'
         },
+        font_exchangeDiam: {
+            default: null,
+            type: cc.Label,
+            displayName: '钻石兑率',
+            tooltip: '钻石兑换率'
+        },
+        font_exchangeCoin: {
+            default: null,
+            type: cc.Label,
+            displayName: '金币兑率',
+            tooltip: '金币兑换率'
+        },
     },
     onLoad() {
     },
@@ -45,6 +57,8 @@ cc.Class({
     },
     numChangeCall: function (num) {
         this.font_num.string = "<color=#FFEFB2>" + num + "</color>";
+        this.font_exchangeDiam.string = num;
+        this.font_exchangeCoin.string = num * 10;
         if (num > USERINFO.diamond) {
             this.font_num.string = "<color=#FF0000>" + num + "</color>";
         }
