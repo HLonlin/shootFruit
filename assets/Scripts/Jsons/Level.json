@@ -1,0 +1,177 @@
+[
+  {
+    "Level": 1,
+    "FruitHP": 300,
+    "BoxHit": ""
+  },
+  {
+    "Level": 2,
+    "FruitHP": 600,
+    "BoxHit": ""
+  },
+  {
+    "Level": 3,
+    "FruitHP": 1000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 4,
+    "FruitHP": 2000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 5,
+    "FruitHP": 3000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 6,
+    "FruitHP": 4000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 7,
+    "FruitHP": 5000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 8,
+    "FruitHP": 6000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 9,
+    "FruitHP": 7000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 10,
+    "FruitHP": 8000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 11,
+    "FruitHP": 9000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 12,
+    "FruitHP": 10000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 13,
+    "FruitHP": 11000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 14,
+    "FruitHP": 12000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 15,
+    "FruitHP": 13000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 16,
+    "FruitHP": 14000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 17,
+    "FruitHP": 15000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 18,
+    "FruitHP": 16000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 19,
+    "FruitHP": 17000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 20,
+    "FruitHP": 18000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 21,
+    "FruitHP": 19000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 22,
+    "FruitHP": 20000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 23,
+    "FruitHP": 21000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 24,
+    "FruitHP": 22000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 25,
+    "FruitHP": 23000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 26,
+    "FruitHP": 24000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 27,
+    "FruitHP": 25000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 28,
+    "FruitHP": 25000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 29,
+    "FruitHP": 25000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 30,
+    "FruitHP": 25000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 31,
+    "FruitHP": 25000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 32,
+    "FruitHP": 25000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 33,
+    "FruitHP": 25000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 34,
+    "FruitHP": 25000,
+    "BoxHit": ""
+  },
+  {
+    "Level": 35,
+    "FruitHP": 25000,
+    "BoxHit": ""
+  }
+]

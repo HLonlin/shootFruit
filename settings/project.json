@@ -1,0 +1,63 @@
+{
+  "collision-matrix": [
+    [
+      false
+    ],
+    [
+      false,
+      false,
+      true,
+      true,
+      true
+    ],
+    [
+      false,
+      true,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
+      false,
+      false
+    ]
+  ],
+  "design-resolution-height": 1334,
+  "design-resolution-width": 750,
+  "excluded-modules": [],
+  "facebook": {
+    "appID": "",
+    "audience": {
+      "enable": false
+    },
+    "enable": false,
+    "live": {
+      "enable": false
+    }
+  },
+  "fit-height": true,
+  "fit-width": true,
+  "group-list": [
+    "default",
+    "bullet",
+    "fruit",
+    "arms",
+    "hinder"
+  ],
+  "last-module-event-record-time": 1551511539774,
+  "simulator-orientation": false,
+  "simulator-resolution": {
+    "height": 640,
+    "width": 960
+  },
+  "use-customize-simulator": false,
+  "use-project-simulator-setting": false,
+  "start-scene": "current"
+}

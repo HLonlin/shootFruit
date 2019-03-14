@@ -1,0 +1,38 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "animation_hinder110",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 3,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": "2",
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "ab228acb-ab4f-43d6-8a4f-2a01fa3610aa"
+            }
+          }
+        ]
+      }
+    },
+    "props": {
+      "rotation": [
+        {
+          "frame": 0,
+          "value": 270,
+          "curve": "linear"
+        },
+        {
+          "frame": 3,
+          "value": -90
+        }
+      ]
+    }
+  },
+  "events": []
+}

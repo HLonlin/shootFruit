@@ -1,0 +1,122 @@
+[
+  {
+    "ArmsLevel": 1,
+    "Power": 50,
+    "Crit": 0.05,
+    "Price": 100
+  },
+  {
+    "ArmsLevel": 2,
+    "Power": 70,
+    "Crit": 0.09,
+    "Price": 200
+  },
+  {
+    "ArmsLevel": 3,
+    "Power": 90,
+    "Crit": 0.13,
+    "Price": 300
+  },
+  {
+    "ArmsLevel": 4,
+    "Power": 110,
+    "Crit": 0.17,
+    "Price": 400
+  },
+  {
+    "ArmsLevel": 5,
+    "Power": 130,
+    "Crit": 0.21,
+    "Price": 500
+  },
+  {
+    "ArmsLevel": 6,
+    "Power": 150,
+    "Crit": 0.25,
+    "Price": 700
+  },
+  {
+    "ArmsLevel": 7,
+    "Power": 170,
+    "Crit": 0.29,
+    "Price": 900
+  },
+  {
+    "ArmsLevel": 8,
+    "Power": 190,
+    "Crit": 0.33,
+    "Price": 1100
+  },
+  {
+    "ArmsLevel": 9,
+    "Power": 210,
+    "Crit": 0.37,
+    "Price": 1300
+  },
+  {
+    "ArmsLevel": 10,
+    "Power": 230,
+    "Crit": 0.41,
+    "Price": 1500
+  },
+  {
+    "ArmsLevel": 11,
+    "Power": 250,
+    "Crit": 0.45,
+    "Price": 1700
+  },
+  {
+    "ArmsLevel": 12,
+    "Power": 270,
+    "Crit": 0.49,
+    "Price": 1900
+  },
+  {
+    "ArmsLevel": 13,
+    "Power": 290,
+    "Crit": 0.53,
+    "Price": 2100
+  },
+  {
+    "ArmsLevel": 14,
+    "Power": 310,
+    "Crit": 0.57,
+    "Price": 2300
+  },
+  {
+    "ArmsLevel": 15,
+    "Power": 330,
+    "Crit": 0.61,
+    "Price": 2500
+  },
+  {
+    "ArmsLevel": 16,
+    "Power": 350,
+    "Crit": 0.65,
+    "Price": 2700
+  },
+  {
+    "ArmsLevel": 17,
+    "Power": 370,
+    "Crit": 0.69,
+    "Price": 2900
+  },
+  {
+    "ArmsLevel": 18,
+    "Power": 390,
+    "Crit": 0.73,
+    "Price": 3100
+  },
+  {
+    "ArmsLevel": 19,
+    "Power": 410,
+    "Crit": 0.77,
+    "Price": 3300
+  },
+  {
+    "ArmsLevel": 20,
+    "Power": 430,
+    "Crit": 0.8,
+    "Price": 3500
+  }
+]
