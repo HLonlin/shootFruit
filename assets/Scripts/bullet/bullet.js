@@ -72,7 +72,7 @@ cc.Class({
 		}
 	},
 	rebound: function (dt) {
-		this.node.y -= dt * this.speed;
+		this.node.y -= dt * this.speed / 2;
 		if (this.node.y > WECHAT.screenHeight / 2) {
 			this.bulletGroup.destroyBullet(this.node);
 		}
