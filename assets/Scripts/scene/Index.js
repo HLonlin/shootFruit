@@ -161,6 +161,12 @@ cc.Class({
 			displayName: '武器暴击价格',
 			tooltip: '武器暴击价格'
 		},
+		icon_luckyReward: {
+			default: null,
+			type: cc.Node,
+			displayName: '抽奖奖励',
+			tooltip: '抽奖奖励'
+		}
 	},
 	onLoad() {
 		//播放背景音乐
