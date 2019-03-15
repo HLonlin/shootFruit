@@ -258,6 +258,11 @@ cc.Class({
 	openDurian: function () {
 		if (USERINFO.durian > 0) {
 			USERINFO.durian -= 1;
+			var lucky = USERINFO.Data_game[3].json[USERINFO.luckyNum]
+			console.log('金币：', lucky.coin);
+			console.log('钻石：', lucky.diamond);
+			console.log('子弹：', lucky.bullet);
+			USERINFO.luckyNum = USERINFO.luckyNum + 1 >= 20 ? 15 : USERINFO.luckyNum + 1;
 			this.tips_openDurian.show();
 		} else {
 			console.log('剩余次数不足');

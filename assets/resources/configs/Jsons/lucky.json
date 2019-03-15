@@ -1,0 +1,122 @@
+[
+  {
+    "openNum": 1,
+    "coin": 100,
+    "diamond": 10,
+    "bullet": 0
+  },
+  {
+    "openNum": 2,
+    "coin": 150,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 3,
+    "coin": 200,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 4,
+    "coin": 250,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 5,
+    "coin": 300,
+    "diamond": 20,
+    "bullet": 9
+  },
+  {
+    "openNum": 6,
+    "coin": 200,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 7,
+    "coin": 250,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 8,
+    "coin": 300,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 9,
+    "coin": 350,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 10,
+    "coin": 400,
+    "diamond": 30,
+    "bullet": 10
+  },
+  {
+    "openNum": 11,
+    "coin": 300,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 12,
+    "coin": 350,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 13,
+    "coin": 400,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 14,
+    "coin": 450,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 15,
+    "coin": 500,
+    "diamond": 40,
+    "bullet": 11
+  },
+  {
+    "openNum": 16,
+    "coin": 400,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 17,
+    "coin": 450,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 18,
+    "coin": 500,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 19,
+    "coin": 550,
+    "diamond": 0.0,
+    "bullet": 0
+  },
+  {
+    "openNum": 20,
+    "coin": 600,
+    "diamond": 50,
+    "bullet": 12
+  }
+]
