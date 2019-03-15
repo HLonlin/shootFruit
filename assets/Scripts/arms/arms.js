@@ -37,6 +37,12 @@ cc.Class({
 			type: require('tips'),
 			displayName: '结束页面',
 		},
+		icon_heartArr: {
+			default: null,
+			type: cc.Layout,
+			displayName: '红心组',
+			tooltip: '红心组'
+		}
 	}),
 	onLoad: function () {
 		this.initStage();
@@ -46,14 +52,21 @@ cc.Class({
 		let manager = cc.director.getCollisionManager();
 		// 开启碰撞检测系统
 		manager.enabled = true;
+		// 武器血量
+		USERINFO.heart = USERINFO.heart == 2 ? USERINFO.heart : this.HP;
+		this.HP = USERINFO.heart;
 		this.armHP = this.HP;
-		this.critRate = USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Crit;
-		this.attackPower = USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1].Power;
+		for (var i = 0, max = this.armHP; i < max; i++) {
+			this.icon_heartArr.node.children[i].getChildByName("icon_hearts").setScale(1);
+			this.icon_heartArr.node.children[i].getChildByName("icon_hearts").opacity = 255;
+		}
 	},
 	// 碰撞组件
 	onCollisionEnter: function (other, self) {
-		if (other.node.group === 'bullet') {
+		if (other.node.group === 'bullet' && this.armHP > 0) {
 			this.armHP -= 1;
+			var actionTo = cc.spawn(cc.scaleTo(0.35, 4), cc.fadeTo(0.35, 0));
+			this.icon_heartArr.node.children[this.armHP].getChildByName("icon_hearts").runAction(actionTo);
 			if (this.armHP <= 0) {
 				this.onHandleDestroy();
 			}

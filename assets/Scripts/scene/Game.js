@@ -7,7 +7,7 @@ cc.Class({
 			displayName: '分数',
 			tooltip: '游戏得分'
 		},
-		hero: {
+		arms: {
 			default: null,
 			type: require('arms'),
 			displayName: '武器',
@@ -42,6 +42,12 @@ cc.Class({
 			type: cc.RichText,
 			displayName: '关卡提示',
 			tooltip: '关卡奖励子弹提示'
+		},
+		icon_heartArr: {
+			default: null,
+			type: cc.Layout,
+			displayName: '红心组',
+			tooltip: '红心组'
 		}
 	},
 	// 生命周期回调
@@ -75,7 +81,6 @@ cc.Class({
 					break;
 				} else {
 					if (USERINFO.level - 1 < i) {
-						console.log(i);
 						this.font_levelTip.string = '<outline color=#223f67 width=2><color=#ffffff>(还差  ' + (i - (USERINFO.level - 1)) + '  关获得新型子弹)</color></outline>';
 						break;
 					}
