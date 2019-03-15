@@ -306,7 +306,7 @@ cc.Class({
 	},
 	initCritUi: function () {
 		this.font_critLevel.string = 'Lv.' + USERINFO.armCritLevel;
-		this.font_critNum.string = USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Power;
+		this.font_critNum.string = USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Crit * 100 + '%';
 		this.crit_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Price + '</color></outline>';
 	},
 	// 显示广告
@@ -336,8 +336,5 @@ cc.Class({
 		}, () => {
 			console.log('没有视频播放');
 		});
-	},
-	toggleHomeBtns: function () {
-
 	},
 });

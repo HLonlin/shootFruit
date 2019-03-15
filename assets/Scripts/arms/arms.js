@@ -37,12 +37,6 @@ cc.Class({
 			type: require('tips'),
 			displayName: '结束页面',
 		},
-		Data_arm: {
-			default: null,
-			type: cc.JsonAsset,
-			displayName: '武器信息',
-			tooltip: '武器各级别信息'
-		}
 	}),
 	onLoad: function () {
 		this.initStage();
@@ -53,8 +47,8 @@ cc.Class({
 		// 开启碰撞检测系统
 		manager.enabled = true;
 		this.armHP = this.HP;
-		console.log(this.Data_arm.json);
-		// USERINFO.arms = this.Data_arm.json
+		this.critRate = USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Crit;
+		this.attackPower = USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1].Power;
 	},
 	// 碰撞组件
 	onCollisionEnter: function (other, self) {

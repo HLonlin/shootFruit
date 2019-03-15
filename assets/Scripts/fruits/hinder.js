@@ -30,13 +30,12 @@ cc.Class({
     onLoad: function () {
         // 默认播放外圈短正转障碍物动画
         var names = this.around + '' + this.length + '' + this.prosAndCons + '';
-        this.playAnimBynames(names);
+        // this.playAnimBynames(names);
     },
-    playAnimBynames: function (name) {
-        let anim = this.getComponent(cc.Animation);
-        let animName = this.node.name + name;
-        var animState = anim.playAdditive(animName);
-        animState.speed = this.speed;
-        anim.playAdditive(animName);
-    },
+    // playAnimBynames: function (name) {
+    //     let anim = this.getComponent(cc.Animation);
+    //     let animName = this.node.name + name;
+    //     var animState = anim.playAdditive(animName);
+    //     animState.speed = this.speed;
+    // },
 });

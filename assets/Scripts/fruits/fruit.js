@@ -1,6 +1,5 @@
 cc.Class({
 	extends: cc.Component,
-
 	properties: {
 		HP: {
 			default: 300,
@@ -32,7 +31,13 @@ cc.Class({
 			type: cc.Float,
 			displayName: '缩小比例',
 			tooltip: '水果最小的缩小比例'
-		}
+		},
+		initSpriteArr: {
+			default: [],
+			type: cc.SpriteFrame,
+			tooltip: '初始化图像组',
+			displayName: '初始化图像组',
+		},
 	},
 	onLoad: function () {
 		// 获取碰撞检测系统
@@ -45,11 +50,16 @@ cc.Class({
 		this.Game.initState();
 		this.node.opacity = 255;
 		this.node.setScale(1);
+		// 获取当前关卡信息
+		this.level = USERINFO.Data_game[2].json[USERINFO.level - 1];
+		// 水果血量
+		this.HP = this.level.FruitHP;
 		this.fruitHp = this.HP;
-		// 找到node的Sprite组件
+		// 获取水果的Sprite组件
 		let nSprite = this.node.getComponent(cc.Sprite);
 		// 初始化spriteFrame
 		var fruit_wave = this.node.getChildByName('fruit_wave').getComponent(cc.Sprite);
+		this.initSpriteFrame = this.initSpriteArr[this.level.fruit - 1];
 		if (fruit_wave.spriteFrame != this.initSpriteFrame) {
 			fruit_wave.spriteFrame = this.initSpriteFrame;
 		}
@@ -89,11 +99,14 @@ cc.Class({
 	},
 	// 计算伤害
 	injuryValue: function () {
-		var attackType = this.isCrit(this.armsProperty.critRate);
+		// 根据武器暴击率计算是否暴击
+		var attackType = this.isCrit(USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Crit);
 		if (!attackType) {
+			// 普通伤害=子弹威力
 			return USERINFO.bulletShop[USERINFO.bulletsInUse - 1].power;
 		} else {
-			return (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].power + this.armsProperty.attackPower) * 2;
+			// 暴击伤害=(子弹威力 + 武器威力) * 2
+			return (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].power + USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1].Power) * 2;
 		}
 	},
 	// 是否暴击
@@ -119,7 +132,14 @@ cc.Class({
 		if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
 			USERINFO.bulletsInUse = 1;
 		}
+		// 	"coin": 250,
+		// "diamond": 10,
+		// "bullet": 0
+		console.log('奖励金币:', this.level.coin);
+		console.log('奖励钻石：', this.level.diamond);
+		console.log('奖励子弹编号:', this.level.bullet);
 		this.page_Over.node.getComponent('Over').initUi();
-		this.page_Over.node.getComponent('tips').show()
+		this.page_Over.node.getComponent('tips').show();
+		USERINFO.level += 1;
 	}
 });

@@ -1,142 +1,352 @@
 [
   {
     "Level": 1,
-    "FruitHP": 300
+    "fruit": 1,
+    "FruitHP": 300,
+    "hinder": 111,
+    "hinders": 111,
+    "coin": 200,
+    "diamond": 10,
+    "bullet": 2
   },
   {
     "Level": 2,
-    "FruitHP": 600
+    "fruit": 2,
+    "FruitHP": 600,
+    "hinder": 110,
+    "hinders": 110,
+    "coin": 250,
+    "diamond": 10,
+    "bullet": 0
   },
   {
     "Level": 3,
-    "FruitHP": 1000
+    "fruit": 3,
+    "FruitHP": 1000,
+    "hinder": 121,
+    "hinders": 121,
+    "coin": 300,
+    "diamond": 10,
+    "bullet": 0
   },
   {
     "Level": 4,
-    "FruitHP": 2000
+    "fruit": 4,
+    "FruitHP": 2000,
+    "hinder": 120,
+    "hinders": 120,
+    "coin": 350,
+    "diamond": 20,
+    "bullet": 0
   },
   {
     "Level": 5,
-    "FruitHP": 3000
+    "fruit": 5,
+    "FruitHP": 3000,
+    "hinder": 131,
+    "hinders": 131,
+    "coin": 400,
+    "diamond": 20,
+    "bullet": 3
   },
   {
     "Level": 6,
-    "FruitHP": 4000
+    "fruit": 6,
+    "FruitHP": 4000,
+    "hinder": 130,
+    "hinders": 130,
+    "coin": 450,
+    "diamond": 20,
+    "bullet": 0
   },
   {
     "Level": 7,
-    "FruitHP": 5000
+    "fruit": 7,
+    "FruitHP": 5000,
+    "hinder": 211,
+    "hinders": 211,
+    "coin": 500,
+    "diamond": 30,
+    "bullet": 0
   },
   {
     "Level": 8,
-    "FruitHP": 6000
+    "fruit": 8,
+    "FruitHP": 6000,
+    "hinder": 210,
+    "hinders": 210,
+    "coin": 550,
+    "diamond": 30,
+    "bullet": 0
   },
   {
     "Level": 9,
-    "FruitHP": 7000
+    "fruit": 9,
+    "FruitHP": 7000,
+    "hinder": 221,
+    "hinders": 221,
+    "coin": 600,
+    "diamond": 30,
+    "bullet": 4
   },
   {
     "Level": 10,
-    "FruitHP": 8000
+    "fruit": 10,
+    "FruitHP": 8000,
+    "hinder": 220,
+    "hinders": 220,
+    "coin": 650,
+    "diamond": 40,
+    "bullet": 0
   },
   {
     "Level": 11,
-    "FruitHP": 9000
+    "fruit": 11,
+    "FruitHP": 9000,
+    "hinder": 231,
+    "hinders": 231,
+    "coin": 700,
+    "diamond": 40,
+    "bullet": 0
   },
   {
     "Level": 12,
-    "FruitHP": 10000
+    "fruit": 12,
+    "FruitHP": 10000,
+    "hinder": 230,
+    "hinders": 230,
+    "coin": 750,
+    "diamond": 40,
+    "bullet": 0
   },
   {
     "Level": 13,
-    "FruitHP": 11000
+    "fruit": 1,
+    "FruitHP": 11000,
+    "hinder": 110,
+    "hinders": 110,
+    "coin": 800,
+    "diamond": 50,
+    "bullet": 5
   },
   {
     "Level": 14,
-    "FruitHP": 12000
+    "fruit": 2,
+    "FruitHP": 12000,
+    "hinder": 111,
+    "hinders": 111,
+    "coin": 850,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 15,
-    "FruitHP": 13000
+    "fruit": 3,
+    "FruitHP": 13000,
+    "hinder": 120,
+    "hinders": 120,
+    "coin": 900,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 16,
-    "FruitHP": 14000
+    "fruit": 4,
+    "FruitHP": 14000,
+    "hinder": 121,
+    "hinders": 121,
+    "coin": 950,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 17,
-    "FruitHP": 15000
+    "fruit": 5,
+    "FruitHP": 15000,
+    "hinder": 130,
+    "hinders": 130,
+    "coin": 1000,
+    "diamond": 50,
+    "bullet": 6
   },
   {
     "Level": 18,
-    "FruitHP": 16000
+    "fruit": 6,
+    "FruitHP": 16000,
+    "hinder": 131,
+    "hinders": 131,
+    "coin": 1050,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 19,
-    "FruitHP": 17000
+    "fruit": 7,
+    "FruitHP": 17000,
+    "hinder": 210,
+    "hinders": 210,
+    "coin": 1100,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 20,
-    "FruitHP": 18000
+    "fruit": 8,
+    "FruitHP": 18000,
+    "hinder": 211,
+    "hinders": 211,
+    "coin": 1150,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 21,
-    "FruitHP": 19000
+    "fruit": 9,
+    "FruitHP": 19000,
+    "hinder": 220,
+    "hinders": 220,
+    "coin": 1200,
+    "diamond": 50,
+    "bullet": 7
   },
   {
     "Level": 22,
-    "FruitHP": 20000
+    "fruit": 10,
+    "FruitHP": 20000,
+    "hinder": 221,
+    "hinders": 221,
+    "coin": 1250,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 23,
-    "FruitHP": 21000
+    "fruit": 11,
+    "FruitHP": 21000,
+    "hinder": 230,
+    "hinders": 230,
+    "coin": 1300,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 24,
-    "FruitHP": 22000
+    "fruit": 12,
+    "FruitHP": 22000,
+    "hinder": 231,
+    "hinders": 231,
+    "coin": 1350,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 25,
-    "FruitHP": 23000
+    "fruit": 1,
+    "FruitHP": 23000,
+    "hinder": 111,
+    "hinders": 110,
+    "coin": 1400,
+    "diamond": 50,
+    "bullet": 8
   },
   {
     "Level": 26,
-    "FruitHP": 24000
+    "fruit": 2,
+    "FruitHP": 24000,
+    "hinder": 110,
+    "hinders": 111,
+    "coin": 1450,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 27,
-    "FruitHP": 25000
+    "fruit": 3,
+    "FruitHP": 25000,
+    "hinder": 121,
+    "hinders": 120,
+    "coin": 1500,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 28,
-    "FruitHP": 25000
+    "fruit": 4,
+    "FruitHP": 25000,
+    "hinder": 120,
+    "hinders": 121,
+    "coin": 1550,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 29,
-    "FruitHP": 25000
+    "fruit": 5,
+    "FruitHP": 25000,
+    "hinder": 131,
+    "hinders": 130,
+    "coin": 1600,
+    "diamond": 50,
+    "bullet": 9
   },
   {
     "Level": 30,
-    "FruitHP": 25000
+    "fruit": 6,
+    "FruitHP": 25000,
+    "hinder": 130,
+    "hinders": 131,
+    "coin": 1650,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 31,
-    "FruitHP": 25000
+    "fruit": 7,
+    "FruitHP": 25000,
+    "hinder": 211,
+    "hinders": 210,
+    "coin": 1700,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 32,
-    "FruitHP": 25000
+    "fruit": 8,
+    "FruitHP": 25000,
+    "hinder": 210,
+    "hinders": 211,
+    "coin": 1750,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 33,
-    "FruitHP": 25000
+    "fruit": 9,
+    "FruitHP": 25000,
+    "hinder": 221,
+    "hinders": 220,
+    "coin": 1800,
+    "diamond": 50,
+    "bullet": 10
   },
   {
     "Level": 34,
-    "FruitHP": 25000
+    "fruit": 10,
+    "FruitHP": 25000,
+    "hinder": 220,
+    "hinders": 221,
+    "coin": 1850,
+    "diamond": 50,
+    "bullet": 0
   },
   {
     "Level": 35,
-    "FruitHP": 25000
+    "fruit": 11,
+    "FruitHP": 25000,
+    "hinder": 231,
+    "hinders": 230,
+    "coin": 1900,
+    "diamond": 50,
+    "bullet": 0
   }
 ]
