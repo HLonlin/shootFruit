@@ -38,6 +38,36 @@ cc.Class({
 			tooltip: '初始化图像组',
 			displayName: '初始化图像组',
 		},
+		box_rewardBox: {
+			default: null,
+			type: cc.Node,
+			displayName: '通关奖励',
+			tooltip: '通关奖励'
+		},
+		reward_coin: {
+			default: null,
+			type: cc.Prefab,
+			displayName: '金币奖励',
+			tooltip: '通关奖励预制'
+		},
+		reward_diamond: {
+			default: null,
+			type: cc.Prefab,
+			displayName: '钻石奖励',
+			tooltip: '通关奖励预制'
+		},
+		reward_bullet: {
+			default: null,
+			type: cc.Prefab,
+			displayName: '子弹奖励',
+			tooltip: '通关奖励预制'
+		},
+		bulletShop: {
+			default: null,
+			type: require('bulletShop'),
+			displayName: '子弹库',
+			tooltip: '子弹库弹出框'
+		},
 	},
 	onLoad: function () {
 		// 获取碰撞检测系统
@@ -132,12 +162,40 @@ cc.Class({
 		if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
 			USERINFO.bulletsInUse = 1;
 		}
-		// 	"coin": 250,
-		// "diamond": 10,
-		// "bullet": 0
-		console.log('奖励金币:', this.level.coin);
-		console.log('奖励钻石：', this.level.diamond);
-		console.log('奖励子弹编号:', this.level.bullet);
+		var RewardNum = 0;
+		for (var i = 0, max = this.box_rewardBox.children.length; i < max; i++) {
+			this.box_rewardBox.children[i].destroy();
+		}
+		if (this.level.bullet != 0) {
+			RewardNum += 1;
+			let reward_bullet = cc.instantiate(this.reward_bullet);
+			reward_bullet.getChildByName('icon_rewardBg').getChildByName('icon_reward').getComponent(cc.Sprite).spriteFrame = USERINFO.bulletShop[this.level.bullet - 1].res;
+			reward_bullet.getChildByName('icon_bg').getChildByName('font_powerNum').getComponent(cc.Label).string = USERINFO.bulletShop[this.level.bullet - 1].power;
+			reward_bullet.getChildByName('btn_buyBullet').getChildByName('font_price').getComponent(cc.RichText).string = '<outline color=#39A3FF width=2><color=#ffffff>' + USERINFO.bulletShop[this.level.bullet - 1].price + '</color></outline>';
+			if (USERINFO.bulletShop[this.level.bullet - 1].state != 2) {
+				if (USERINFO.bulletShop[this.level.bullet - 1].state == 0) {
+					reward_bullet.getChildByName("icon_rewardBg").getChildByName("icon_new").active = true
+				}
+				USERINFO.bulletShop[this.level.bullet - 1].state = 1;
+				this.bulletShop.initUi();
+			}
+			this.box_rewardBox.addChild(reward_bullet);
+		}
+		if (this.level.coin != 0) {
+			USERINFO.coin += this.level.coin;
+			RewardNum += 1;
+			let reward_coin = cc.instantiate(this.reward_coin);
+			reward_coin.getChildByName("font_rewardNum").getComponent(cc.Label).string = 'x' + this.level.coin;
+			this.box_rewardBox.addChild(reward_coin);
+		}
+		if (this.level.diamond != 0) {
+			USERINFO.diamond += this.level.diamond;
+			RewardNum += 1;
+			let reward_diamond = cc.instantiate(this.reward_diamond);
+			reward_diamond.getChildByName("font_rewardNum").getComponent(cc.Label).string = 'x' + this.level.diamond;
+			this.box_rewardBox.addChild(reward_diamond);
+		}
+		this.box_rewardBox.height = RewardNum * 115
 		this.page_Over.node.getComponent('Over').initUi();
 		this.page_Over.node.getComponent('tips').show();
 		USERINFO.level += 1;

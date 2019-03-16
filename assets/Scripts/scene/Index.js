@@ -166,7 +166,25 @@ cc.Class({
 			type: cc.Node,
 			displayName: '抽奖奖励',
 			tooltip: '抽奖奖励'
-		}
+		},
+		item_coin: {
+			default: null,
+			type: cc.Prefab,
+			displayName: '金币奖励',
+			tooltip: '抽奖奖励预制'
+		},
+		item_diamond: {
+			default: null,
+			type: cc.Prefab,
+			displayName: '钻石奖励',
+			tooltip: '抽奖奖励预制'
+		},
+		item_bullet: {
+			default: null,
+			type: cc.Prefab,
+			displayName: '子弹奖励',
+			tooltip: '抽奖奖励预制'
+		},
 	},
 	onLoad() {
 		//播放背景音乐
@@ -264,10 +282,42 @@ cc.Class({
 	openDurian: function () {
 		if (USERINFO.durian > 0) {
 			USERINFO.durian -= 1;
-			var lucky = USERINFO.Data_game[3].json[USERINFO.luckyNum]
-			console.log('金币：', lucky.coin);
-			console.log('钻石：', lucky.diamond);
-			console.log('子弹：', lucky.bullet);
+			var lucky = USERINFO.Data_game[3].json[USERINFO.luckyNum];
+			var luckyRewardNum = 0;
+			for (var i = 0, max = this.icon_luckyReward.children.length; i < max; i++) {
+				this.icon_luckyReward.children[i].destroy();
+			}
+			if (lucky.bullet != 0) {
+				luckyRewardNum += 1;
+				let item_bullet = cc.instantiate(this.item_bullet);
+				item_bullet.getChildByName("icon_bg").getChildByName("icon_reward").getComponent(cc.Sprite).spriteFrame = this.bulletShop.fruit[lucky.bullet - 1].res;
+				item_bullet.getChildByName("bg").getChildByName("font_rewardNum").getComponent(cc.Label).string = USERINFO.bulletShop[lucky.bullet - 1].power;
+				if (USERINFO.bulletShop[lucky.bullet - 1].state != 2) {
+					if (USERINFO.bulletShop[lucky.bullet - 1].state == 0) {
+						item_bullet.getChildByName("icon_bg").getChildByName("icon_new").active = true
+					}
+					USERINFO.bulletShop[lucky.bullet - 1].state = 1;
+					this.bulletShop.initUi();
+				}
+				this.icon_luckyReward.addChild(item_bullet);
+			}
+			if (lucky.coin != 0) {
+				USERINFO.coin += lucky.coin;
+				this.font_coin.string = USERINFO.coin;
+				luckyRewardNum += 1;
+				let item_coin = cc.instantiate(this.item_coin);
+				item_coin.getChildByName("font_rewardNum").getComponent(cc.Label).string = 'x' + lucky.coin;
+				this.icon_luckyReward.addChild(item_coin);
+			}
+			if (lucky.diamond != 0) {
+				USERINFO.diamond += lucky.diamond;
+				this.font_diamond.string = USERINFO.diamond;
+				luckyRewardNum += 1;
+				let item_diamond = cc.instantiate(this.item_diamond);
+				item_diamond.getChildByName("font_rewardNum").getComponent(cc.Label).string = 'x' + lucky.diamond;
+				this.icon_luckyReward.addChild(item_diamond);
+			}
+			this.icon_luckyReward.height = luckyRewardNum * 115
 			USERINFO.luckyNum = USERINFO.luckyNum + 1 >= 20 ? 15 : USERINFO.luckyNum + 1;
 			this.tips_openDurian.show();
 		} else {
