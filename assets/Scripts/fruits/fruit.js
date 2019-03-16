@@ -159,6 +159,10 @@ cc.Class({
 	},
 	// 显示胜利页面
 	showpage_victory: function () {
+		if (HL.nodePoolState.gameScore > USERINFO.highestScore) {
+			USERINFO.highestScore = HL.nodePoolState.gameScore;
+			console.log()
+		}
 		if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
 			USERINFO.bulletsInUse = 1;
 		}

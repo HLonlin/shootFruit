@@ -193,6 +193,19 @@ cc.Class({
 			this.audioMng = this.audioMng.getComponent('AudioMaster');
 		}
 		if (this.audioMng) this.audioMng.playMusic();
+		// 签到页弹出
+		var signInState = localStorage.getItem('signInState');
+		if (signInState != 2) {
+			this.redPoint_singnIn.node.active = true;
+			this.openSingnIn();
+		}
+		// 微信
+		if (cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT) {
+			//初始化设备信息
+			WECHAT.initDeviceMaster();
+			//初始化广告
+			WECHAT.initAD();
+		}
 	},
 	start: function () {
 		// 登录
@@ -208,7 +221,7 @@ cc.Class({
 			coin: 0,//金币
 			diamond: 100,//钻石
 			durian: 1,//榴莲
-			highestScore: 100000,//最高分
+			highestScore: 0,//最高分
 			bulletsInUse: 1,//正在使用的子弹
 			armCritLevel: 1,// 武器暴击等级
 			armpoweLevel: 1,// 武器威力等级
@@ -219,12 +232,6 @@ cc.Class({
 		USERINFO.init(data);
 	},
 	initUi: function () {
-		// 签到页弹出
-		var signInState = localStorage.getItem('signInState');
-		if (signInState != 2) {
-			this.redPoint_singnIn.node.active = true;
-			this.openSingnIn();
-		}
 		// 金币
 		this.font_coin.string = USERINFO.coin;
 		// 钻石
@@ -245,13 +252,6 @@ cc.Class({
 		// 升级面板
 		this.initPowerUi();
 		this.initCritUi();
-		// 微信
-		if (cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT) {
-			//初始化设备信息
-			WECHAT.initDeviceMaster();
-			//初始化广告
-			WECHAT.initAD();
-		}
 	},
 	startAction: function () {
 		this.action_StartGame();
