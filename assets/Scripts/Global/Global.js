@@ -175,6 +175,7 @@ window.USERINFO = {
 	armCritLevel: 1,// 武器暴击等级
 	armpoweLevel: 1,// 武器威力等级
 	bulletShop: null,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
+	Invincible: false,//无敌状态
 	// initScene:wx.getLaunchOptionsSync()||'',
 	luckyNum: 0,
 	initScene: '1001',// 初始场景值，用于区分从哪进入游戏

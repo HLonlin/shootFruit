@@ -1,3 +1,5 @@
+import { userInfo } from "os";
+
 // 子弹
 cc.Class({
 	extends: cc.Component,
@@ -24,8 +26,7 @@ cc.Class({
 		this.normal = true;
 		// 暂时性无敌状态
 		this.tentativeInvincible = false;
-		// 无敌状态
-		this.Invincible = false;
+
 	},
 	//碰撞检测
 	onCollisionEnter: function (other, self) {
@@ -37,7 +38,7 @@ cc.Class({
 			currentTag = currentTag + '0';
 			if (other.tag == currentTag) {
 				// 判断现在是否无敌
-				if (!this.Invincible) {
+				if (!USERINFO.Invincible) {
 					// 将子弹方向设置向下
 					this.normal = false;
 				}

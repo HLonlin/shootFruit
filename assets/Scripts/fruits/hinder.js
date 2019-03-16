@@ -27,15 +27,4 @@ cc.Class({
             tooltip: '障碍物环绕速度，值越大速度越快,1为正常速度'
         }
     },
-    onLoad: function () {
-        // 默认播放外圈短正转障碍物动画
-        var names = this.around + '' + this.length + '' + this.prosAndCons + '';
-        // this.playAnimBynames(names);
-    },
-    // playAnimBynames: function (name) {
-    //     let anim = this.getComponent(cc.Animation);
-    //     let animName = this.node.name + name;
-    //     var animState = anim.playAdditive(animName);
-    //     animState.speed = this.speed;
-    // },
 });
