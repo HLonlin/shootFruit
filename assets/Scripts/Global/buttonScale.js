@@ -15,8 +15,6 @@ cc.Class({
             tooltip: '按钮缩放用时'
         },
     },
-
-    // use this for initialization 用于初始化
     onLoad: function () {
         var self = this;
         var audioMng = cc.find('Index/AudioMaster') || cc.find('Game/AudioMaster') || cc.find('Shop/AudioMaster') || cc.find('Over/AudioMaster') || cc.find('AudioMaster');

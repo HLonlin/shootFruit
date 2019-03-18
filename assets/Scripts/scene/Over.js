@@ -64,8 +64,6 @@ cc.Class({
         this.font_score.getComponent(cc.Label).string = HL.nodePoolState.gameScore;
         this.victoryCoin_zIndex = this.font_coin.zIndex;
         this.victoryDiam_zIndex = this.font_diamond.zIndex;
-        this.font_coin.zIndex = 27;
-        this.font_diamond.zIndex = 27;
         this.tips_victory.getComponent('tips').show();
         this.showIcon();
     },
@@ -80,8 +78,6 @@ cc.Class({
         this.font_diamond.opacity = 255;
         this.reviveCoin_zIndex = this.font_coin.zIndex;
         this.reviveDiam_zIndex = this.font_diamond.zIndex;
-        this.font_coin.zIndex = 27;
-        this.font_diamond.zIndex = 27;
         this.tips_revive.getComponent('tips').show();
         this.panel_levelUp.node.getComponent('fadeTab').fadeToggle();
         this.showIcon();
@@ -99,8 +95,6 @@ cc.Class({
         this.font_diamond.opacity = 255;
         this.overCoin_zIndex = this.font_coin.zIndex;
         this.overDiam_zIndex = this.font_diamond.zIndex;
-        this.font_coin.zIndex = 27;
-        this.font_diamond.zIndex = 27;
         this.tips_over.getComponent('tips').show();
     },
     fadeOut_over: function () {
