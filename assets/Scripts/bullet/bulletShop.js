@@ -220,10 +220,13 @@ cc.Class({
         }
     },
     show: function () {
+        this.zIndex = this.node.zIndex;
+        this.node.zIndex = this.node.parent.childrenCount + 1;
         this.node.active = true;
         this.node.emit('fade-in');
     },
     hide: function () {
+        this.node.zIndex = this.zIndex;
         this.node.emit('fade-out');
     },
     startFadeIn: function () {

@@ -76,7 +76,6 @@ cc.Class({
 		if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
 			USERINFO.bulletsInUse = 1;
 		}
-		this.page_Over.node.getComponent('Over').initUi();
-		this.page_Over.node.getComponent('tips').show()
+		this.page_Over.node.getComponent('Over').fadein_revive()
 	}
 });

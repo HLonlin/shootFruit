@@ -161,7 +161,6 @@ cc.Class({
 	showpage_victory: function () {
 		if (HL.nodePoolState.gameScore > USERINFO.highestScore) {
 			USERINFO.highestScore = HL.nodePoolState.gameScore;
-			console.log()
 		}
 		if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
 			USERINFO.bulletsInUse = 1;
@@ -200,8 +199,7 @@ cc.Class({
 			this.box_rewardBox.addChild(reward_diamond);
 		}
 		this.box_rewardBox.height = RewardNum * 115
-		this.page_Over.node.getComponent('Over').initUi();
-		this.page_Over.node.getComponent('tips').show();
+		this.page_Over.node.getComponent('Over').fadein_victory();
 		USERINFO.level += 1;
 	}
 });

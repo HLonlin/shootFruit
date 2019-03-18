@@ -48,6 +48,18 @@ cc.Class({
 			type: cc.Layout,
 			displayName: '红心组',
 			tooltip: '红心组'
+		},
+		icon_coins: {
+			default: null,
+			type: cc.Node,
+			displayName: '金币',
+			tooltip: '金币'
+		},
+		icon_diamond: {
+			default: null,
+			type: cc.Node,
+			displayName: '钻石',
+			tooltip: '钻石'
 		}
 	},
 	// 生命周期回调
@@ -87,6 +99,14 @@ cc.Class({
 				}
 			}
 		}
+	},
+	hideIcon: function () {
+		this.icon_coins.opacity = 0;
+		this.icon_diamond.opacity = 0;
+	},
+	showIcon: function () {
+		this.icon_coins.opacity = 255;
+		this.icon_diamond.opacity = 255;
 	},
 	changeScore: function (score) {
 		HL.nodePoolState.gameScore += score;

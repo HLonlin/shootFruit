@@ -42,13 +42,12 @@ cc.Class({
     onLoad: function () {
         this.node.on('fade-in', this.startFadeIn, this);
         this.node.on('fade-out', this.startFadeOut, this);
-        this.fade = false;
     },
     init: function (home) {
         this.home = home;
     },
     fadeToggle: function () {
-        if (!this.fade) {
+        if (!this.fade||this.fade==null) {
             this.node.active = true;
             this.node.emit('fade-in');
             this.fade = true;
