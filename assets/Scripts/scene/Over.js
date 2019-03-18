@@ -50,6 +50,18 @@ cc.Class({
             displayName: '钻石',
             tooltip: '钻石数'
         },
+        cardPrefab: {
+            default: null,
+            type: cc.Prefab,
+            displayName: 'item_gameList',
+            tooltip: '列表中item预制'
+        },
+        scrollView: {
+            default: null,
+            type: cc.Node,
+            displayName: '推荐列表',
+            tooltip: '推荐列表'
+        },
     },
     hideIcon: function () {
         this.font_coin.opacity = 0;
@@ -104,5 +116,42 @@ cc.Class({
         this.tips_over.getComponent('tips').hide();
         this.font_coin.zIndex = this.victoryCoin_zIndex;
         this.font_diamond.zIndex = this.victoryDiam_zIndex;
+    },
+    onLoad() {
+        this.init();
+    },
+    init: function () {
+        this.itemsArr = [];
+        if (this.scrollView.children.length >= 6) {
+            return;
+        }
+        for (let i = 0; i < 6; ++i) {
+            let items = this.additem();
+            this.itemsArr.push(items);
+        }
+        this.addEvents();
+    },
+    additem: function () {
+        let card = cc.instantiate(this.cardPrefab);
+        var remoteUrl = "https://img.zcool.cn/community/01849a5c85eaefa80120af9a7984af.png@1280w_1l_2o_100sh.png";
+        cc.loader.load(remoteUrl, function (err, texture) {
+            var sf = new cc.SpriteFrame(texture);
+            card.getChildByName("gameList_head").getComponent(cc.Sprite).spriteFrame = sf;
+            card.getChildByName("gameList_head").width = 120;
+            card.getChildByName("gameList_head").height = 120;
+            card.getChildByName("font_gameName").getComponent(cc.Label).string = '游戏游戏';
+        });
+        this.scrollView.addChild(card);
+        return card;
+    },
+    // 对应跳转
+    addEvents: function () {
+        for (var i = 0, max = this.itemsArr.length; i < max; i++) {
+            this.itemsArr[i].index = i;
+            this.itemsArr[i].on('touchend', function (event) {
+                var index = event.currentTarget.index
+                console.log('跳转到小程序：', index);
+            }, this);
+        }
     },
 });
