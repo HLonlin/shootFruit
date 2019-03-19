@@ -11,7 +11,9 @@
     "eslint": "^5.14.1"
   },
   "dependencies": {
-    "loads": "0.0.4"
+    "loads": "0.0.4",
+    "lodash": "^4.17.11",
+    "md5": "^2.2.1"
   },
   "description": ""
 }

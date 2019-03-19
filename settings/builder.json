@@ -35,7 +35,7 @@
     "REMOTE_SERVER_ROOT": "https://page8.h5.0e3.cn/H5Game/page8/1903/0301/",
     "appid": "wxc25ddb6500b7b8c6",
     "orientation": "portrait",
-    "subContext": ""
+    "subContext": "wx-open-data"
   },
   "xxteaKey": "5c436f49-b98b-4b",
   "zipCompressJs": true
