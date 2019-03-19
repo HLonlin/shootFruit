@@ -110,6 +110,11 @@ cc.Class({
 	},
 	changeScore: function (score) {
 		HL.nodePoolState.gameScore += score;
+		// 刷新最高分
+		if (HL.nodePoolState.gameScore >= USERINFO.highestScore) {
+			USERINFO.highestScore = HL.nodePoolState.gameScore;
+			localStorage.setItem('highestScore', USERINFO.highestScore);
+		}
 		this.scoreDisplay.string = HL.nodePoolState.gameScore.toString();
 	},
 });

@@ -102,6 +102,13 @@ cc.Class({
         this.font_coin.zIndex = this.victoryCoin_zIndex;
     },
     fadein_over: function () {
+        // 上传最高分
+        if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            wx.postMessage({
+                messageType: 'overRank',
+                maxScore: USERINFO.highestScore,
+            })
+        }
         this.showIcon();
         this.font_coin.opacity = 255;
         this.font_diamond.opacity = 255;
@@ -130,6 +137,8 @@ cc.Class({
             this.itemsArr.push(items);
         }
         this.addEvents();
+
+
     },
     additem: function () {
         let card = cc.instantiate(this.cardPrefab);

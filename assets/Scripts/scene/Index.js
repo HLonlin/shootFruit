@@ -221,7 +221,7 @@ cc.Class({
 			coin: 0,//金币
 			diamond: 100,//钻石
 			durian: 1,//榴莲
-			highestScore: 0,//最高分
+			highestScore: localStorage.getItem('highestScore') || 0,//最高分
 			bulletsInUse: 1,//正在使用的子弹
 			armCritLevel: 1,// 武器暴击等级
 			armpoweLevel: 1,// 武器威力等级
