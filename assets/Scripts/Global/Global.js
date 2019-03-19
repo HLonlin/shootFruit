@@ -176,9 +176,8 @@ window.USERINFO = {
 	armpoweLevel: 1,// 武器威力等级
 	bulletShop: null,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
 	Invincible: false,//无敌状态
-	// initScene:wx.getLaunchOptionsSync()||'',
-	luckyNum: 0,
-	initScene: '1001',// 初始场景值，用于区分从哪进入游戏
+	luckyNum: 0,//已经抽奖次数
+	initScene: null,// 初始场景值，用于区分从哪进入游戏
 	// 同步数据到本地
 	init: function (data) {
 		var that = this;
@@ -193,6 +192,13 @@ window.USERINFO = {
 		that.initScene = data.initScene;
 		this.Data_game = data.Data_game;
 	},
+	getInitScene: function () {
+		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+			return wx.getLaunchOptionsSync();
+		} else {
+			return null;
+		}
+	}
 };
 window.WECHAT = {
 	SYSTEM_INFO: null,
@@ -451,14 +457,3 @@ window.WECHAT = {
 		});
 	}
 };
-window.WXRANK = {
-	// 向开放域发送信息
-	postMessage: function (type, data) {
-		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
-			window.wx.postMessage({
-				messageType: type,
-				maxScore: data,
-			});
-		}
-	}
-}

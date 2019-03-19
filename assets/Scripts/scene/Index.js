@@ -226,8 +226,8 @@ cc.Class({
 			armCritLevel: 1,// 武器暴击等级
 			armpoweLevel: 1,// 武器威力等级
 			bulletShop: this.bulletShop.fruit,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
-			initScene: '1001',// 初始场景值，用于区分从哪进入游戏
 			Data_game: this.Data_game,//游戏数据
+			initScene: USERINFO.getInitScene(),//进入场景
 		};
 		USERINFO.init(data);
 	},

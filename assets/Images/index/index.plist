@@ -26,9 +26,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{36,36}}</string>
+                <string>{{5,5},{36,36}}</string>
                 <key>sourceSize</key>
-                <string>{36,36}</string>
+                <string>{46,46}</string>
             </dict>
             <key>anniu_kaiqi.png</key>
             <dict>
@@ -147,19 +147,6 @@
                 <key>sourceSize</key>
                 <string>{500,580}</string>
             </dict>
-            <key>kuang_tuijian01.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{759,137},{120,120}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
-                <key>sourceSize</key>
-                <string>{120,120}</string>
-            </dict>
             <key>kuang_tuijian02.png</key>
             <dict>
                 <key>frame</key>
@@ -215,7 +202,7 @@
             <key>tubiao_jinbi00.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{881,137},{60,60}}</string>
+                <string>{{841,137},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,7 +215,7 @@
             <key>tubiao_jinbi0101.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{881,200},{80,80}}</string>
+                <string>{{759,137},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -332,7 +319,7 @@
             <key>tubiao_zuanshi00.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{943,141},{59,57}}</string>
+                <string>{{903,141},{59,57}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -352,7 +339,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:210c2996d6353928ebf39ac2e745419e:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:54b574391df33a9ef795d35b4363bfec:1/1$</string>
             <key>textureFileName</key>
             <string>index.png</string>
         </dict>
