@@ -14,6 +14,12 @@ cc.Class({
             displayName: '分数',
             tooltip: '关卡得分'
         },
+        font_score_over: {
+            default: null,
+            type: cc.Node,
+            displayName: '结束分数',
+            tooltip: '关卡得分'
+        },
         tips_victory: {
             default: null,
             type: cc.Node,
@@ -102,6 +108,7 @@ cc.Class({
         this.font_coin.zIndex = this.victoryCoin_zIndex;
     },
     fadein_over: function () {
+        this.font_score_over.getComponent(cc.Label).string = '本局得分：' + HL.nodePoolState.gameScore;
         // 上传最高分
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             wx.postMessage({

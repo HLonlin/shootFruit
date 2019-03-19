@@ -77,7 +77,7 @@ cc.Class({
 		this.fruitInit();
 	},
 	fruitInit: function () {
-		this.Game.initState();
+		// this.Game.initState();
 		this.node.opacity = 255;
 		this.node.setScale(1);
 		// 获取当前关卡信息
