@@ -37,6 +37,18 @@ cc.Class({
             type: cc.Node,
             displayName: '签到',
             tooltip: '签到按钮'
+        },
+        index_arm: {
+            default: null,
+            type: cc.Node,
+            displayName: '主页武器',
+            tooltip: '主页武器动画'
+        },
+        index_bullet: {
+            default: null,
+            type: cc.Node,
+            displayName: '主页子弹',
+            tooltip: '主页子弹动画'
         }
     },
     onLoad: function () {
@@ -47,7 +59,7 @@ cc.Class({
         this.home = home;
     },
     fadeToggle: function () {
-        if (!this.fade||this.fade==null) {
+        if (!this.fade || this.fade == null) {
             this.node.active = true;
             this.node.emit('fade-in');
             this.fade = true;
@@ -57,6 +69,9 @@ cc.Class({
         }
     },
     startFadeIn: function () {
+        this.index_arm.getComponent(cc.Animation).pause();
+        this.index_bullet.getComponent(cc.Animation).pause();
+        this.index_bullet.opacity = 0;
         this.node.setScale(cc.v2(1, 0));
         this.node.opacity = 0;
         var onFadeInFinish = function () { this.font_StartGame.opacity = 0 };
@@ -78,6 +93,9 @@ cc.Class({
         this.node.runAction(actionFadeIn);
     },
     startFadeOut: function () {
+        this.index_arm.getComponent(cc.Animation).resume();
+        this.index_bullet.getComponent(cc.Animation).resume();
+        this.index_bullet.opacity = 255;
         var onFadeOutFinish = function () { this.font_StartGame.opacity = 255 };
         // 排行榜
         var action = cc.moveTo(this.duration, cc.v2(-280, 230));
