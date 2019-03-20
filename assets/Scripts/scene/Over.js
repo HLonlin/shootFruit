@@ -78,6 +78,7 @@ cc.Class({
         this.font_diamond.opacity = 255;
     },
     submitScore: function () {
+        // 上传最高分到服务器
         HL.ajax.post(HL.ajax.sendScore, { score: HL.nodePoolState.gameScore, uid: USERINFO.uid, fruits_id: USERINFO.bulletsInUse }, ((e) => {
             // 请求成功
             if (e.code == 1) {
@@ -88,6 +89,13 @@ cc.Class({
                 console.log('fail');
             }
         }));
+        // 上传最高分到微信开放域
+        if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            wx.postMessage({
+                messageType: 'overRank',
+                maxScore: USERINFO.highestScore,
+            })
+        }
     },
     fadein_victory: function () {
         this.submitScore();
@@ -113,23 +121,48 @@ cc.Class({
         this.panel_levelUp.node.getComponent('fadeTab').fadeToggle();
         this.showIcon();
     },
-    fadeOut_revive: function () {
-        this.hideIcon();
-        this.panel_levelUp.node.getComponent('fadeTab').fadeToggle();
-        this.font_diamond.zIndex = this.victoryDiam_zIndex;
-        this.tips_revive.getComponent('tips').hide();
-        this.font_coin.zIndex = this.victoryCoin_zIndex;
+    fadeOut_revive: function (data, type) {
+        if (type = 'skip') {
+            this.hideIcon();
+            this.panel_levelUp.node.getComponent('fadeTab').fadeToggle();
+            this.font_diamond.zIndex = this.victoryDiam_zIndex;
+            this.tips_revive.getComponent('tips').hide();
+            this.font_coin.zIndex = this.victoryCoin_zIndex;
+        } else {
+            WECHAT.openVideoAd(() => {
+                this.hideIcon();
+                this.panel_levelUp.node.getComponent('fadeTab').fadeToggle();
+                this.font_diamond.zIndex = this.victoryDiam_zIndex;
+                this.tips_revive.getComponent('tips').hide();
+                this.font_coin.zIndex = this.victoryCoin_zIndex;
+            }, () => {
+                wx.showToast({
+                    title: '视频未正常播放结束',
+                    icon: 'none',
+                    duration: 2000,
+                    mask: true
+                })
+            }, () => {
+                WECHAT.share(null, () => {
+                    this.hideIcon();
+                    this.panel_levelUp.node.getComponent('fadeTab').fadeToggle();
+                    this.font_diamond.zIndex = this.victoryDiam_zIndex;
+                    this.tips_revive.getComponent('tips').hide();
+                    this.font_coin.zIndex = this.victoryCoin_zIndex;
+                }, () => {
+                    wx.showToast({
+                        title: '请分享到群',
+                        icon: 'none',
+                        duration: 2000,
+                        mask: true
+                    })
+                }, 'querys1=1');
+            });
+        }
     },
     fadein_over: function () {
         this.submitScore();
         this.font_score_over.getComponent(cc.Label).string = '本局得分：' + HL.nodePoolState.gameScore;
-        // 上传最高分
-        if (cc.sys.platform === cc.sys.WECHAT_GAME) {
-            wx.postMessage({
-                messageType: 'overRank',
-                maxScore: USERINFO.highestScore,
-            })
-        }
         this.showIcon();
         this.font_coin.opacity = 255;
         this.font_diamond.opacity = 255;
@@ -154,22 +187,27 @@ cc.Class({
             return;
         }
         for (let i = 0; i < 6; ++i) {
-            let items = this.additem();
+            let items = this.additem(i);
             this.itemsArr.push(items);
         }
         this.addEvents();
-
-
     },
-    additem: function () {
+    additem: function (index) {
         let card = cc.instantiate(this.cardPrefab);
-        var remoteUrl = "https://img.zcool.cn/community/01849a5c85eaefa80120af9a7984af.png@1280w_1l_2o_100sh.png";
+        if (WECHAT.GameList[index] != undefined) {
+            var remoteUrl = WECHAT.GameList[index].image;
+        } else {
+            var remoteUrl = "https://img.zcool.cn/community/01849a5c85eaefa80120af9a7984af.png@1280w_1l_2o_100sh.png";
+        }
         cc.loader.load(remoteUrl, function (err, texture) {
             var sf = new cc.SpriteFrame(texture);
             card.getChildByName("gameList_head").getComponent(cc.Sprite).spriteFrame = sf;
             card.getChildByName("gameList_head").width = 120;
             card.getChildByName("gameList_head").height = 120;
-            card.getChildByName("font_gameName").getComponent(cc.Label).string = '游戏游戏';
+            if (WECHAT.GameList[index] != undefined) {
+                card.getChildByName("font_gameName").getComponent(cc.Label).string = WECHAT.GameList[index].name;
+            }
+
         });
         this.scrollView.addChild(card);
         return card;
@@ -180,8 +218,43 @@ cc.Class({
             this.itemsArr[i].index = i;
             this.itemsArr[i].on('touchend', function (event) {
                 var index = event.currentTarget.index
-                console.log('跳转到小程序：', index);
+                if (WECHAT.GameList[index] != undefined) {
+                    console.log('跳转到小程序：', WECHAT.GameList[index].appid, 'index:', index);
+                }
             }, this);
         }
     },
+    double: function () {
+        WECHAT.openVideoAd(() => {
+            wx.showToast({
+                title: '双倍奖励',
+                icon: 'none',
+                duration: 2000,
+                mask: true
+            })
+        }, () => {
+            wx.showToast({
+                title: '视频未正常播放结束',
+                icon: 'none',
+                duration: 2000,
+                mask: true
+            })
+        }, () => {
+            WECHAT.share(null, () => {
+                wx.showToast({
+                    title: '双倍奖励',
+                    icon: 'none',
+                    duration: 2000,
+                    mask: true
+                })
+            }, () => {
+                wx.showToast({
+                    title: '请分享到群',
+                    icon: 'none',
+                    duration: 2000,
+                    mask: true
+                })
+            }, 'querys1=1');
+        });
+    }
 });

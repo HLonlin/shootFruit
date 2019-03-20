@@ -208,6 +208,9 @@ cc.Class({
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
 			wx.onHide(() => {
 				var bulletShop = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+				for (var i = 0, max = USERINFO.bulletShop.length; i < max; i++) {
+					bulletShop[i] = USERINFO.bulletShop[i].state;
+				}
 				var data = {
 					level: USERINFO.level,//关卡
 					coin: USERINFO.coin,//拥有金币数
@@ -222,7 +225,6 @@ cc.Class({
 				}
 
 				var info = JSON.stringify(data);
-				console.log(info);
 				HL.ajax.post(HL.ajax.setGameData, { uid: USERINFO.uid, info: info }, ((e) => {
 					// 请求成功
 					if (e.code == 1) {
@@ -397,7 +399,12 @@ cc.Class({
 							that.font_durianNum.string = USERINFO.durian;
 						}
 					}, () => {
-						console.log('分享失败');
+						wx.showToast({
+							title: '请分享到群',
+							icon: 'none',
+							duration: 2000,
+							mask: true
+						})
 					}, 'querys1=1');
 				});
 			}
@@ -461,10 +468,20 @@ cc.Class({
 	// 分享
 	share: function () {
 		WECHAT.share(null, () => {
-			console.log('分享成功');
+			wx.showToast({
+				title: '分享成功',
+				icon: 'none',
+				duration: 2000,
+				mask: true
+			})
 		}, () => {
-			console.log('分享失败');
-		}, 'querys1=1');
+			wx.showToast({
+				title: '请分享到群',
+				icon: 'none',
+				duration: 2000,
+				mask: true
+			})
+		}, 'openId=' + USERINFO.openId);
 	},
 	// 观看视频
 	openVideo: function () {
@@ -473,7 +490,21 @@ cc.Class({
 		}, () => {
 			console.log('中途退出视频');
 		}, () => {
-			console.log('没有视频播放');
+			WECHAT.share(null, () => {
+				wx.showToast({
+					title: '分享成功',
+					icon: 'none',
+					duration: 2000,
+					mask: true
+				})
+			}, () => {
+				wx.showToast({
+					title: '请分享到群',
+					icon: 'none',
+					duration: 2000,
+					mask: true
+				})
+			}, 'openId=' + USERINFO.openId);
 		});
 	},
 });
