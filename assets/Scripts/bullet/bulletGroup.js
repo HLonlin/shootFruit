@@ -62,7 +62,7 @@ cc.Class({
 		let newNode = HL.nodePool.genNewNode(that[poolName], that.prefab, that.node);
 		newNode.setPosition(that.getBulletPosition(that.position));
 		newNode.getComponent('bullet').bulletGroup = that;
-		newNode.getComponent(cc.Sprite).spriteFrame = USERINFO.bulletShop[USERINFO.bulletsInUse - 1].bullet;
+		newNode.getComponent(cc.Sprite).spriteFrame = USERINFO.bulletShop[USERINFO.bulletsInUse].bullet;
 	},
 	//获取子弹位置
 	getBulletPosition: function (positionStr) {

@@ -1,3 +1,4 @@
+import { userInfo } from "os";
 
 const fruit = cc.Class({
     name: 'fruitInfo',
@@ -110,7 +111,7 @@ cc.Class({
     init: function (home) {
         this.itemsArr = [];
         this.home = home;
-        for (let i = 0; i < this.totalCount; ++i) {
+        for (let i = 0; i < this.totalCount; i++) {
             let items = this.additem();
             this.itemsArr.push(items);
         }
@@ -166,12 +167,12 @@ cc.Class({
                 this.itemsArr[i].getChildByName("item2").active = true;
             }
         }
-        this.itemsArr[USERINFO.bulletsInUse - 1].getChildByName("item0").active = false;
-        this.itemsArr[USERINFO.bulletsInUse - 1].getChildByName("item1").active = false;
-        this.itemsArr[USERINFO.bulletsInUse - 1].getChildByName("item2").active = false;
-        this.itemsArr[USERINFO.bulletsInUse - 1].getChildByName("item3").active = true;
-        if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
-            this.itemsArr[USERINFO.bulletsInUse - 1].getChildByName("item3").getChildByName("font_inUse").getComponent(cc.Label).string = '试用中';
+        this.itemsArr[USERINFO.bulletsInUse].getChildByName("item0").active = false;
+        this.itemsArr[USERINFO.bulletsInUse].getChildByName("item1").active = false;
+        this.itemsArr[USERINFO.bulletsInUse].getChildByName("item2").active = false;
+        this.itemsArr[USERINFO.bulletsInUse].getChildByName("item3").active = true;
+        if (USERINFO.bulletShop[USERINFO.bulletsInUse].state < 2) {
+            this.itemsArr[USERINFO.bulletsInUse].getChildByName("item3").getChildByName("font_inUse").getComponent(cc.Label).string = '试用中';
         }
     },
     addevents: function () {
@@ -181,29 +182,53 @@ cc.Class({
             var btn_testTry = this.itemsArr[i].getChildByName("item0").getChildByName("btn_testTry");
             btn_testTry.index = i;
             btn_testTry.on('touchend', function (event) {
-                var index = event.currentTarget.index
-                USERINFO.bulletsInUse = index + 1;
-                that.initUi();
+                WECHAT.openVideoAd(() => {
+                    var index = event.currentTarget.index
+                    USERINFO.bulletsInUse = index;
+                    that.initUi();
+                }, () => {
+                    console.log('中途退出视频');
+                }, () => {
+                    WECHAT.share(null, () => {
+                        var index = event.currentTarget.index
+                        USERINFO.bulletsInUse = index;
+                        that.initUi();
+                    }, () => {
+                        console.log('分享失败');
+                    }, 'querys1=1');
+                });
             });
             // 未购买试用按钮
             var btn_testTry0 = this.itemsArr[i].getChildByName("item1").getChildByName("btn_test");
             btn_testTry0.index = i;
             btn_testTry0.on('touchend', function (event) {
-                var index = event.currentTarget.index
-                USERINFO.bulletsInUse = index + 1;
-                that.initUi();
+                WECHAT.openVideoAd(() => {
+                    var index = event.currentTarget.index
+                    USERINFO.bulletsInUse = index;
+                    that.initUi();
+                }, () => {
+                    console.log('中途退出视频');
+                }, () => {
+                    WECHAT.share(null, () => {
+                        var index = event.currentTarget.index
+                        USERINFO.bulletsInUse = index;
+                        that.initUi();
+                    }, () => {
+                        console.log('分享失败');
+                    }, 'querys1=1');
+                });
             });
             // 购买按钮
             var btn_testTry1 = this.itemsArr[i].getChildByName("item1").getChildByName("btn_testTry");
             btn_testTry1.index = i;
             btn_testTry1.on('touchend', function (event) {
-                var price = 1200;
+                var index = event.currentTarget.index;
+                var price = USERINFO.bulletShop[index].price;
                 if (USERINFO.coin >= price) {
                     USERINFO.coin -= price;
                     that.font_coinNums.string = USERINFO.coin;
-                    var index = event.currentTarget.index;
-                    USERINFO.bulletShop[index] = 2;
-                    USERINFO.bulletsInUse = index + 1;
+                    USERINFO.bulletShop[index].state = 2;
+                    USERINFO.bulletsInUse = index;
                     that.initUi();
                 } else {
                     that.tips_exchange.getComponent('tips').show();
@@ -214,7 +239,7 @@ cc.Class({
             btn_testTry2.index = i;
             btn_testTry2.on('touchend', function (event) {
                 var index = event.currentTarget.index
-                USERINFO.bulletsInUse = index + 1;
+                USERINFO.bulletsInUse = index;
                 that.initUi();
             });
         }

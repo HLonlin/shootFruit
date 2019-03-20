@@ -77,7 +77,6 @@ cc.Class({
 		this.fruitInit();
 	},
 	fruitInit: function () {
-		// this.Game.initState();
 		this.node.opacity = 255;
 		this.node.setScale(1);
 		// 获取当前关卡信息
@@ -130,13 +129,13 @@ cc.Class({
 	// 计算伤害
 	injuryValue: function () {
 		// 根据武器暴击率计算是否暴击
-		var attackType = this.isCrit(USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Crit);
+		var attackType = this.isCrit(USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit);
 		if (!attackType) {
 			// 普通伤害=子弹威力
-			return USERINFO.bulletShop[USERINFO.bulletsInUse - 1].power;
+			return USERINFO.bulletShop[USERINFO.bulletsInUse].power;
 		} else {
 			// 暴击伤害=(子弹威力 + 武器威力) * 2
-			return (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].power + USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1].Power) * 2;
+			return (USERINFO.bulletShop[USERINFO.bulletsInUse].power + USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Power) * 2;
 		}
 	},
 	// 是否暴击
@@ -159,11 +158,12 @@ cc.Class({
 	},
 	// 显示胜利页面
 	showpage_victory: function () {
+		USERINFO.level += 1;
 		if (HL.nodePoolState.gameScore > USERINFO.highestScore) {
 			USERINFO.highestScore = HL.nodePoolState.gameScore;
 		}
-		if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
-			USERINFO.bulletsInUse = 1;
+		if (USERINFO.bulletShop[USERINFO.bulletsInUse].state < 2) {
+			USERINFO.bulletsInUse = 0;
 		}
 		var RewardNum = 0;
 		for (var i = 0, max = this.box_rewardBox.children.length; i < max; i++) {
@@ -180,7 +180,6 @@ cc.Class({
 					reward_bullet.getChildByName("icon_rewardBg").getChildByName("icon_new").active = true
 				}
 				USERINFO.bulletShop[this.level.bullet - 1].state = 1;
-				this.bulletShop.initUi();
 			}
 			this.box_rewardBox.addChild(reward_bullet);
 		}
@@ -200,6 +199,5 @@ cc.Class({
 		}
 		this.box_rewardBox.height = RewardNum * 115
 		this.page_Over.node.getComponent('Over').fadein_victory();
-		USERINFO.level += 1;
 	}
 });

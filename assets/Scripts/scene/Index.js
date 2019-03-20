@@ -199,144 +199,222 @@ cc.Class({
 			this.redPoint_singnIn.node.active = true;
 			this.openSingnIn();
 		}
-		// 微信
-		if (cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT) {
-			//初始化设备信息
-			WECHAT.initDeviceMaster();
-			//初始化广告
-			WECHAT.initAD();
-		}
-	},
-	start: function () {
+		// 初始设备
+		WECHAT.initDeviceMaster();
+		//初始化广告
+		WECHAT.initAD();
 		// 登录
 		this.login();
-		// 初始化界面
-		this.initUi();
-		// 开始动作
-		this.startAction();
+		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+			wx.onHide(() => {
+				var bulletShop = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+				var data = {
+					level: USERINFO.level,//关卡
+					coin: USERINFO.coin,//拥有金币数
+					diamond: USERINFO.diamond,//拥有钻石数
+					durian: USERINFO.durian,//榴莲蛋剩余次数
+					highestScore: USERINFO.highestScore,//最高分
+					bulletsInUse: USERINFO.bulletsInUse,//正在使用的子弹编号
+					armCritLevel: USERINFO.armCritLevel,// 武器暴击等级
+					armpoweLevel: USERINFO.armpoweLevel,// 武器威力等级
+					bulletShop: bulletShop,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
+					luckyNum: USERINFO.luckyNum,//已经抽奖次数
+				}
+
+				var info = JSON.stringify(data);
+				console.log(info);
+				HL.ajax.post(HL.ajax.setGameData, { uid: USERINFO.uid, info: info }, ((e) => {
+					// 请求成功
+					if (e.code == 1) {
+						console.log('save_GameData_Success', e.data);
+					} else {
+						console.log('fail');
+					}
+				}));
+				wx.exitMiniProgram({
+					success: () => { console.log('success') },
+					fail: () => { console.log('fail') }
+				})
+			})
+		}
 	},
 	login: function () {
-		var data = {
-			// 用户信息
-			coin: 0,//金币
-			diamond: 100,//钻石
-			durian: 1,//榴莲
-			highestScore: localStorage.getItem('highestScore') || 0,//最高分
-			bulletsInUse: 1,//正在使用的子弹
-			armCritLevel: 1,// 武器暴击等级
-			armpoweLevel: 1,// 武器威力等级
-			bulletShop: this.bulletShop.fruit,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
-			Data_game: this.Data_game,//游戏数据
-			initScene: USERINFO.getInitScene(),//进入场景
-		};
-		USERINFO.init(data);
+		var that = this;
+		USERINFO.Data_game = this.Data_game;
+		USERINFO.bulletShop = this.bulletShop.fruit;
+		USERINFO.initScene = USERINFO.getInitScene();
+		// 登录并获取用户信息
+		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+			wx.login({
+				success: (res) => {
+					if (res.code) {
+						HL.ajax.post(HL.ajax.login, { code: res.code }, ((e) => {
+							// 请求成功
+							if (e.code == 1) {
+								var loginData = e.data;
+								USERINFO.uid = loginData.uid;
+								USERINFO.openId = loginData.openId;
+								HL.ajax.post(HL.ajax.getGameData, { uid: loginData.uid }, ((e) => {
+									// 请求成功
+									if (e.code == 1) {
+										var data = JSON.parse(e.data.info);
+										USERINFO.init(data);
+										// 开始动作
+										that.startAction();
+										// 子弹库
+										that.bulletShop.init();
+										// 初始化界面
+										that.initUi();
+									} else {
+										console.log('getGameData_fail', e);
+									}
+								}));
+							} else {
+								console.log('login_fail', e);
+							}
+						}));
+					}
+				},
+			})
+		}
 	},
 	initUi: function () {
+		var that = this;
 		// 金币
-		this.font_coin.string = USERINFO.coin;
+		that.font_coin.string = USERINFO.coin;
 		// 钻石
-		this.font_diamond.string = USERINFO.diamond;
+		that.font_diamond.string = USERINFO.diamond;
 		// 最高分
-		this.font_highestScore.string = '<outline color=#af5f00 width=2><color=#ffffff>最高分' + USERINFO.highestScore + '</color>';
+		that.font_highestScore.string = '<outline color=#af5f00 width=2><color=#ffffff>最高分' + USERINFO.highestScore + '</color>';
 		// 榴莲蛋
 		if (USERINFO.durian == 0) {
-			this.btn_openDurian.interactable = true;
-			this.redPoint_durian.node.active = false;
+			that.btn_openDurian.interactable = true;
+			that.redPoint_durian.node.active = false;
 		} else {
-			this.btn_openDurian.interactable = false;
-			this.redPoint_durian.node.active = true;
-			this.font_durianNum.string = USERINFO.durian;
+			that.btn_openDurian.interactable = false;
+			that.redPoint_durian.node.active = true;
+			that.font_durianNum.string = USERINFO.durian;
 		}
-		// 子弹库
-		this.bulletShop.init();
 		// 升级面板
-		this.initPowerUi();
-		this.initCritUi();
+		that.initPowerUi();
+		that.initCritUi();
 	},
 	startAction: function () {
-		this.action_StartGame();
+		var that = this;
+		that.action_StartGame();
 	},
 	// 重复缩放动作
 	action_StartGame: function () {
+		var taht = this;
 		var seq = cc.ActionInstant;
 		seq = cc.repeatForever(
 			cc.sequence(
 				cc.scaleTo(0.75, 0.85),
 				cc.scaleTo(0.75, 1)
 			));
-		this.StartGame.runAction(seq);
+		taht.StartGame.runAction(seq);
 	},
 	// 领取福利
 	getWelfare: function (event) {
+		var that = this;
 		USERINFO.diamond += 2000;
-		this.font_diamond.string = USERINFO.diamond;
+		that.font_diamond.string = USERINFO.diamond;
 		localStorage.setItem('isGotWelfare', 'true');
 		event.currentTarget.getComponent(cc.Button).interactable = false;
 		event.currentTarget.getChildByName("font_getWelfare").getComponent(cc.RichText).string = '<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>';
 	},
 	// 开启签到
 	openSingnIn: function () {
-		this.tips_singnIn.show();
+		var that = this;
+		that.tips_singnIn.show();
 	},
 	// 开启榴莲蛋
 	openDurian: function () {
+		var that = this;
 		if (USERINFO.durian > 0) {
 			USERINFO.durian -= 1;
 			var lucky = USERINFO.Data_game[3].json[USERINFO.luckyNum];
 			var luckyRewardNum = 0;
-			for (var i = 0, max = this.icon_luckyReward.children.length; i < max; i++) {
-				this.icon_luckyReward.children[i].destroy();
+			for (var i = 0, max = that.icon_luckyReward.children.length; i < max; i++) {
+				that.icon_luckyReward.children[i].destroy();
 			}
 			if (lucky.bullet != 0) {
 				luckyRewardNum += 1;
-				let item_bullet = cc.instantiate(this.item_bullet);
-				item_bullet.getChildByName("icon_bg").getChildByName("icon_reward").getComponent(cc.Sprite).spriteFrame = this.bulletShop.fruit[lucky.bullet - 1].res;
+				let item_bullet = cc.instantiate(that.item_bullet);
+				item_bullet.getChildByName("icon_bg").getChildByName("icon_reward").getComponent(cc.Sprite).spriteFrame = that.bulletShop.fruit[lucky.bullet - 1].res;
 				item_bullet.getChildByName("bg").getChildByName("font_rewardNum").getComponent(cc.Label).string = USERINFO.bulletShop[lucky.bullet - 1].power;
 				if (USERINFO.bulletShop[lucky.bullet - 1].state != 2) {
 					if (USERINFO.bulletShop[lucky.bullet - 1].state == 0) {
 						item_bullet.getChildByName("icon_bg").getChildByName("icon_new").active = true
 					}
 					USERINFO.bulletShop[lucky.bullet - 1].state = 1;
-					this.bulletShop.initUi();
+					that.bulletShop.initUi();
 				}
-				this.icon_luckyReward.addChild(item_bullet);
+				that.icon_luckyReward.addChild(item_bullet);
 			}
 			if (lucky.coin != 0) {
 				USERINFO.coin += lucky.coin;
-				this.font_coin.string = USERINFO.coin;
+				that.font_coin.string = USERINFO.coin;
 				luckyRewardNum += 1;
-				let item_coin = cc.instantiate(this.item_coin);
+				let item_coin = cc.instantiate(that.item_coin);
 				item_coin.getChildByName("font_rewardNum").getComponent(cc.Label).string = 'x' + lucky.coin;
-				this.icon_luckyReward.addChild(item_coin);
+				that.icon_luckyReward.addChild(item_coin);
 			}
 			if (lucky.diamond != 0) {
 				USERINFO.diamond += lucky.diamond;
-				this.font_diamond.string = USERINFO.diamond;
+				that.font_diamond.string = USERINFO.diamond;
 				luckyRewardNum += 1;
-				let item_diamond = cc.instantiate(this.item_diamond);
+				let item_diamond = cc.instantiate(that.item_diamond);
 				item_diamond.getChildByName("font_rewardNum").getComponent(cc.Label).string = 'x' + lucky.diamond;
-				this.icon_luckyReward.addChild(item_diamond);
+				that.icon_luckyReward.addChild(item_diamond);
 			}
-			this.icon_luckyReward.height = luckyRewardNum * 115
+			that.icon_luckyReward.height = luckyRewardNum * 115
 			USERINFO.luckyNum = USERINFO.luckyNum + 1 >= 20 ? 15 : USERINFO.luckyNum + 1;
-			this.tips_openDurian.show();
+			that.tips_openDurian.show();
 		} else {
-			console.log('剩余次数不足');
-			USERINFO.durian += 1;
+			if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+				WECHAT.openVideoAd(() => {
+					USERINFO.durian += 1;
+					if (USERINFO.durian == 0) {
+						that.btn_openDurian.interactable = true;
+						that.redPoint_durian.node.active = false;
+					} else {
+						that.btn_openDurian.interactable = false;
+						that.redPoint_durian.node.active = true;
+						that.font_durianNum.string = USERINFO.durian;
+					}
+				}, () => {
+					console.log('中途退出视频');
+				}, () => {
+					WECHAT.share(null, () => {
+						USERINFO.durian += 1;
+						if (USERINFO.durian == 0) {
+							that.btn_openDurian.interactable = true;
+							that.redPoint_durian.node.active = false;
+						} else {
+							that.btn_openDurian.interactable = false;
+							that.redPoint_durian.node.active = true;
+							that.font_durianNum.string = USERINFO.durian;
+						}
+					}, () => {
+						console.log('分享失败');
+					}, 'querys1=1');
+				});
+			}
 		}
 		if (USERINFO.durian <= 0) {
-			this.btn_openDurian.interactable = true;
-			this.redPoint_durian.node.active = false;
+			that.btn_openDurian.interactable = true;
+			that.redPoint_durian.node.active = false;
 		} else {
-			this.btn_openDurian.interactable = false;
-			this.redPoint_durian.node.active = true;
-			this.font_durianNum.string = USERINFO.durian;
+			that.btn_openDurian.interactable = false;
+			that.redPoint_durian.node.active = true;
+			that.font_durianNum.string = USERINFO.durian;
 		}
 	},
 	// 升级武器
 	updatalevel_power: function () {
 		// 威力
-		var currentLv = USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1];
+		var currentLv = USERINFO.Data_game[0].json[USERINFO.armpoweLevel];
 		if (USERINFO.coin >= currentLv.Price) {
 			USERINFO.coin -= currentLv.Price;
 			USERINFO.armpoweLevel += 1;
@@ -348,13 +426,13 @@ cc.Class({
 		}
 	},
 	initPowerUi: function () {
-		this.font_powerLevel.string = 'Lv.' + USERINFO.armpoweLevel;
-		this.font_powerNum.string = USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1].Power;
-		this.power_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armpoweLevel - 1].Price + '</color></outline>';
+		this.font_powerLevel.string = 'Lv.' + (USERINFO.armpoweLevel + 1);
+		this.font_powerNum.string = USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Power;
+		this.power_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Price + '</color></outline>';
 	},
 	updatalevel_crit: function () {
 		// 暴击
-		var currentLv = USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1];
+		var currentLv = USERINFO.Data_game[0].json[USERINFO.armCritLevel];
 		if (USERINFO.coin >= currentLv.Price) {
 			USERINFO.coin -= currentLv.Price;
 			USERINFO.armCritLevel += 1;
@@ -366,9 +444,9 @@ cc.Class({
 		}
 	},
 	initCritUi: function () {
-		this.font_critLevel.string = 'Lv.' + USERINFO.armCritLevel;
-		this.font_critNum.string = USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Crit * 100 + '%';
-		this.crit_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armCritLevel - 1].Price + '</color></outline>';
+		this.font_critLevel.string = 'Lv.' + (USERINFO.armCritLevel + 1);
+		this.font_critNum.string = USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit * 100 + '%';
+		this.crit_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armCritLevel].Price + '</color></outline>';
 	},
 	// 显示广告
 	openAd: function () {

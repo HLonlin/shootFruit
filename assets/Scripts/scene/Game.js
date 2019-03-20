@@ -80,8 +80,8 @@ cc.Class({
 		// 初始化障碍物
 		let hinder_anim = this.hinder.getComponent(cc.Animation);
 		let hinders_anim = this.hinders.getComponent(cc.Animation);
-		let hinder_animName = this.hinder.name + USERINFO.Data_game[2].json[USERINFO.level - 1].hinder;
-		let hinders_animName = this.hinders.name + USERINFO.Data_game[2].json[USERINFO.level - 1].hinders;
+		let hinder_animName = this.hinder.name + USERINFO.Data_game[2].json[USERINFO.level].hinder;
+		let hinders_animName = this.hinders.name + USERINFO.Data_game[2].json[USERINFO.level].hinders;
 		var hinder_animState = hinder_anim.play(hinder_animName);
 		var hinders_animState = hinders_anim.play(hinders_animName);
 		// 关卡信息
@@ -110,11 +110,6 @@ cc.Class({
 	},
 	changeScore: function (score) {
 		HL.nodePoolState.gameScore += score;
-		// 刷新最高分
-		if (HL.nodePoolState.gameScore >= USERINFO.highestScore) {
-			USERINFO.highestScore = HL.nodePoolState.gameScore;
-			localStorage.setItem('highestScore', USERINFO.highestScore);
-		}
 		this.scoreDisplay.string = HL.nodePoolState.gameScore.toString();
 	},
 });

@@ -3,7 +3,7 @@ window.Md5 = require('md5');
 window.HL = {
 	ajax: {
 		// 域名
-		DOMAIN: 'http://114.55.25.63:3000/mock/135',
+		DOMAIN: 'https://newbox.0e3.cn/gfruits',
 		// token
 		TOKEN: '',
 		//混淆字符串
@@ -57,8 +57,8 @@ window.HL = {
 			var newParam = this.objSort(param);
 			var signString = '';
 			for (var i in newParam) {
-				// signString += signString ? '&' : '';
-				signString += i + newParam[i];
+				signString += signString ? '&' : '';
+				signString += i + '=' + newParam[i];
 			}
 			signString += this.appSalt;//添加混淆字符串
 			// 通过 npm install js-md5 并require('md5')
@@ -80,8 +80,7 @@ window.HL = {
 			// console.log('************************************');
 			// console.log('发起请求', api, param);
 			var ajax = new XMLHttpRequest();
-			param.timestamp = Math.floor((new Date()).getTime() / 1000);
-			param.secret = this.createSign(param);
+			param.token = this.createSign(param);
 			ajax.open(method, api);
 			ajax.send(this.obj2str(param));
 			ajax.onreadystatechange = function () {
@@ -89,8 +88,6 @@ window.HL = {
 					if (complete) {
 						complete(JSON.parse(ajax.responseText));
 					}
-				} else {
-					console.log('ajax fail')
 				}
 			};
 		},
@@ -169,28 +166,30 @@ window.USERINFO = {
 	level: 1,//关卡
 	coin: 100,//拥有金币数
 	diamond: 100,//拥有钻石数
-	durian: 1,//榴莲蛋剩余次数
+	durian: 0,//榴莲蛋剩余次数
 	highestScore: 0,//最高分
-	bulletsInUse: 1,//正在使用的子弹编号
+	bulletsInUse: 0,//正在使用的子弹编号
 	armCritLevel: 1,// 武器暴击等级
 	armpoweLevel: 1,// 武器威力等级
-	bulletShop: null,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
+	bulletShop: {},// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
 	Invincible: false,//无敌状态
 	luckyNum: 0,//已经抽奖次数
 	initScene: null,// 初始场景值，用于区分从哪进入游戏
 	// 同步数据到本地
 	init: function (data) {
 		var that = this;
-		that.coin = data.coin;
-		that.diamond = data.diamond;
-		that.durian = data.durian;
-		that.highestScore = data.highestScore;
-		that.bulletsInUse = data.bulletsInUse;
-		that.armCritLevel = data.armCritLevel;
-		that.armpoweLevel = data.armpoweLevel;
-		that.bulletShop = data.bulletShop;
-		that.initScene = data.initScene;
-		this.Data_game = data.Data_game;
+		for (var i = 0, max = data.bulletShop.length; i < max; i++) {
+			that.bulletShop[i].state = data.bulletShop[i];
+		}
+		that.level = data.level || that.level;
+		that.coin = data.coin || that.coin;
+		that.diamond = data.diamond || that.diamond;
+		that.durian = data.durian || that.durian;
+		that.highestScore = data.highestScore || that.highestScore;
+		that.bulletsInUse = data.bulletsInUse || that.bulletsInUse;
+		that.armCritLevel = data.armCritLevel || that.armCritLevel;
+		that.armpoweLevel = data.armpoweLevel || that.armpoweLevel;
+		that.luckyNum = data.luckyNum || that.luckyNum;
 	},
 	getInitScene: function () {
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
@@ -219,19 +218,36 @@ window.WECHAT = {
 	//设备与场景 高度比率 screenHeight/stageHeight
 	scaleHeight: 1,
 	model: '',
-	//初始化
+	// 初始化推荐游戏列表
+	initGameList: function (callFun) {
+		var that = this;
+		HL.ajax.post(HL.ajax.getGameList, {}, ((e) => {
+			// 请求成功
+			if (e.code == 1) {
+				that.GameList = e.data[1].games;
+				if (callFun) {
+					callFun();
+				}
+			} else {
+				console.log('fail');
+			}
+		}));
+	},
+	//初始化设备
 	initDeviceMaster: function (stageWidth, stageHeight) {
-		this.stageWidth = stageWidth;
-		this.stageHeight = stageHeight;
 		//获取系统信息
-		this.SYSTEM_INFO = wx.getSystemInfoSync();
-		this.model = this.SYSTEM_INFO.model;
-		this.screenWidth = this.SYSTEM_INFO.screenWidth;
-		this.screenHeight = this.SYSTEM_INFO.screenHeight;
-		this.scaleWidth = this.screenWidth / this.stageWidth;
-		this.scaleHeight = this.screenHeight / this.stageHeight;
-		this.windowWidth = this.SYSTEM_INFO.windowWidth * 2;
-		this.windowHeight = this.SYSTEM_INFO.windowHeight * 2;
+		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+			this.stageWidth = stageWidth;
+			this.stageHeight = stageHeight;
+			this.SYSTEM_INFO = wx.getSystemInfoSync();
+			this.model = this.SYSTEM_INFO.model;
+			this.screenWidth = this.SYSTEM_INFO.screenWidth;
+			this.screenHeight = this.SYSTEM_INFO.screenHeight;
+			this.scaleWidth = this.screenWidth / this.stageWidth;
+			this.scaleHeight = this.screenHeight / this.stageHeight;
+			this.windowWidth = this.SYSTEM_INFO.windowWidth * 2;
+			this.windowHeight = this.SYSTEM_INFO.windowHeight * 2;
+		}
 	},
 	//获取设备对应比例的宽度值
 	getX: function (num) {
@@ -261,8 +277,10 @@ window.WECHAT = {
 	shareImage: ['resources/share/share.png', 'resources/share/share.png'],
 	//初始化
 	initAD: function () {
-		this.INIT_STATUS = 1;
-		this.list();
+		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+			this.INIT_STATUS = 1;
+			this.list();
+		}
 	},
 	getURLs: function (url) {
 		url = cc.url.raw(url);
@@ -282,31 +300,23 @@ window.WECHAT = {
 	//获取流量主列表
 	list: function () {
 		var that = this;
-		wx.request({
-			url: 'https://high.app81.com/highjump/back/getid', // 仅为示例，并非真实的接口地址
-			data: {},
-			header: {
-				'content-type': 'application/json' // 默认值
-			},
-			method: 'POST',
-			success(res) {
-				var res = res.data;
-				if (parseInt(res.code) === 200 && Number(res.errorcode) === 0 && res.data) {
-					that.createBanner(res.data);
-					that.createVideo(res.data);
-					that.INIT_STATUS = 2
-				}
-			},
-			fail(err) {
-				console.log('fail');
+		HL.ajax.post(HL.ajax.getConfig, {}, ((res) => {
+			// 请求成功
+			// console.log('获取流量主列表success', res);
+			if (res.code == 1) {
+				that.createBanner(res.data);
+				that.createVideo(res.data);
+				that.INIT_STATUS = 2
+			} else {
+				console.log('获取流量主列表fail');
 				that.INIT_STATUS = 3
 			}
-		});
+		}));
 	},
 	// 创建banner广告
 	createBanner: function (data) {
 		var that = this;
-		that.initDeviceMaster();
+		// that.initDeviceMaster();
 		// banner广告
 		that.bannerArr = data.banner_id;
 		if (that.bannerArr != undefined && that.bannerArr != null && that.bannerArr.length > 0) {
@@ -358,8 +368,13 @@ window.WECHAT = {
 			});
 			// 监听创建视频广告失败
 			this.cacheVideoAd.onError(() => {
+				wx.showToast({
+					title: '没有视频可播放！',
+					icon: 'none',
+					duration: 2000,
+					mask: true
+				})
 				this.cacheVideoAd = false;
-				console.log('Create video Fail');
 			})
 		} else {
 			this.cacheVideoAd = false;
@@ -415,7 +430,11 @@ window.WECHAT = {
 	// 分享卡
 	share: function (index, success, fail, querys) {
 		var randomNum = (index != null) ? index : this.random(1, 3) - 1;
-		var imageUrl = this.getURL(this.shareImage[randomNum]);
+		// 本地分享图
+		// var imageUrl = this.getURL(this.shareImage[randomNum]);
+		// 远程分享图
+		this.shareImage = ["https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share.png", "https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share1.jpg"];
+		var imageUrl = this.shareImage[randomNum];
 		wx.shareAppMessage({
 			title: this.shareTitle[randomNum],
 			imageUrl: imageUrl,
@@ -440,7 +459,7 @@ window.WECHAT = {
 	},
 	// 12、授权按钮
 	UserInfoButton: function (left, top, width, height) {
-		this.initDeviceMaster();
+		// this.initDeviceMaster();
 		var scale = this.screenWidth / 750;
 		const button = wx.createUserInfoButton({
 			type: 'image',

@@ -22,7 +22,16 @@ cc.Class({
         },
     },
     onLoad() {
-        this.init();
+        // 初始化推荐游戏列表
+        var that = this;
+        WECHAT.initGameList(() => {
+            that.itemsArr = [];
+            for (let i = 0; i < that.totalCount; ++i) {
+                let items = that.additem(i);
+                that.itemsArr.push(items);
+            }
+            that.addEvents();
+        });
     },
     init: function () {
         this.itemsArr = [];
@@ -33,9 +42,13 @@ cc.Class({
         this.addEvents();
     },
     //添加列表中的item
-    additem: function () {
+    additem: function (index) {
         let card = cc.instantiate(this.cardPrefab);
-        var remoteUrl = "https://img.zcool.cn/community/01849a5c85eaefa80120af9a7984af.png@1280w_1l_2o_100sh.png";
+        if (WECHAT.GameList[index] != undefined) {
+            var remoteUrl = WECHAT.GameList[index].image;
+        } else {
+            var remoteUrl = "https://img.zcool.cn/community/01849a5c85eaefa80120af9a7984af.png@1280w_1l_2o_100sh.png";
+        }
         cc.loader.load(remoteUrl, function (err, texture) {
             var sf = new cc.SpriteFrame(texture);
             card.getChildByName("icon_gameList").getComponent(cc.Sprite).spriteFrame = sf;
@@ -50,8 +63,10 @@ cc.Class({
         for (var i = 0, max = this.itemsArr.length; i < max; i++) {
             this.itemsArr[i].index = i;
             this.itemsArr[i].on('touchend', function (event) {
-                var index = event.currentTarget.index
-                console.log('跳转到小程序：', index);
+                var index = event.currentTarget.index;
+                if (WECHAT.GameList[index] != undefined) {
+                    console.log('跳转到小程序：', WECHAT.GameList[index].appid, 'index:', index);
+                }
             }, this);
         }
     },

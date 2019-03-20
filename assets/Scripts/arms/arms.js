@@ -73,8 +73,8 @@ cc.Class({
 		}
 	},
 	onHandleDestroy: function () {
-		if (USERINFO.bulletShop[USERINFO.bulletsInUse - 1].state < 2) {
-			USERINFO.bulletsInUse = 1;
+		if (USERINFO.bulletShop[USERINFO.bulletsInUse].state < 2) {
+			USERINFO.bulletsInUse = 0;
 		}
 		this.page_Over.node.getComponent('Over').fadein_revive()
 	}

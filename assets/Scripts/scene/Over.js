@@ -77,7 +77,20 @@ cc.Class({
         this.font_coin.opacity = 255;
         this.font_diamond.opacity = 255;
     },
+    submitScore: function () {
+        HL.ajax.post(HL.ajax.sendScore, { score: HL.nodePoolState.gameScore, uid: USERINFO.uid, fruits_id: USERINFO.bulletsInUse }, ((e) => {
+            // 请求成功
+            if (e.code == 1) {
+                console.log('提交成功：', e.data);
+                USERINFO.highestScore = e.data.high_score;
+                localStorage.setItem('highestScore', USERINFO.highestScore);
+            } else {
+                console.log('fail');
+            }
+        }));
+    },
     fadein_victory: function () {
+        this.submitScore();
         this.font_level.getComponent(cc.RichText).string = "<outline color=#39A3FF width=2><color=#ffffff>第" + USERINFO.level + "关</color></outline>";
         this.font_score.getComponent(cc.Label).string = HL.nodePoolState.gameScore;
         this.victoryCoin_zIndex = this.font_coin.zIndex;
@@ -108,6 +121,7 @@ cc.Class({
         this.font_coin.zIndex = this.victoryCoin_zIndex;
     },
     fadein_over: function () {
+        this.submitScore();
         this.font_score_over.getComponent(cc.Label).string = '本局得分：' + HL.nodePoolState.gameScore;
         // 上传最高分
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {

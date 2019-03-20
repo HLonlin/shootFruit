@@ -133,34 +133,56 @@ cc.Class({
     },
     onSingnIn: function (event) {
         var that = this;
-        var res = that.singnReward[that.Day].res.name;
-        var num = that.singnReward[that.Day].Number;
-        // 判断奖励的物品及数量
-        if (res == 'tubiao_jinbi00') {
-            USERINFO.coin += num;
-            that.font_coinNums.string = USERINFO.coin;
-        } else if (res == 'tubiao_zuanshi00') {
-            USERINFO.diamond += num;
-            that.font_diamNums.string = USERINFO.diamond;
+        function singnRewards() {
+            var res = that.singnReward[that.Day].res.name;
+            var num = that.singnReward[that.Day].Number;
+            // 判断奖励的物品及数量
+            if (res == 'tubiao_jinbi00') {
+                USERINFO.coin += num;
+                that.font_coinNums.string = USERINFO.coin;
+            } else if (res == 'tubiao_zuanshi00') {
+                USERINFO.diamond += num;
+                that.font_diamNums.string = USERINFO.diamond;
+            }
+            that.signInState = that.signInState + 1;
+            // 保存最新签到状态
+            localStorage.setItem('signInState', that.signInState);
+            // 保存最新签到日期
+            localStorage.setItem('today', that.today);
+            // 更新界面
+            if (that.signInState == 1) {
+
+                event.currentTarget.getChildByName("font_singnIn").getComponent(cc.RichText).string = '<outline color=#9e5d00 width=2><color=#ffffff>再签一次</color>';
+            } else if (that.signInState == 2) {
+                event.currentTarget.getComponent(cc.Button).interactable = false;
+                event.currentTarget.getChildByName("font_singnIn").getComponent(cc.RichText).string = '<outline color=#9e5d00 width=2><color=#ffffff>已签到</color>';
+            }
+            that.dayArr[that.Day].children[0].active = true;
+            that.dayArr[that.Day].children[1].active = false;
+            // 奖励物品
+            var icon_singnCoin = that.dayArr[that.Day].children[0].getChildByName("icon_singnCoin");
+            if (icon_singnCoin != null) {
+                icon_singnCoin.getComponent(cc.Sprite).spriteFrame = that.singnReward[that.Day].res;
+            }
         }
-        that.signInState += 1;
-        // 保存最新签到状态
-        localStorage.setItem('signInState', that.signInState);
-        // 保存最新签到日期
-        localStorage.setItem('today', that.today);
-        // 更新界面
         if (that.signInState == 1) {
-            event.currentTarget.getChildByName("font_singnIn").getComponent(cc.RichText).string = '<outline color=#9e5d00 width=2><color=#ffffff>再签一次</color>';
-        } else if (that.signInState == 2) {
-            event.currentTarget.getComponent(cc.Button).interactable = false;
-            event.currentTarget.getChildByName("font_singnIn").getComponent(cc.RichText).string = '<outline color=#9e5d00 width=2><color=#ffffff>已签到</color>';
+            console.log('需要看视频');
+            if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+                WECHAT.openVideoAd(() => {
+                    singnRewards();
+                }, () => {
+                    console.log('中途退出视频');
+                }, () => {
+                    WECHAT.share(null, () => {
+                        singnRewards();
+                    }, () => {
+                        console.log('分享失败');
+                    }, 'querys1=1');
+                });
+            }
+        } else {
+            singnRewards();
         }
-        that.dayArr[that.Day].children[0].active = true;
-        that.dayArr[that.Day].children[1].active = false;
-        // 奖励物品
-        var icon_singnCoin = that.dayArr[that.Day].children[0].getChildByName("icon_singnCoin");
-        if (icon_singnCoin != null) {
-            icon_singnCoin.getComponent(cc.Sprite).spriteFrame = that.singnReward[that.Day].res;
-        }
+
     }
 });
