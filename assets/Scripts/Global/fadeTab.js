@@ -68,6 +68,10 @@ cc.Class({
             this.fade = false;
         }
     },
+    fadeOut: function () {
+        this.node.emit('fade-out');
+        this.fade = false;
+    },
     startFadeIn: function () {
         this.index_arm.getComponent(cc.Animation).pause();
         this.index_bullet.getComponent(cc.Animation).pause();

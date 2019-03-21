@@ -174,6 +174,8 @@ window.USERINFO = {
 	bulletShop: {},// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
 	Invincible: false,//无敌状态
 	luckyNum: 0,//已经抽奖次数
+	signInState: 0,//签到状态
+	today: new Date().getDate(),//签到刷新日期
 	initScene: null,// 初始场景值，用于区分从哪进入游戏
 	// 同步数据到本地
 	init: function (data) {
@@ -190,6 +192,40 @@ window.USERINFO = {
 		that.armCritLevel = data.armCritLevel || that.armCritLevel;
 		that.armpoweLevel = data.armpoweLevel || that.armpoweLevel;
 		that.luckyNum = data.luckyNum || that.luckyNum;
+		that.signInState = data.signInState || that.signInState;
+	},
+	save: function () {
+		var bulletShop = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		for (var i = 0, max = USERINFO.bulletShop.length; i < max; i++) {
+			bulletShop[i] = USERINFO.bulletShop[i].state;
+		}
+		var data = {
+			level: USERINFO.level,//关卡
+			coin: USERINFO.coin,//拥有金币数
+			diamond: USERINFO.diamond,//拥有钻石数
+			durian: USERINFO.durian,//榴莲蛋剩余次数
+			highestScore: USERINFO.highestScore,//最高分
+			bulletsInUse: USERINFO.bulletsInUse,//正在使用的子弹编号
+			armCritLevel: USERINFO.armCritLevel,// 武器暴击等级
+			armpoweLevel: USERINFO.armpoweLevel,// 武器威力等级
+			bulletShop: bulletShop,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
+			luckyNum: USERINFO.luckyNum,//已经抽奖次数
+			signInState: USERINFO.signInState,//签到状态
+			today: USERINFO.today,//签到刷新日期
+		}
+		var info = JSON.stringify(data);
+		HL.ajax.post(HL.ajax.setGameData, { uid: USERINFO.uid, info: info }, ((e) => {
+			// 请求成功
+			if (e.code == 1) {
+				console.log('save_GameData_Success', e.data);
+			} else {
+				console.log('fail');
+			}
+		}));
+		wx.exitMiniProgram({
+			success: () => { console.log('success') },
+			fail: () => { console.log('fail') }
+		});
 	},
 	getInitScene: function () {
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {

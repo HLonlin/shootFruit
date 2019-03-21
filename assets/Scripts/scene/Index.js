@@ -193,12 +193,6 @@ cc.Class({
 			this.audioMng = this.audioMng.getComponent('AudioMaster');
 		}
 		if (this.audioMng) this.audioMng.playMusic();
-		// 签到页弹出
-		var signInState = localStorage.getItem('signInState');
-		if (signInState != 2) {
-			this.redPoint_singnIn.node.active = true;
-			this.openSingnIn();
-		}
 		// 初始设备
 		WECHAT.initDeviceMaster();
 		//初始化广告
@@ -207,36 +201,7 @@ cc.Class({
 		this.login();
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
 			wx.onHide(() => {
-				var bulletShop = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-				for (var i = 0, max = USERINFO.bulletShop.length; i < max; i++) {
-					bulletShop[i] = USERINFO.bulletShop[i].state;
-				}
-				var data = {
-					level: USERINFO.level,//关卡
-					coin: USERINFO.coin,//拥有金币数
-					diamond: USERINFO.diamond,//拥有钻石数
-					durian: USERINFO.durian,//榴莲蛋剩余次数
-					highestScore: USERINFO.highestScore,//最高分
-					bulletsInUse: USERINFO.bulletsInUse,//正在使用的子弹编号
-					armCritLevel: USERINFO.armCritLevel,// 武器暴击等级
-					armpoweLevel: USERINFO.armpoweLevel,// 武器威力等级
-					bulletShop: bulletShop,// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
-					luckyNum: USERINFO.luckyNum,//已经抽奖次数
-				}
-
-				var info = JSON.stringify(data);
-				HL.ajax.post(HL.ajax.setGameData, { uid: USERINFO.uid, info: info }, ((e) => {
-					// 请求成功
-					if (e.code == 1) {
-						console.log('save_GameData_Success', e.data);
-					} else {
-						console.log('fail');
-					}
-				}));
-				wx.exitMiniProgram({
-					success: () => { console.log('success') },
-					fail: () => { console.log('fail') }
-				})
+				USERINFO.save();
 			})
 		}
 	},
@@ -267,6 +232,12 @@ cc.Class({
 										that.bulletShop.init();
 										// 初始化界面
 										that.initUi();
+										// 签到页弹出
+										var signInState = localStorage.getItem('signInState');
+										if (signInState != 2) {
+											this.redPoint_singnIn.node.active = true;
+											this.openSingnIn();
+										}
 									} else {
 										console.log('getGameData_fail', e);
 									}
@@ -452,7 +423,7 @@ cc.Class({
 	},
 	initCritUi: function () {
 		this.font_critLevel.string = 'Lv.' + (USERINFO.armCritLevel + 1);
-		this.font_critNum.string = Math.floor(USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit) + '%';
+		this.font_critNum.string = Math.floor(USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit * 100) + '%';
 		this.crit_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armCritLevel].Price + '</color></outline>';
 	},
 	// 显示广告

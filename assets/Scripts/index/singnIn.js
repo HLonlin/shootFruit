@@ -57,12 +57,13 @@ cc.Class({
         }
     },
     onLoad() {
-        this.today = localStorage.getItem('today') || new Date().getDate(); //上一次刷新签到状态的日期
-        this.signInState = localStorage.getItem('signInState') || 0; //签到状态默认为未签到、0：未签到   1：已签到一次 2：已签到2次
+        this.today = USERINFO.today || localStorage.getItem('today') || new Date().getDate(); //上一次刷新签到状态的日期
+        this.signInState = USERINFO.signInState || localStorage.getItem('signInState') || 0; //签到状态默认为未签到、0：未签到   1：已签到一次 2：已签到2次
         // 检测是否需要初始化签到状态
         if (this.today != new Date().getDate()) {
             this.today = new Date().getDate();
             localStorage.setItem('today', this.today);
+            USERINFO.today = this.today;
             // 初始化签到状态
             this.signInState = 0;
         }
@@ -150,8 +151,10 @@ cc.Class({
             that.signInState = that.signInState + 1;
             // 保存最新签到状态
             localStorage.setItem('signInState', that.signInState);
+            USERINFO.signInState = that.signInState;
             // 保存最新签到日期
             localStorage.setItem('today', that.today);
+            USERINFO.today = that.today;
             // 更新界面
             if (that.signInState == 1) {
 
@@ -167,9 +170,9 @@ cc.Class({
             if (icon_singnCoin != null) {
                 icon_singnCoin.getComponent(cc.Sprite).spriteFrame = that.singnReward[that.Day].res;
             }
+            USERINFO.save();
         }
         if (that.signInState == 1) {
-            console.log('需要看视频');
             if (cc.sys.platform === cc.sys.WECHAT_GAME) {
                 WECHAT.openVideoAd(() => {
                     singnRewards();
