@@ -92,6 +92,9 @@ cc.Class({
             }
             // 当天
             if (i == this.Day) {
+                this.dayArr[i].getChildByName('singn1').getChildByName('font_data').getComponent(cc.Label).string = '今天';
+                this.dayArr[i].getChildByName('singn2').getChildByName('font_data').getComponent(cc.Label).string = '今天';
+                this.dayArr[i].getChildByName('singn3').getChildByName('font_data').getComponent(cc.Label).string = '今天';
                 if (this.signInState == 0) {
                     this.dayArr[i].children[0].active = false;
                     this.dayArr[i].children[1].active = true;

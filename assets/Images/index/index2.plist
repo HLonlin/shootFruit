@@ -20,33 +20,59 @@
             <key>kuang_0101.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{754,715},{160,190}}</string>
+                <string>{{1661,2},{150,180}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{160,190}}</string>
+                <string>{{5,5},{150,180}}</string>
                 <key>sourceSize</key>
                 <string>{160,190}</string>
             </dict>
             <key>kuang_0102.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{754,2},{711,211}}</string>
+                <string>{{2,1338},{701,201}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{711,211}}</string>
+                <string>{{5,5},{701,201}}</string>
                 <key>sourceSize</key>
                 <string>{711,211}</string>
+            </dict>
+            <key>kuang_paihangbang0101.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{387,1338},{661,941}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{5,5},{661,941}}</string>
+                <key>sourceSize</key>
+                <string>{671,951}</string>
+            </dict>
+            <key>kuang_paihangbang0201.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1330,2},{329,64}}</string>
+                <key>offset</key>
+                <string>{0,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,2},{329,64}}</string>
+                <key>sourceSize</key>
+                <string>{329,66}</string>
             </dict>
             <key>kuang_tuijian00.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1338},{680,180}}</string>
+                <string>{{205,1338},{680,180}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -64,9 +90,9 @@
             <key>realTextureFileName</key>
             <string>index2.png</string>
             <key>size</key>
-            <string>{1024,2048}</string>
+            <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6e523c636628b9b7593053e9388a85b8:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:2734996ca3cb5ad2513b85b84d8da67f:1/1$</string>
             <key>textureFileName</key>
             <string>index2.png</string>
         </dict>

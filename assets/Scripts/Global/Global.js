@@ -272,7 +272,7 @@ window.WECHAT = {
 	//是否初始化成功 0未初始，1开始初始化，2初始化成功，3初始化失败
 	INIT_STATUS: 0,
 	//分享标题
-	shareTitle: ['小学生也能轻松答对，但很多成年人却不行，你试试？', '这题有点难，你能答出来吗？'],
+	shareTitle: ['你的好友送你一箱宝石，快来拿走属于你的', '这么圆的大橘子，你见过吗？', '欢乐又刺激的射击水果，果汁四溅！'],
 	//分享图片
 	shareImage: ['resources/share/share.png', 'resources/share/share.png'],
 	//初始化
@@ -429,14 +429,16 @@ window.WECHAT = {
 	},
 	// 分享卡
 	share: function (index, success, fail, querys) {
-		var randomNum = (index != null) ? index : this.random(1, 3) - 1;
+		var that = this;
+		var randomNum = (index != null) ? index : that.random(1, 3) - 1;
 		// 本地分享图
 		// var imageUrl = this.getURL(this.shareImage[randomNum]);
 		// 远程分享图
-		this.shareImage = ["https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share.png", "https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share1.jpg"];
-		var imageUrl = this.shareImage[randomNum];
+		that.shareImage = ["https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share1.png", "https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share2.png", "https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share3.png"];
+		var shareTitle = that.shareTitle[randomNum];
+		var imageUrl = that.shareImage[randomNum];
 		wx.shareAppMessage({
-			title: this.shareTitle[randomNum],
+			title: shareTitle,
 			imageUrl: imageUrl,
 			query: querys
 		});
@@ -445,17 +447,34 @@ window.WECHAT = {
 		wx.onShow(() => {
 			if (share) {
 				if (new Date().getTime() - t > 3000) {
-					if (this.random(1, 100) < 70) {
+					if (that.random(1, 100) < 70) {
 						success();
 					} else {
-						fail();
+						that.onceMoreShare(index, success, fail, querys);
 					}
 				} else {
-					fail();
+					that.onceMoreShare(index, success, fail, querys);
 				}
 			}
 			share = false;
 		})
+	},
+	onceMoreShare: function (index, success, fail, querys) {
+		var that = this;
+		wx.showModal({
+			title: '温馨提示',
+			content: '分享到不同的群才能获得奖励哦~',
+			confirmText: '再试一次',
+			success(res) {
+				if (res.confirm) {
+					that.share(index, success, fail, querys);
+				} else if (res.cancel) {
+					if (fail) {
+						fail();
+					}
+				}
+			}
+		});
 	},
 	// 12、授权按钮
 	UserInfoButton: function (left, top, width, height) {

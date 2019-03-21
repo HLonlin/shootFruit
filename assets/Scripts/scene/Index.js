@@ -452,7 +452,7 @@ cc.Class({
 	},
 	initCritUi: function () {
 		this.font_critLevel.string = 'Lv.' + (USERINFO.armCritLevel + 1);
-		this.font_critNum.string = USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit * 100 + '%';
+		this.font_critNum.string = Math.floor(USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit) + '%';
 		this.crit_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armCritLevel].Price + '</color></outline>';
 	},
 	// 显示广告
