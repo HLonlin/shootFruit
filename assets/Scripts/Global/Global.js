@@ -66,9 +66,9 @@ window.HL = {
 		},
 		/**
 		 *例：
-		HL.ajax.post(HL.ajax.getEnergy, { uid: 1, be_invitation_uid: 2, share_day: '2019-01-01' }, ((e) => {
+		HL.ajax.post(HL.ajax.getEnergy, { uid: 1 }, ((e) => {
 			// 请求成功
-			if (e.code == 1 && e.msg == "访问成功") {
+			if (e.code == 1) {
 				console.log(e.data);
 			} else {
 				console.log('fail');
