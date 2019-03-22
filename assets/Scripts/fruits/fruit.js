@@ -101,6 +101,7 @@ cc.Class({
 		if (other.node.group !== 'bullet' || this.fruitHp <= 0) {
 			return;
 		}
+
 		var anim = self.node.getChildByName("fruit_wave").getComponent(cc.Animation);
 		let animName = self.node.getComponent(cc.Sprite).spriteFrame.name;
 		if (animName != null) anim.play(animName);
@@ -120,6 +121,13 @@ cc.Class({
 		}
 		// 更新得分
 		this.Game.changeScore(Math.floor(injury));
+		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+			wx.vibrateLong({
+				success: () => {
+					console.log('振动');
+				}
+			})
+		}
 		// 水果血量耗完
 		if (this.fruitHp <= 0) {
 			this.explodingAnim();

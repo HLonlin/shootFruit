@@ -13,7 +13,7 @@ cc.Class({
         if (this.isgot == 'true') {
             this.btn_getWelfare.getComponent(cc.Button).interactable = false;
             this.btn_getWelfare.node.getChildByName("font_getWelfare").getComponent(cc.RichText).string = '<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>';
-        } else if (USERINFO.initScene == '1001' || USERINFO.initScene == '1103' || USERINFO.initScene == '1104') {
+        } else if (USERINFO.initSync.scene == '1001' || USERINFO.initSync.scene == '1103' || USERINFO.initSync.scene == '1104') {
             this.btn_getWelfare.getComponent(cc.Button).interactable = true;
         } else {
             this.btn_getWelfare.getComponent(cc.Button).interactable = false;

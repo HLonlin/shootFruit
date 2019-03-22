@@ -193,6 +193,7 @@ cc.Class({
 			this.audioMng = this.audioMng.getComponent('AudioMaster');
 		}
 		if (this.audioMng) this.audioMng.playMusic();
+
 		// 初始设备
 		WECHAT.initDeviceMaster();
 		//初始化广告
@@ -209,7 +210,7 @@ cc.Class({
 		var that = this;
 		USERINFO.Data_game = this.Data_game;
 		USERINFO.bulletShop = this.bulletShop.fruit;
-		USERINFO.initScene = USERINFO.getInitScene();
+		USERINFO.initSync = USERINFO.getInitScene();
 		// 登录并获取用户信息
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
 			wx.login({
@@ -224,8 +225,7 @@ cc.Class({
 								HL.ajax.post(HL.ajax.getGameData, { uid: loginData.uid }, ((e) => {
 									// 请求成功
 									if (e.code == 1) {
-										var data = JSON.parse(e.data.info);
-										USERINFO.init(data);
+										USERINFO.init(e.data.info);
 										// 开始动作
 										that.startAction();
 										// 子弹库
@@ -235,8 +235,12 @@ cc.Class({
 										// 签到页弹出
 										var signInState = localStorage.getItem('signInState');
 										if (signInState != 2) {
-											this.redPoint_singnIn.node.active = true;
-											this.openSingnIn();
+											that.redPoint_singnIn.node.active = true;
+											that.openSingnIn();
+										}
+										USERINFO.initSync.query.type = 'getDiamond';
+										if (USERINFO.initSync.query.type == 'getDiamond') {
+											that.tips_getDiamonds.node.getComponent('getDiamond').show();
 										}
 									} else {
 										console.log('getGameData_fail', e);
@@ -439,12 +443,17 @@ cc.Class({
 	// 分享
 	share: function () {
 		WECHAT.share(null, () => {
-			wx.showToast({
-				title: '分享成功',
-				icon: 'none',
-				duration: 2000,
-				mask: true
-			})
+			wx.showModal({
+				title: '温馨提示',
+				content: '从分享链接点进去就能领取钻石哦~',
+				showCancel: false,
+				confirmText: '知道了',
+				success(res) {
+					if (res.confirm) {
+
+					}
+				}
+			});
 		}, () => {
 			wx.showToast({
 				title: '请分享到群',
@@ -452,7 +461,7 @@ cc.Class({
 				duration: 2000,
 				mask: true
 			})
-		}, 'openId=' + USERINFO.openId);
+		}, 'openId=' + USERINFO.openId + '&type=getDiamond');
 	},
 	// 观看视频
 	openVideo: function () {
