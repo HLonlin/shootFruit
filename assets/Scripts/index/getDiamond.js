@@ -12,6 +12,12 @@ cc.Class({
             type: cc.Label,
             displayName: '钻石',
             tooltip: '用户拥有钻石'
+        },
+        btn_getDiamond: {
+            default: null,
+            type: cc.Node,
+            displayName: '领取按钮',
+            tooltip: '领取钻石按钮'
         }
     },
     onLoad: function () {
@@ -52,33 +58,31 @@ cc.Class({
         this.node.runAction(this.actionFadeOut);
     },
     onFadeInFinish: function () {
+        var that = this;
         if (USERINFO.initSync.query.type == 'getDiamond') {
             if (USERINFO.isGotDiamonds) {
-                this.node.getChildByName('bg_getDiamonds').getChildByName('btn_getDiamonds').getComponent(cc.Button).interactable = false;
-                var font_getDiamond = this.node.getChildByName('bg_getDiamonds').getChildByName('btn_getDiamonds').getChildByName('font_share').getComponent(cc.RichText);
-                font_getDiamond.string = "<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>";
+                that.btn_getDiamond.getComponent(cc.Button).interactable = false;
+                that.btn_getDiamond.getChildByName('font_share').getComponent(cc.RichText).string = "<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>";
             } else {
-                this.node.getChildByName('bg_getDiamonds').getChildByName('btn_getDiamonds').getComponent(cc.Button).interactable = true;
-                var font_getDiamond = this.node.getChildByName('bg_getDiamonds').getChildByName('btn_getDiamonds').getChildByName('font_share').getComponent(cc.RichText);
-                font_getDiamond.string = "<outline color=#9e5d00 width=2><color=#ffffff>领取</color>";
+                that.btn_getDiamond.getComponent(cc.Button).interactable = true;
+                that.btn_getDiamond.getChildByName('font_share').getComponent(cc.RichText).string = "<outline color=#9e5d00 width=2><color=#ffffff>领取</color>";
             }
         } else {
-            this.node.getChildByName('bg_getDiamonds').getChildByName('btn_getDiamonds').getComponent(cc.Button).interactable = true;
-            var font_getDiamond = this.node.getChildByName('bg_getDiamonds').getChildByName('btn_getDiamonds').getChildByName('font_share').getComponent(cc.RichText);
-            font_getDiamond.string = "<outline color=#9e5d00 width=2><color=#ffffff>分享好友</color>";
+            that.btn_getDiamond.getComponent(cc.Button).interactable = true;
+            that.btn_getDiamond.getChildByName('font_share').getComponent(cc.RichText).string = "<outline color=#9e5d00 width=2><color=#ffffff>分享好友</color>";
         }
     },
     onFadeOutFinish: function () {
         this.node.position = this.outOfWorld;
     },
     onGetDiamond: function () {
+        var that = this;
         if (USERINFO.initSync.query.type == 'getDiamond') {
             USERINFO.diamond += 40;
-            this.font_diamNums.string = USERINFO.diamond;
+            that.font_diamNums.string = USERINFO.diamond;
             USERINFO.isGotDiamonds = true;
-            this.node.getChildByName('bg_getDiamonds').getChildByName('btn_getDiamonds').getComponent(cc.Button).interactable = false;
-            var font_getDiamond = this.node.getChildByName('bg_getDiamonds').getChildByName('btn_getDiamonds').getChildByName('font_share').getComponent(cc.RichText);
-            font_getDiamond.string = "<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>";
+            that.btn_getDiamond.getComponent(cc.Button).interactable = false;
+            that.btn_getDiamond.getChildByName('font_share').getComponent(cc.RichText).string = "<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>";
             USERINFO.save()
         } else {
             WECHAT.share(null, () => {

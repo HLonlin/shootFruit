@@ -33,7 +33,7 @@
       }
     ],
     "_active": true,
-    "_level": 5,
+    "_level": 1,
     "_components": [],
     "_prefab": {
       "__id__": 41
@@ -252,7 +252,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
     "fileId": "55mNGg7KFHBKii4EsO0Vur",
     "sync": false
@@ -320,7 +320,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
     "fileId": "14xoc+R8RNLIYaH2Z+Ndfb",
     "sync": false
@@ -581,9 +581,9 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
-    "fileId": "d5UL7Uu+ZHjaTpguIWeRno",
+    "fileId": "9du3OMSstBYrM+FMxJfaH0",
     "sync": false
   },
   {
@@ -639,7 +639,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
     "fileId": "69SRzbRQ9HB5a83zk88V5c",
     "sync": false
@@ -707,7 +707,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
     "fileId": "76kZ9aUOhLc5jtxJ40uzFv",
     "sync": false
@@ -827,8 +827,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 25.80000000000001,
-      "y": 0,
+      "x": 26,
+      "y": 5,
       "z": 0
     },
     "_scale": {
@@ -940,7 +940,7 @@
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
+    "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
     "_id": ""
   },
@@ -968,9 +968,9 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
-    "fileId": "80ht4akTBMfZRuNZKoHCrG",
+    "fileId": "10Mx+sWJ9FRqfq1ZAtPheK",
     "sync": false
   },
   {
@@ -981,7 +981,7 @@
       "__id__": 22
     },
     "_enabled": true,
-    "_fontFamily": "Arial",
+    "_fontFamily": "Microsoft YaHei",
     "_isSystemFontUsed": true,
     "_N$string": "<outline color=#9e5d00\n width=2><color=#ffffff>翻倍</color></outline>",
     "_N$horizontalAlign": 0,
@@ -1004,7 +1004,7 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 8,
-    "_left": 70.30000000000001,
+    "_left": 70.5,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
@@ -1026,7 +1026,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
     "fileId": "01F1vP8OJPI7wOg0cc8uWa",
     "sync": false
@@ -1094,7 +1094,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
     "fileId": "fawi8bsUZAOa4GOxF5Fksx",
     "sync": false
@@ -1130,7 +1130,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
+      "width": 72,
       "height": 40
     },
     "_anchorPoint": {
@@ -1178,7 +1178,7 @@
     "_useOriginalSize": false,
     "_string": "数量",
     "_N$string": "数量",
-    "_fontSize": 30,
+    "_fontSize": 36,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -1201,8 +1201,8 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 8,
-    "_left": 154,
+    "_alignFlags": 10,
+    "_left": 148,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
@@ -1224,7 +1224,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
     "fileId": "5fdKW/pWhO74twj9ACyySV",
     "sync": false
@@ -1260,7 +1260,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 65.05,
+      "width": 81.58,
       "height": 40
     },
     "_anchorPoint": {
@@ -1270,7 +1270,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 29.000000000000007,
+      "x": 28.999999999999993,
       "y": 0,
       "z": 0
     },
@@ -1308,7 +1308,7 @@
     "_useOriginalSize": false,
     "_string": "x500",
     "_N$string": "x500",
-    "_fontSize": 30,
+    "_fontSize": 36,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -1317,7 +1317,7 @@
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
+    "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
     "_id": ""
   },
@@ -1331,9 +1331,9 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 32,
+    "_alignFlags": 34,
     "_left": 0,
-    "_right": 205.975,
+    "_right": 197.71,
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,
@@ -1354,7 +1354,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
     "fileId": "b8tssa4ARELIV8HevLYVre",
     "sync": false
@@ -1365,7 +1365,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c142aa8b-62cb-4e25-96d8-e483540a0c66"
     },
     "fileId": "fcTEqu11dJKbgxbZBjZ/7A",
     "sync": false
