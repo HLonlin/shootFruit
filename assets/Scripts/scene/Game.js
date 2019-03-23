@@ -82,22 +82,18 @@ cc.Class({
 		let hinders_anim = this.hinders.getComponent(cc.Animation);
 		let hinder_animName = this.hinder.name + USERINFO.Data_game[2].json[USERINFO.level - 1].hinder;
 		let hinders_animName = this.hinders.name + USERINFO.Data_game[2].json[USERINFO.level - 1].hinders;
-		console.log('hinder.around:', this.hinder.getComponent('hinder').around);
-		console.log('hinder.length:', this.hinder.getComponent('hinder').length);
-		console.log('hinders.around:', this.hinders.getComponent('hinder').around);
-		console.log('hinders.length:', this.hinders.getComponent('hinder').length);
 		var hinder_Str = USERINFO.Data_game[2].json[USERINFO.level - 1].hinder.toString();
 		var hinders_Str = USERINFO.Data_game[2].json[USERINFO.level - 1].hinders.toString();
 		this.hinder.getComponent('hinder').around = hinder_Str.substring(0, 1);
 		this.hinder.getComponent('hinder').length = hinder_Str.substring(1, 2);
 		this.hinders.getComponent('hinder').around = hinders_Str.substring(0, 1);
 		this.hinders.getComponent('hinder').length = hinders_Str.substring(1, 2);
-		console.log('hinder.around:', this.hinder.getComponent('hinder').around);
-		console.log('hinder.length:', this.hinder.getComponent('hinder').length);
-		console.log('hinders.around:', this.hinders.getComponent('hinder').around);
-		console.log('hinders.length:', this.hinders.getComponent('hinder').length);
 		var hinder_animState = hinder_anim.play(hinder_animName);
 		var hinders_animState = hinders_anim.play(hinders_animName);
+		// 使动画播放速度加、减速
+		hinder_animState.speed = USERINFO.Data_game[2].json[USERINFO.level - 1].hinder_speed;
+		hinders_animState.speed = USERINFO.Data_game[2].json[USERINFO.level - 1].hinders_speed;
+		// speed 值越大速度越快，值越小则速度越慢
 		// 关卡信息
 		this.font_level.string = '第' + USERINFO.level + '关';
 		for (var i = 0, max = USERINFO.Data_game[2].json.length; i < max; i++) {
