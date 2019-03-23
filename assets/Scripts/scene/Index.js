@@ -432,6 +432,20 @@ cc.Class({
 		this.font_critNum.string = Math.floor(USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit * 100) + '%';
 		this.crit_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armCritLevel].Price + '</color></outline>';
 	},
+	// 兑换领取钻石
+	exchange_getDiamond: function () {
+		WECHAT.share(null, () => {
+			USERINFO.diamond += 50;
+			this.font_diamond = USERINFO.diamond;
+		}, () => {
+			wx.showToast({
+				title: '请分享到群',
+				icon: 'none',
+				duration: 2000,
+				mask: true
+			})
+		}, 'openId=' + USERINFO.openId + '&type=getDiamond');
+	},
 	// 显示广告
 	openAd: function () {
 		setTimeout(() => {

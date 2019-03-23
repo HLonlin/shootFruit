@@ -122,11 +122,7 @@ cc.Class({
 		// 更新得分
 		this.Game.changeScore(Math.floor(injury));
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
-			wx.vibrateLong({
-				success: () => {
-					console.log('振动');
-				}
-			})
+			wx.vibrateLong();
 		}
 		// 水果血量耗完
 		if (this.fruitHp <= 0) {

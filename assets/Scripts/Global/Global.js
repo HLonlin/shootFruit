@@ -489,7 +489,9 @@ window.WECHAT = {
 			if (share) {
 				if (new Date().getTime() - t > 3000) {
 					if (that.random(1, 100) < 70) {
-						success();
+						if (success) {
+							success();
+						}
 					} else {
 						that.onceMoreShare(index, success, fail, querys);
 					}

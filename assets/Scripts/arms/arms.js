@@ -76,6 +76,11 @@ cc.Class({
 		if (USERINFO.bulletShop[USERINFO.bulletsInUse].state < 2) {
 			USERINFO.bulletsInUse = 0;
 		}
-		this.page_Over.node.getComponent('Over').fadein_revive()
+		if (HL.nodePoolState.revive == 0) {
+			this.page_Over.node.getComponent('Over').fadein_revive();
+		} else {
+			this.page_Over.node.getComponent('Over').fadein_over();
+		}
+
 	}
 });

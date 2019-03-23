@@ -189,6 +189,7 @@ cc.Class({
     },
     onRevive: function () {
         var that = this;
+        HL.nodePoolState.revive += 1;
         WECHAT.share(null, () => {
             that.arms.getComponent('arms').initStage()
             that.fadeOut_revive();
@@ -231,6 +232,10 @@ cc.Class({
         });
         this.scrollView.addChild(card);
         return card;
+    },
+    // 挑战好友
+    friendFight: function () {
+        WECHAT.share(null, () => { }, () => { }, 'openId=' + USERINFO.openId);
     },
     // 对应跳转
     addEvents: function () {

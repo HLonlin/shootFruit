@@ -76,6 +76,8 @@ cc.Class({
 	initState: function () {
 		// 重置分数
 		HL.nodePoolState.gameScore = 0;
+		// 重置复活次数
+		HL.nodePoolState.revive = 0;
 		this.scoreDisplay.string = HL.nodePoolState.gameScore.toString();
 		// 初始化障碍物
 		let hinder_anim = this.hinder.getComponent(cc.Animation);
