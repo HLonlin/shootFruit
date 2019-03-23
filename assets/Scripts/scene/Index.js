@@ -232,6 +232,16 @@ cc.Class({
 										that.bulletShop.init();
 										// 初始化界面
 										that.initUi();
+										// 签到页弹出
+										var signInState = localStorage.getItem('signInState');
+										if (signInState != 2) {
+											that.redPoint_singnIn.node.active = true;
+											that.openSingnIn();
+										}
+										// 领钻石弹出
+										if (USERINFO.initSync.query.type == 'getDiamond') {
+											that.tips_getDiamonds.node.getComponent('getDiamond').show();
+										}
 										wx.triggerGC()
 									} else {
 										console.log('getGameData_fail', e);
@@ -266,16 +276,7 @@ cc.Class({
 		// 升级面板
 		that.initPowerUi();
 		that.initCritUi();
-		// 签到页弹出
-		var signInState = localStorage.getItem('signInState');
-		if (signInState != 2) {
-			that.redPoint_singnIn.node.active = true;
-			that.openSingnIn();
-		}
-		// 领钻石弹出
-		if (USERINFO.initSync.query.type == 'getDiamond') {
-			that.tips_getDiamonds.node.getComponent('getDiamond').show();
-		}
+
 	},
 	startAction: function () {
 		var that = this;

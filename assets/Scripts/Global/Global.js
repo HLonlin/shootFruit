@@ -231,10 +231,6 @@ window.USERINFO = {
 				console.log('fail');
 			}
 		}));
-		wx.exitMiniProgram({
-			success: () => { console.log('success') },
-			fail: () => { console.log('fail') }
-		});
 	},
 	getInitScene: function () {
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {

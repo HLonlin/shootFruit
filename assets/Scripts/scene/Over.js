@@ -68,6 +68,12 @@ cc.Class({
             displayName: '推荐列表',
             tooltip: '推荐列表'
         },
+        arms: {
+            default: null,
+            type: cc.Node,
+            displayName: '武器',
+            tooltip: '武器'
+        },
     },
     hideIcon: function () {
         this.font_coin.opacity = 0;
@@ -180,6 +186,20 @@ cc.Class({
     },
     onLoad() {
         this.init();
+    },
+    onRevive: function () {
+        var that = this;
+        WECHAT.share(null, () => {
+            that.arms.getComponent('arms').initStage()
+            that.fadeOut_revive();
+        }, () => {
+            wx.showToast({
+                title: '请分享到群',
+                icon: 'none',
+                duration: 2000,
+                mask: true
+            })
+        }, 'openId=' + USERINFO.openId);
     },
     init: function () {
         this.itemsArr = [];
