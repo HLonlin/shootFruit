@@ -15,6 +15,12 @@ cc.Class({
             displayName: '兑换数量',
             tooltip: '准备要兑换的钻石数量'
         },
+        DiamondNum: {
+            default: null,
+            type: cc.Label,
+            displayName: '剩余次数',
+            tooltip: '剩余领取钻石次数'
+        },
         font_userDiamond: {
             default: null,
             type: cc.Label,
@@ -41,6 +47,71 @@ cc.Class({
         },
     },
     onLoad() {
+        this.outOfWorld = cc.v2(3000, 0);
+        this.node.position = this.outOfWorld;
+        let cbFadeOut = cc.callFunc(this.onFadeOutFinish, this);
+        let cbFadeIn = cc.callFunc(this.onFadeInFinish, this);
+        this.actionFadeIn = cc.sequence(cc.spawn(cc.fadeTo(this.duration, 255), cc.scaleTo(this.duration, 1.0)), cbFadeIn);
+        this.actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(this.duration, 0), cc.scaleTo(this.duration, 2.0)), cbFadeOut);
+        this.node.on('fade-in', this.startFadeIn, this);
+        this.node.on('fade-out', this.startFadeOut, this);
+        // 检测是否需要初始化剩余领取次数
+        if (USERINFO.exchange_DiamondDay != new Date().getDate()) {
+            USERINFO.exchange_DiamondDay = new Date().getDate();
+            // 初始化签到状态
+            USERINFO.exchange_getDiamond = 2;
+        }
+    },
+    show: function () {
+        this.node.active = true;
+        this.node.emit('fade-in');
+        this.DiamondNum.string = "剩余" + USERINFO.exchange_getDiamond + "次机会";
+        if (USERINFO.exchange_getDiamond <= 0) {
+            var color = new cc.Color(255, 0, 0);
+            this.DiamondNum.node.color = color;
+        }
+    },
+    hide: function () {
+        this.node.emit('fade-out');
+    },
+    startFadeIn: function () {
+        this.node.position = cc.v2(0, 0);
+        this.node.setScale(2);
+        this.node.opacity = 0;
+        this.node.runAction(this.actionFadeIn);
+    },
+    startFadeOut: function () {
+        this.node.runAction(this.actionFadeOut);
+    },
+    onFadeInFinish: function () {
+    },
+    onFadeOutFinish: function () {
+        this.node.position = this.outOfWorld;
+    },
+    // 兑换领取钻石
+    exchange_getDiamond: function () {
+        if (USERINFO.exchange_getDiamond > 0) {
+            WECHAT.share(null, () => {
+                USERINFO.exchange_getDiamond -= 1;
+                USERINFO.diamond += 50;
+                this.font_userDiamond.string = USERINFO.diamond;
+                this.DiamondNum.string = "剩余" + USERINFO.exchange_getDiamond + "次机会";
+                if (USERINFO.exchange_getDiamond <= 0) {
+                    var color = new cc.Color(255, 0, 0);
+                    this.DiamondNum.node.color = color;
+                }
+                USERINFO.save();
+            }, () => {
+                wx.showToast({
+                    title: '请分享到群',
+                    icon: 'none',
+                    duration: 2000,
+                    mask: true
+                })
+            }, 'openId=' + USERINFO.openId);
+        } else {
+            console.log('次数不足');
+        }
     },
     addDiamonds: function () {
         // 增加兑换的钻石数量

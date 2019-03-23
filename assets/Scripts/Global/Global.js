@@ -178,6 +178,8 @@ window.USERINFO = {
 	today: new Date().getDate(),//签到刷新日期
 	isGotDiamonds: false,//是否领取过钻石 false未领取、true已领取
 	GotDiamondDay: new Date().getDate(),// 领取钻石刷新日期
+	exchange_getDiamond: 2,//兑换钻石对话框领取钻石剩余次数
+	exchange_DiamondDay: new Date().getDate(),//兑换钻石对话框领取钻石刷新日期
 	initScene: null,// 初始场景值，用于区分从哪进入游戏
 	// 同步数据到本地
 	init: function (data) {
@@ -200,6 +202,8 @@ window.USERINFO = {
 		that.signInState = data.signInState || that.signInState;
 		that.isGotDiamonds = data.isGotDiamonds || that.isGotDiamonds;//是否领取过钻石 false未领取、true已领取
 		that.GotDiamondDay = data.GotDiamondDay || that.GotDiamondDay;//领取钻石刷新日期
+		that.exchange_getDiamond = data.exchange_getDiamond //兑换钻石对话框领取钻石剩余次数
+		that.exchange_DiamondDay = data.exchange_DiamondDay //兑换钻石对话框领取钻石刷新日期
 	},
 	save: function () {
 		var bulletShop = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -221,6 +225,8 @@ window.USERINFO = {
 			today: USERINFO.today,//签到刷新日期
 			isGotDiamonds: USERINFO.isGotDiamonds,//是否领取过钻石 false未领取、true已领取
 			GotDiamondDay: USERINFO.GotDiamondDay,//领取钻石刷新日期
+			exchange_getDiamond: USERINFO.exchange_getDiamond,//兑换钻石对话框领取钻石剩余次数
+			exchange_DiamondDay: USERINFO.exchange_DiamondDay,//兑换钻石对话框领取钻石刷新日期
 		}
 		var info = JSON.stringify(data);
 		HL.ajax.post(HL.ajax.setGameData, { uid: USERINFO.uid, info: info }, ((e) => {
