@@ -1,0 +1,96 @@
+[
+  {
+    "level": 10,
+    "singnData": [
+      {
+        "data": 1,
+        "coin": 200,
+        "diamond": 0,
+        "durian": 0
+      },
+      {
+        "data": 2,
+        "coin": 0,
+        "diamond": 0,
+        "durian": 2
+      },
+      {
+        "data": 3,
+        "coin": 0,
+        "diamond": 50,
+        "durian": 0
+      },
+      {
+        "data": 4,
+        "coin": 500,
+        "diamond": 0,
+        "durian": 0
+      },
+      {
+        "data": 5,
+        "coin": 0,
+        "diamond": 0,
+        "durian": 3
+      },
+      {
+        "data": 6,
+        "coin": 0,
+        "diamond": 80,
+        "durian": 0
+      },
+      {
+        "data": 7,
+        "coin": 500,
+        "diamond": 50,
+        "durian": 3
+      }
+    ]
+  },
+  {
+    "level": 20,
+    "singnData": [
+      {
+        "data": 1,
+        "coin": 500,
+        "diamond": 0,
+        "durian": 0
+      },
+      {
+        "data": 2,
+        "coin": 0,
+        "diamond": 0,
+        "durian": 2
+      },
+      {
+        "data": 3,
+        "coin": 0,
+        "diamond": 50,
+        "durian": 0
+      },
+      {
+        "data": 4,
+        "coin": 800,
+        "diamond": 0,
+        "durian": 0
+      },
+      {
+        "data": 5,
+        "coin": 0,
+        "diamond": 0,
+        "durian": 3
+      },
+      {
+        "data": 6,
+        "coin": 0,
+        "diamond": 80,
+        "durian": 0
+      },
+      {
+        "data": 7,
+        "coin": 800,
+        "diamond": 50,
+        "durian": 4
+      }
+    ]
+  }
+]

@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.32042795103584853,
-      "y": 0.32042795103584853,
+      "x": 0.2679232738371237,
+      "y": 0.2679232738371237,
       "z": 1
     },
     "_quat": {
@@ -5232,7 +5232,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "92WzKuBkpKEJqDXdfAosU1"
+    "_id": "04AjUX/59HiJwRbcj1hh1Y"
   },
   {
     "__type__": "cc.Label",
@@ -5258,7 +5258,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "12ylCDnpRP/JWMH3LSvmho"
+    "_id": "77wrO5hNpI6bL57tqIl12T"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -5276,7 +5276,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "712XiabF1FIY5vXys3t4fs"
+    "_id": "b4DKSoQs9LIoT4Mtl35AxM"
   },
   {
     "__type__": "cc.RichText",
@@ -6728,7 +6728,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "83XZ5a5rlImqAGOE8jvEiT"
+    "_id": "2a+/dW8klB6qF8FJzyhLTC"
   },
   {
     "__type__": "cc.Label",
@@ -6754,7 +6754,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "c9YhvYMopDIouoC1J3kQcT"
+    "_id": "eetNuxAllHvKTPorvwGcd6"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -6772,7 +6772,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "7fLZBV0qNFFoOD+kdwfjW3"
+    "_id": "17sS0UtZxHv6ejdXiNxd4P"
   },
   {
     "__type__": "cc.Widget",
@@ -7862,7 +7862,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
+    "_zIndex": -32768,
     "groupIndex": 0,
     "_id": "5cF6ZKsW9B+6A1OFj8/WWg"
   },
@@ -8439,7 +8439,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
+    "_zIndex": -32768,
     "groupIndex": 0,
     "_id": "0cyhNHeX5Ahr2hREcypG14"
   },
@@ -10100,7 +10100,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
+    "_zIndex": -32768,
     "groupIndex": 0,
     "_id": "04NXh+VL1FZZFLarisitGr"
   },
@@ -27661,7 +27661,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "e1ENyC7nhOCq5z7QFX80tP"
+    "_id": "61NUdNvLVHVLt9L8hsQo5F"
   },
   {
     "__type__": "cc.Label",
@@ -27687,7 +27687,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "b7Ny7UJzdB9odMMEyIrI3+"
+    "_id": "050Wg6bFxKtKQTJ4C7/OyS"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -27705,7 +27705,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "8amWm4OZZEjZ5tayhVK5eo"
+    "_id": "50C12VEhVB8ZqkAmAu3Vea"
   },
   {
     "__type__": "cc.RichText",
@@ -29749,7 +29749,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "b3mw8SfJ5HXqfzttEjr4i1"
+    "_id": "04ujusCCtNCbfwNsmLXb0a"
   },
   {
     "__type__": "cc.Label",
@@ -29775,7 +29775,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "e9iJQIeXZNh5VcgtTm6+uc"
+    "_id": "6fNuc5FfVNcLwkm3ZVsht7"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -29793,7 +29793,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "d0ov2+p8tMKrh9JxE7VyN1"
+    "_id": "d4cLrtoMZJ55q/hE8BLzh+"
   },
   {
     "__type__": "cc.RichText",
@@ -30272,7 +30272,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "41YbQJpe5DKJwbdlzGE6Ea"
+    "_id": "0az1JQuOFA37c+469OeSxz"
   },
   {
     "__type__": "cc.Label",
@@ -30298,7 +30298,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Microsoft YaHei",
     "_N$overflow": 0,
-    "_id": "8d3hygl1NLD5ARJLSIhb8b"
+    "_id": "77O/f31/ROq52SRA46I67j"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -30316,7 +30316,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "66Sgz/33BAkYdj0I3+NXE5"
+    "_id": "2f7b3/DHBDdbViUFecMFri"
   },
   {
     "__type__": "cc.RichText",
@@ -45388,7 +45388,7 @@
     "res": {
       "__uuid__": "5eb76df6-e51a-4428-9741-3e41eadfc095"
     },
-    "Number": 100
+    "Number": 1
   },
   {
     "__type__": "cc.Node",
@@ -46441,6 +46441,9 @@
       },
       {
         "__uuid__": "28ee691c-a38c-41f4-8637-242d1d0f7194"
+      },
+      {
+        "__uuid__": "7f93c457-4a80-4ade-b886-796eb5f72de3"
       }
     ],
     "page_Game": {

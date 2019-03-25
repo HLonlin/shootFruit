@@ -164,6 +164,8 @@ window.HL = {
 window.USERINFO = {
 	// 用户信息
 	level: 1,//关卡
+	armLevel: 0,//武器威力和暴击的平均等级、决定签到奖励的等级
+	weekDate: new Date().getDate(),//签到等级刷新日期
 	coin: 100,//拥有金币数
 	diamond: 100,//拥有钻石数
 	durian: 0,//榴莲蛋剩余次数
@@ -191,6 +193,8 @@ window.USERINFO = {
 			}
 		}
 		that.level = data.level || that.level;
+		that.armLevel = data.armLevel || that.armLevel;//武器威力和暴击的平均等级、决定签到奖励的等级
+		that.weekDate = data.weekDate || that.weekDate;//签到等级刷新日期
 		that.coin = data.coin || that.coin;
 		that.diamond = data.diamond || that.diamond;
 		that.durian = data.durian || that.durian;
@@ -212,6 +216,8 @@ window.USERINFO = {
 		}
 		var data = {
 			level: USERINFO.level,//关卡
+			armLevel: USERINFO.armLevel,//武器威力和暴击的平均等级、决定签到奖励的等级
+			weekDate: USERINFO.weekDate,//签到等级刷新日期
 			coin: USERINFO.coin,//拥有金币数
 			diamond: USERINFO.diamond,//拥有钻石数
 			durian: USERINFO.durian,//榴莲蛋剩余次数

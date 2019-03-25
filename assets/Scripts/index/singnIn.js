@@ -6,7 +6,7 @@ const reward = cc.Class({
             default: null,
             type: cc.SpriteFrame,
             displayName: '物品',
-            tooltip: '0是金币1是钻石3是礼盒'
+            tooltip: '奖励物品'
         },
         Number: {
             default: 0,
@@ -73,6 +73,21 @@ cc.Class({
     },
     start() {
         this.initUi();
+    },
+    initData: function () {
+        // 每7天检测一次是否需要更新签到奖励等级
+        // USERINFO.weekDate = new Date().getDate() - USERINFO.weekDate >= 7 ? new Date().getDate() : USERINFO.weekDate;
+        if (new Date().getDate() - USERINFO.weekDate >= 7) {
+            USERINFO.weekDate = new Date().getDate();
+            USERINFO.armLevel = (USERINFO.armCritLevel + USERINFO.armpoweLevel) / 2;
+        }
+        // 根据武器等级（签到奖励等级）刷新签到奖励
+        for (var i = 0, max = USERINFO.Data_game[3].json.length; i < max; i++) {
+            if (USERINFO.armLevel <= this.singnData[i].level) {
+                console.log('this.singnData[i]:', this.singnData[i]);
+            }
+        }
+
     },
     initUi: function () {
         if (this.signInState == 1) {
@@ -147,6 +162,10 @@ cc.Class({
             } else if (res == 'tubiao_zuanshi00') {
                 USERINFO.diamond += num;
                 that.font_diamNums.string = USERINFO.diamond;
+            } else if (res == 'tubiao_lihe0201') {
+                console.log('奖励礼盒');
+            } else if (res == 'tubiao_liulian') {
+                USERINFO.durian += num;
             }
             that.signInState = that.signInState + 1;
             // 保存最新签到状态
@@ -157,7 +176,6 @@ cc.Class({
             USERINFO.today = that.today;
             // 更新界面
             if (that.signInState == 1) {
-
                 event.currentTarget.getChildByName("font_singnIn").getComponent(cc.RichText).string = '<outline color=#9e5d00 width=2><color=#ffffff>再签一次</color>';
             } else if (that.signInState == 2) {
                 event.currentTarget.getComponent(cc.Button).interactable = false;
