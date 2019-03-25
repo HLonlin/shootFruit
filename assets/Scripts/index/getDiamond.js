@@ -60,7 +60,7 @@ cc.Class({
     onFadeInFinish: function () {
         var that = this;
         if (USERINFO.initSync.query.type == 'getDiamond') {
-            if (USERINFO.isGotDiamonds) {
+            if (USERINFO.isGotDiamonds == 1) {
                 that.btn_getDiamond.getComponent(cc.Button).interactable = false;
                 that.btn_getDiamond.getChildByName('font_share').getComponent(cc.RichText).string = "<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>";
             } else {
@@ -80,12 +80,12 @@ cc.Class({
         if (USERINFO.initSync.query.type == 'getDiamond') {
             USERINFO.diamond += 40;
             that.font_diamNums.string = USERINFO.diamond;
-            USERINFO.isGotDiamonds = true;
+            USERINFO.isGotDiamonds = 1;
             that.btn_getDiamond.getComponent(cc.Button).interactable = false;
             that.btn_getDiamond.getChildByName('font_share').getComponent(cc.RichText).string = "<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>";
             USERINFO.save()
         } else {
-            WECHAT.share(null, () => {
+            WECHAT.sharer(null, () => {
                 wx.showModal({
                     title: '温馨提示',
                     content: '从分享链接点进去就能领取钻石哦~',

@@ -57,8 +57,8 @@ cc.Class({
         }
     },
     onLoad() {
-        this.today = USERINFO.today || localStorage.getItem('today') || new Date().getDate(); //上一次刷新签到状态的日期
-        this.signInState = USERINFO.signInState || localStorage.getItem('signInState') || 0; //签到状态默认为未签到、0：未签到   1：已签到一次 2：已签到2次
+        this.today = USERINFO.today || new Date().getDate(); //上一次刷新签到状态的日期
+        this.signInState = USERINFO.signInState || 0; //签到状态默认为未签到、0：未签到   1：已签到一次 2：已签到2次
         // 检测是否需要初始化签到状态
         if (this.today != new Date().getDate()) {
             this.today = new Date().getDate();

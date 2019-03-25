@@ -176,8 +176,8 @@ window.USERINFO = {
 	luckyNum: 0,//已经抽奖次数
 	signInState: 0,//签到状态 0未签到、1已签到1次、2已签到2次
 	today: new Date().getDate(),//签到刷新日期
-	isGotDiamonds: false,//是否领取过钻石 false未领取、true已领取
-	GotDiamondDay: new Date().getDate(),// 领取钻石刷新日期
+	isGotDiamonds: 0,//领取钻石对话框是否领取过钻石 0未领取、1已领取
+	GotDiamondDay: new Date().getDate(),// 领取钻石对话框领取钻石刷新日期
 	exchange_getDiamond: 2,//兑换钻石对话框领取钻石剩余次数
 	exchange_DiamondDay: new Date().getDate(),//兑换钻石对话框领取钻石刷新日期
 	initScene: null,// 初始场景值，用于区分从哪进入游戏
@@ -200,8 +200,8 @@ window.USERINFO = {
 		that.armpoweLevel = data.armpoweLevel || that.armpoweLevel;
 		that.luckyNum = data.luckyNum || that.luckyNum;
 		that.signInState = data.signInState || that.signInState;
-		that.isGotDiamonds = data.isGotDiamonds || that.isGotDiamonds;//是否领取过钻石 false未领取、true已领取
-		that.GotDiamondDay = data.GotDiamondDay || that.GotDiamondDay;//领取钻石刷新日期
+		that.isGotDiamonds = data.isGotDiamonds || that.isGotDiamonds;//领取钻石对话框是否领取过钻石 0未领取、1已领取
+		that.GotDiamondDay = data.GotDiamondDay || that.GotDiamondDay;//领取钻石对话框领取钻石刷新日期
 		that.exchange_getDiamond = data.exchange_getDiamond //兑换钻石对话框领取钻石剩余次数
 		that.exchange_DiamondDay = data.exchange_DiamondDay //兑换钻石对话框领取钻石刷新日期
 	},
@@ -223,8 +223,8 @@ window.USERINFO = {
 			luckyNum: USERINFO.luckyNum,//已经抽奖次数
 			signInState: USERINFO.signInState,//签到状态
 			today: USERINFO.today,//签到刷新日期
-			isGotDiamonds: USERINFO.isGotDiamonds,//是否领取过钻石 false未领取、true已领取
-			GotDiamondDay: USERINFO.GotDiamondDay,//领取钻石刷新日期
+			isGotDiamonds: USERINFO.isGotDiamonds,//领取钻石对话框是否领取过钻石 0未领取、1已领取
+			GotDiamondDay: USERINFO.GotDiamondDay,//领取钻石对话框领取钻石刷新日期
 			exchange_getDiamond: USERINFO.exchange_getDiamond,//兑换钻石对话框领取钻石剩余次数
 			exchange_DiamondDay: USERINFO.exchange_DiamondDay,//兑换钻石对话框领取钻石刷新日期
 		}
@@ -503,6 +503,32 @@ window.WECHAT = {
 					}
 				} else {
 					that.onceMoreShare(index, success, fail, querys);
+				}
+			}
+			share = false;
+		})
+	},
+	sharer: function (index, success, fail, querys) {
+		var that = this;
+		var randomNum = (index != null) ? index : that.random(1, 3) - 1;
+		that.shareImage = [
+			"https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share1.png",
+			"https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share2.png",
+			"https://page8.h5.0e3.cn/H5Game/page8/1903/0301/share/share3.png"
+		];
+		var shareTitle = that.shareTitle[randomNum];
+		var imageUrl = that.shareImage[randomNum];
+		wx.shareAppMessage({
+			title: shareTitle,
+			imageUrl: imageUrl,
+			query: querys
+		});
+		let share = true;
+		let t = new Date().getTime();
+		wx.onShow(() => {
+			if (share) {
+				if (success) {
+					success();
 				}
 			}
 			share = false;

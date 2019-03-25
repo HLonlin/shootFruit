@@ -187,23 +187,34 @@ cc.Class({
 		},
 	},
 	onLoad() {
+		var that = this;
 		//播放背景音乐
-		this.audioMng = cc.find('Index/AudioMaster') || cc.find('Game/AudioMaster') || cc.find('Shop/AudioMaster') || cc.find('Over/AudioMaster') || cc.find('AudioMaster');
-		if (this.audioMng) {
-			this.audioMng = this.audioMng.getComponent('AudioMaster');
+		that.audioMng = cc.find('Index/AudioMaster') || cc.find('Game/AudioMaster') || cc.find('Shop/AudioMaster') || cc.find('Over/AudioMaster') || cc.find('AudioMaster');
+		if (that.audioMng) {
+			that.audioMng = that.audioMng.getComponent('AudioMaster');
 		}
-		if (this.audioMng) this.audioMng.playMusic();
+		if (that.audioMng) that.audioMng.playMusic();
 
 		// 初始设备
 		WECHAT.initDeviceMaster();
 		//初始化广告
 		WECHAT.initAD();
 		// 登录
-		this.login();
+		that.login();
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
 			wx.onHide(() => {
 				USERINFO.save();
-			})
+			});
+			wx.onShow((res) => {
+				USERINFO.initSync.query = res.query;
+				// 领钻石弹出
+				if (USERINFO.initSync.query.type == 'getDiamond') {
+					console.log('USERINFO.isGotDiamonds:', USERINFO.isGotDiamonds);
+					if (USERINFO.isGotDiamonds == 0) {
+						that.tips_getDiamonds.node.getComponent('getDiamond').show();
+					}
+				}
+			});
 		}
 	},
 	login: function () {
@@ -240,7 +251,10 @@ cc.Class({
 										}
 										// 领钻石弹出
 										if (USERINFO.initSync.query.type == 'getDiamond') {
-											that.tips_getDiamonds.node.getComponent('getDiamond').show();
+											console.log('USERINFO.isGotDiamonds:', USERINFO.isGotDiamonds);
+											if (USERINFO.isGotDiamonds == 0) {
+												that.tips_getDiamonds.node.getComponent('getDiamond').show();
+											}
 										}
 										wx.triggerGC()
 									} else {
@@ -443,28 +457,28 @@ cc.Class({
 		WECHAT.closeBannerAd();
 	},
 	// 分享
-	share: function () {
-		WECHAT.share(null, () => {
-			wx.showModal({
-				title: '温馨提示',
-				content: '从分享链接点进去就能领取钻石哦~',
-				showCancel: false,
-				confirmText: '知道了',
-				success(res) {
-					if (res.confirm) {
+	// share: function () {
+	// 	WECHAT.share(null, () => {
+	// 		wx.showModal({
+	// 			title: '温馨提示',
+	// 			content: '从分享链接点进去就能领取钻石哦~',
+	// 			showCancel: false,
+	// 			confirmText: '知道了',
+	// 			success(res) {
+	// 				if (res.confirm) {
 
-					}
-				}
-			});
-		}, () => {
-			wx.showToast({
-				title: '请分享到群',
-				icon: 'none',
-				duration: 2000,
-				mask: true
-			})
-		}, 'openId=' + USERINFO.openId + '&type=getDiamond');
-	},
+	// 				}
+	// 			}
+	// 		});
+	// 	}, () => {
+	// 		wx.showToast({
+	// 			title: '请分享到群',
+	// 			icon: 'none',
+	// 			duration: 2000,
+	// 			mask: true
+	// 		})
+	// 	}, 'openId=' + USERINFO.openId + '&type=getDiamond');
+	// },
 	// 观看视频
 	openVideo: function () {
 		WECHAT.openVideoAd(() => {
