@@ -27,10 +27,10 @@
       }
     ],
     "_active": true,
-    "_level": 1,
+    "_level": 5,
     "_components": [],
     "_prefab": {
-      "__id__": 49
+      "__id__": 50
     },
     "_opacity": 255,
     "_color": {
@@ -853,7 +853,7 @@
     "asset": {
       "__uuid__": "04e2b279-7ee7-43b8-a056-24c1cb745071"
     },
-    "fileId": "1f2F1WTxFAFYcROWk2Yf/z",
+    "fileId": "03LEoCQ8pM+ZohRq2RiWaw",
     "sync": false
   },
   {
@@ -1266,10 +1266,13 @@
       },
       {
         "__id__": 47
+      },
+      {
+        "__id__": 48
       }
     ],
     "_prefab": {
-      "__id__": 48
+      "__id__": 49
     },
     "_opacity": 255,
     "_color": {
@@ -1504,7 +1507,7 @@
     "asset": {
       "__uuid__": "04e2b279-7ee7-43b8-a056-24c1cb745071"
     },
-    "fileId": "976Xrr4gZM/aRFjnjxinRa",
+    "fileId": "c2e08wzT5El6pcm1bnFZGh",
     "sync": false
   },
   {
@@ -1620,6 +1623,74 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Button",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 37
+    },
+    "_enabled": true,
+    "duration": 0.1,
+    "zoomScale": 1.2,
+    "clickEvents": [
+      null
+    ],
+    "_N$interactable": true,
+    "_N$enableAutoGrayEffect": false,
+    "_N$transition": 0,
+    "transition": 0,
+    "_N$normalColor": {
+      "__type__": "cc.Color",
+      "r": 214,
+      "g": 214,
+      "b": 214,
+      "a": 255
+    },
+    "_N$pressedColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "pressedColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "_N$hoverColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "hoverColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_N$disabledColor": {
+      "__type__": "cc.Color",
+      "r": 124,
+      "g": 124,
+      "b": 124,
+      "a": 255
+    },
+    "_N$normalSprite": null,
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
+    "_N$disabledSprite": null,
+    "_N$target": null,
     "_id": ""
   },
   {

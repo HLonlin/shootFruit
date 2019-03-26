@@ -171,8 +171,8 @@ window.USERINFO = {
 	durian: 0,//榴莲蛋剩余次数
 	highestScore: 0,//最高分
 	bulletsInUse: 0,//正在使用的子弹编号
-	armCritLevel: 1,// 武器暴击等级
-	armpoweLevel: 1,// 武器威力等级
+	armCritLevel: 0,// 武器暴击等级
+	armpoweLevel: 0,// 武器威力等级
 	bulletShop: {},// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
 	Invincible: false,//无敌状态
 	luckyNum: 0,//已经抽奖次数
@@ -435,7 +435,7 @@ window.WECHAT = {
 		}
 	},
 	//开启视频广告
-	openVideoAd: function (successCall, failCall, Novideo) {
+	openVideoAd: function (success, fail, Novideo) {
 		if (this.cacheVideoAd) {
 			var isvideo = true;
 			// 尝试播放视频
@@ -450,11 +450,15 @@ window.WECHAT = {
 				if (res && res.isEnded || res === undefined) {
 					if (isvideo) {
 						// 正常播放结束，可以下发游戏奖励
-						successCall();
+						if (success) {
+							success();
+						}
 					}
 				} else {
 					// 播放中途退出，不下发游戏奖励
-					failCall();
+					if (fail) {
+						fail();
+					}
 				}
 				isvideo = false;
 			});

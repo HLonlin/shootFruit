@@ -75,48 +75,48 @@
     "ArmsLevel": 13,
     "Power": 290,
     "Crit": 0.53,
-    "Price": 2100
+    "Price": 2200
   },
   {
     "ArmsLevel": 14,
     "Power": 310,
     "Crit": 0.57,
-    "Price": 2300
+    "Price": 2500
   },
   {
     "ArmsLevel": 15,
     "Power": 330,
     "Crit": 0.61,
-    "Price": 2500
+    "Price": 2800
   },
   {
     "ArmsLevel": 16,
     "Power": 350,
     "Crit": 0.65,
-    "Price": 2700
+    "Price": 3200
   },
   {
     "ArmsLevel": 17,
     "Power": 370,
     "Crit": 0.69,
-    "Price": 2900
+    "Price": 3600
   },
   {
     "ArmsLevel": 18,
     "Power": 390,
     "Crit": 0.73,
-    "Price": 3100
+    "Price": 4000
   },
   {
     "ArmsLevel": 19,
     "Power": 410,
     "Crit": 0.77,
-    "Price": 3300
+    "Price": 4400
   },
   {
     "ArmsLevel": 20,
     "Power": 430,
     "Crit": 0.8,
-    "Price": 3500
+    "Price": 4800
   }
 ]

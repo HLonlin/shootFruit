@@ -21,10 +21,28 @@ cc.Class({
 			displayName: '武器',
 			tooltip: '玩家的武器'
 		},
+		font_coin: {
+			default: null,
+			type: cc.Label,
+			displayName: '金币',
+			tooltip: '金币数量'
+		},
+		font_diamond: {
+			default: null,
+			type: cc.Label,
+			displayName: '钻石',
+			tooltip: '钻石数量'
+		},
 		page_Over: {
 			default: null,
 			type: require('tips'),
 			displayName: '结束页面',
+		},
+		tips_exchange: {
+			default: null,
+			type: require('tips'),
+			displayName: '钻石换金币弹出框',
+			tooltip: '消息弹出框'
 		},
 		minPercent: {
 			default: 0.3,
@@ -185,6 +203,31 @@ cc.Class({
 				}
 				USERINFO.bulletShop[this.level.bullet - 1].state = 1;
 			}
+			// 购买子弹按钮
+			reward_bullet.getChildByName('btn_buyBullet').on(cc.Node.EventType.TOUCH_END, () => {
+				if (USERINFO.coin >= USERINFO.bulletShop[this.level.bullet - 1].price && USERINFO.bulletShop[this.level.bullet - 1].state != 2) {
+					USERINFO.coin -= USERINFO.bulletShop[this.level.bullet - 1].price;
+					this.font_coin.string = USERINFO.coin;
+					USERINFO.bulletShop[this.level.bullet - 1].state = 2;
+					USERINFO.bulletsInUse = this.level.bullet - 1;
+					wx.showToast({
+						title: '子弹已购买',
+						icon: 'none',
+						duration: 2000,
+						mask: true
+					});
+				} else if (USERINFO.bulletShop[this.level.bullet - 1].state == 2) {
+					wx.showToast({
+						title: '该子弹已购买',
+						icon: 'none',
+						duration: 2000,
+						mask: true
+					});
+				} else {
+					// 金币不足
+					this.tips_exchange.show();
+				}
+			}, this, true);
 			this.box_rewardBox.addChild(reward_bullet);
 		}
 		if (this.level.coin != 0) {
@@ -192,6 +235,21 @@ cc.Class({
 			RewardNum += 1;
 			let reward_coin = cc.instantiate(this.reward_coin);
 			reward_coin.getChildByName("font_rewardNum").getComponent(cc.Label).string = 'x' + this.level.coin;
+			// 双倍金币奖励
+			reward_coin.getChildByName("btn_buyBulletShare").on(cc.Node.EventType.TOUCH_END, () => {
+				WECHAT.share(null, () => {
+					USERINFO.coin += this.level.coin;
+					this.font_coin.string = USERINFO.coin;
+					reward_coin.getChildByName("btn_buyBulletShare").active = false;
+				}, () => {
+					wx.showToast({
+						title: '请分享到群',
+						icon: 'none',
+						duration: 2000,
+						mask: true
+					})
+				}, 'querys1=1');
+			}, this, true);
 			this.box_rewardBox.addChild(reward_coin);
 		}
 		if (this.level.diamond != 0) {
@@ -199,9 +257,37 @@ cc.Class({
 			RewardNum += 1;
 			let reward_diamond = cc.instantiate(this.reward_diamond);
 			reward_diamond.getChildByName("font_rewardNum").getComponent(cc.Label).string = 'x' + this.level.diamond;
+			// 双倍钻石奖励
+			reward_diamond.getChildByName("btn_buyBulletVideo").on(cc.Node.EventType.TOUCH_END, () => {
+				WECHAT.openVideoAd(() => {
+					USERINFO.diamond += this.level.diamond;
+					this.font_diamond.string = USERINFO.diamond;
+					reward_diamond.getChildByName("btn_buyBulletVideo").active = false;
+				}, () => {
+					wx.showToast({
+						title: '视频未正常播放结束',
+						icon: 'none',
+						duration: 2000,
+						mask: true
+					})
+				}, () => {
+					WECHAT.share(null, () => {
+						USERINFO.diamond += this.level.diamond;
+						this.font_diamond.string = USERINFO.diamond;
+						reward_diamond.getChildByName("btn_buyBulletVideo").active = false;
+					}, () => {
+						wx.showToast({
+							title: '请分享到群',
+							icon: 'none',
+							duration: 2000,
+							mask: true
+						})
+					}, 'querys1=1');
+				});
+			}, this, true);
 			this.box_rewardBox.addChild(reward_diamond);
 		}
 		this.box_rewardBox.height = RewardNum * 115
 		this.page_Over.node.getComponent('Over').fadein_victory();
-	}
+	},
 });

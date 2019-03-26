@@ -249,37 +249,4 @@ cc.Class({
             }, this);
         }
     },
-    double: function () {
-        WECHAT.openVideoAd(() => {
-            wx.showToast({
-                title: '双倍奖励',
-                icon: 'none',
-                duration: 2000,
-                mask: true
-            })
-        }, () => {
-            wx.showToast({
-                title: '视频未正常播放结束',
-                icon: 'none',
-                duration: 2000,
-                mask: true
-            })
-        }, () => {
-            WECHAT.share(null, () => {
-                wx.showToast({
-                    title: '双倍奖励',
-                    icon: 'none',
-                    duration: 2000,
-                    mask: true
-                })
-            }, () => {
-                wx.showToast({
-                    title: '请分享到群',
-                    icon: 'none',
-                    duration: 2000,
-                    mask: true
-                })
-            }, 'querys1=1');
-        });
-    }
 });
