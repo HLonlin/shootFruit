@@ -1,17 +1,24 @@
 cc.Class({
     extends: cc.Component,
+
     properties: {
-        bg_propPowerUp: {
+        fruit: {
             default: null,
             type: cc.Node,
-            displayName: '提升威力',
-            tooltip: '威力提升道具'
+            displayName: '水果',
+            tooltip: '新水果'
         },
-        bg_propLifeUp: {
+        font_fruitName: {
             default: null,
             type: cc.Node,
-            displayName: '提升生命',
-            tooltip: '生命提升道具'
+            displayName: '水果名字',
+            tooltip: '新水果名字'
+        },
+        font_newBullerPower: {
+            default: null,
+            type: cc.Label,
+            displayName: '水果威力',
+            tooltip: '新水果威力'
         },
         duration: {
             default: 0.2,
@@ -20,7 +27,8 @@ cc.Class({
             tooltip: '界面切换用时'
         },
     },
-    onLoad() {
+
+    onLoad: function () {
         this.outOfWorld = cc.v2(3000, 0);
         this.node.position = this.outOfWorld;
         let cbFadeOut = cc.callFunc(this.onFadeOutFinish, this);
@@ -29,21 +37,6 @@ cc.Class({
         this.actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(this.duration, 0), cc.scaleTo(this.duration, 2.0)), cbFadeOut);
         this.node.on('fade-in', this.startFadeIn, this);
         this.node.on('fade-out', this.startFadeOut, this);
-
-    },
-    randomProp: function () {
-        var randomNum = WECHAT.random(0, 2);
-        if (randomNum == 1) {
-            this.bg_propPowerUp.active = true;
-        } else {
-            this.bg_propLifeUp.active = true;
-        }
-    },
-    onUseProp_power: function () {
-        console.log('使用威力道具按钮');
-    },
-    onUseProp_Life: function () {
-        console.log('使用生命道具按钮');
     },
     init: function (home) {
         this.home = home;
@@ -65,7 +58,10 @@ cc.Class({
         this.node.runAction(this.actionFadeOut);
     },
     onFadeInFinish: function () {
-        this.randomProp();
+        var bulletNum = USERINFO.Data_game[2].json[USERINFO.level - 2].bullet;
+        this.fruit.getComponent(cc.Sprite).spriteFrame = USERINFO.bulletShop[bulletNum - 1].res;
+        this.font_fruitName.getComponent(cc.RichText).string = '<outline color=#af5f00 width=2><color=#ffffff>' + USERINFO.bulletShop[bulletNum - 1].name + '</color></outline>'
+        this.font_newBullerPower.string = USERINFO.bulletShop[bulletNum - 1].power;
     },
     onFadeOutFinish: function () {
         this.node.position = this.outOfWorld;

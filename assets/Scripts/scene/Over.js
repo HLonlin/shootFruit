@@ -105,7 +105,7 @@ cc.Class({
     },
     fadein_victory: function () {
         this.submitScore();
-        this.font_level.getComponent(cc.RichText).string = "<outline color=#39A3FF width=2><color=#ffffff>第" + USERINFO.level + "关</color></outline>";
+        this.font_level.getComponent(cc.RichText).string = "<outline color=#39A3FF width=2><color=#ffffff>第" + (USERINFO.level - 1) + "关</color></outline>";
         this.font_score.getComponent(cc.Label).string = HL.nodePoolState.gameScore;
         this.victoryCoin_zIndex = this.font_coin.zIndex;
         this.victoryDiam_zIndex = this.font_diamond.zIndex;

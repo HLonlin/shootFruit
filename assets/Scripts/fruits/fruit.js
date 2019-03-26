@@ -38,6 +38,11 @@ cc.Class({
 			type: require('tips'),
 			displayName: '结束页面',
 		},
+		page_newBullet: {
+			default: null,
+			type: require('newBullet'),
+			displayName: '新子弹',
+		},
 		tips_exchange: {
 			default: null,
 			type: require('tips'),
@@ -180,6 +185,17 @@ cc.Class({
 	},
 	// 显示胜利页面
 	showpage_victory: function () {
+		var that = this;
+		// 判断本局是否奖励子弹
+		if (this.level.bullet != 0) {
+			this.page_newBullet.show();
+			setTimeout(function () {
+				that.page_newBullet.hide();
+				that.page_Over.node.getComponent('Over').fadein_victory();
+			}, 2000);
+		} else {
+			this.page_Over.node.getComponent('Over').fadein_victory();
+		}
 		USERINFO.level += 1;
 		if (HL.nodePoolState.gameScore > USERINFO.highestScore) {
 			USERINFO.highestScore = HL.nodePoolState.gameScore;
@@ -288,6 +304,5 @@ cc.Class({
 			this.box_rewardBox.addChild(reward_diamond);
 		}
 		this.box_rewardBox.height = RewardNum * 115
-		this.page_Over.node.getComponent('Over').fadein_victory();
 	},
 });
