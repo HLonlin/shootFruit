@@ -106,6 +106,7 @@ cc.Class({
 		this.fruitInit();
 	},
 	fruitInit: function () {
+		USERINFO.DoubleDamage = USERINFO.DoubleDamage == 2 ? USERINFO.DoubleDamage : 1;
 		this.node.opacity = 255;
 		this.node.setScale(1);
 		// 获取当前关卡信息
@@ -141,7 +142,7 @@ cc.Class({
 		// 获取子弹挂载的组件'bullet'
 		this.bulletProperty = other.node.getComponent("bullet");
 		// 当子弹命中时计算伤害
-		var injury = this.injuryValue();
+		var injury = this.injuryValue() * USERINFO.DoubleDamage;
 		// 扣除伤害
 		this.fruitHp = this.fruitHp - injury;
 		this.percent = this.fruitHp / this.HP;

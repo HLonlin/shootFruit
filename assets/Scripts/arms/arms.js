@@ -53,9 +53,12 @@ cc.Class({
 		// 开启碰撞检测系统
 		manager.enabled = true;
 		// 武器血量
-		USERINFO.heart = USERINFO.heart == 2 ? USERINFO.heart : this.HP;
+		USERINFO.heart = USERINFO.heart == 2 ? USERINFO.heart : 1;
 		this.HP = USERINFO.heart;
 		this.armHP = this.HP;
+		for (var i = 0, max = 2; i < max; i++) {
+			this.icon_heartArr.node.children[i].getChildByName("icon_hearts").opacity = 0;
+		}
 		for (var i = 0, max = this.armHP; i < max; i++) {
 			this.icon_heartArr.node.children[i].getChildByName("icon_hearts").setScale(1);
 			this.icon_heartArr.node.children[i].getChildByName("icon_hearts").opacity = 255;

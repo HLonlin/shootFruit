@@ -25,6 +25,18 @@ cc.Class({
             displayName: '不用道具',
             tooltip: '不使用道具'
         },
+        arm: {
+            default: null,
+            type: require('arms'),
+            displayName: '武器',
+            tooltip: '武器信息'
+        },
+        fruit: {
+            default: null,
+            type: cc.Node,
+            displayName: '水果',
+            tooltip: '水果信息'
+        },
         duration: {
             default: 0.2,
             type: cc.Float,
@@ -78,8 +90,13 @@ cc.Class({
         }
     },
     useProp: function () {
+        var that = this;
         if (this.propLifeUp.getChildByName("outline_onTap").active && this.propPowerUp.getChildByName("outline_onTap").active) {
             WECHAT.openVideoAd(() => {
+                USERINFO.heart = 2;
+                USERINFO.DoubleDamage = 2;
+                that.fruit.getComponent('fruit').fruitInit();
+                that.arm.initStage();
                 this.hide();
             }, () => {
                 wx.showToast({
@@ -90,6 +107,10 @@ cc.Class({
                 });
             }, () => {
                 WECHAT.share(null, () => {
+                    USERINFO.heart = 2;
+                    USERINFO.DoubleDamage = 2;
+                    that.fruit.getComponent('fruit').fruitInit();
+                    that.arm.initStage();
                     this.hide();
                 }, () => {
                     wx.showToast({
@@ -102,6 +123,15 @@ cc.Class({
             });
         } else if (this.propLifeUp.getChildByName("outline_onTap").active || this.propPowerUp.getChildByName("outline_onTap").active) {
             WECHAT.share(null, () => {
+                if (that.propLifeUp.getChildByName("outline_onTap").active) {
+                    USERINFO.heart = 2;
+                    USERINFO.DoubleDamage = 1;
+                } else if (that.propPowerUp.getChildByName("outline_onTap").active) {
+                    USERINFO.heart = 1;
+                    USERINFO.DoubleDamage = 2;
+                }
+                that.fruit.getComponent('fruit').fruitInit();
+                that.arm.initStage();
                 this.hide();
             }, () => {
                 wx.showToast({
@@ -121,7 +151,11 @@ cc.Class({
         }
     },
     noprop: function () {
-        console.log('不使用道具');
+        var that = this;
+        USERINFO.heart = 1;
+        USERINFO.DoubleDamage = 1;
+        that.fruit.getComponent('fruit').fruitInit();
+        that.arm.initStage();
         this.hide();
     },
 });
