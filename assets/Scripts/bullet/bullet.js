@@ -1,5 +1,3 @@
-import { userInfo } from "os";
-
 // 子弹
 cc.Class({
 	extends: cc.Component,

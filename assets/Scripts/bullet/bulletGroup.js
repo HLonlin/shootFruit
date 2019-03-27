@@ -63,6 +63,11 @@ cc.Class({
 		newNode.setPosition(that.getBulletPosition(that.position));
 		newNode.getComponent('bullet').bulletGroup = that;
 		newNode.getComponent(cc.Sprite).spriteFrame = USERINFO.bulletShop[USERINFO.bulletsInUse].bullet;
+		if (USERINFO.DoubleDamage == 2) {
+			newNode.setScale(1.5);
+		} else {
+			newNode.setScale(1);
+		}
 	},
 	//获取子弹位置
 	getBulletPosition: function (positionStr) {
