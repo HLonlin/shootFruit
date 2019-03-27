@@ -456,29 +456,6 @@ cc.Class({
 	closeAd: function () {
 		WECHAT.closeBannerAd();
 	},
-	// 分享
-	// share: function () {
-	// 	WECHAT.share(null, () => {
-	// 		wx.showModal({
-	// 			title: '温馨提示',
-	// 			content: '从分享链接点进去就能领取钻石哦~',
-	// 			showCancel: false,
-	// 			confirmText: '知道了',
-	// 			success(res) {
-	// 				if (res.confirm) {
-
-	// 				}
-	// 			}
-	// 		});
-	// 	}, () => {
-	// 		wx.showToast({
-	// 			title: '请分享到群',
-	// 			icon: 'none',
-	// 			duration: 2000,
-	// 			mask: true
-	// 		})
-	// 	}, 'openId=' + USERINFO.openId + '&type=getDiamond');
-	// },
 	// 观看视频
 	openVideo: function () {
 		WECHAT.openVideoAd(() => {

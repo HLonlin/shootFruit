@@ -63,14 +63,62 @@ cc.Class({
     onFadeOutFinish: function () {
         this.node.position = this.outOfWorld;
     },
-    tapPowe: function () {
-        console.log('tap威力！');
-    },
     tapLife: function () {
-        console.log('tap生命！');
+        if (this.propLifeUp.getChildByName("outline_onTap").active) {
+            this.propLifeUp.getChildByName("outline_onTap").active = false;
+        } else {
+            this.propLifeUp.getChildByName("outline_onTap").active = true;
+        }
+    },
+    tapPowe: function () {
+        if (this.propPowerUp.getChildByName("outline_onTap").active) {
+            this.propPowerUp.getChildByName("outline_onTap").active = false;
+        } else {
+            this.propPowerUp.getChildByName("outline_onTap").active = true;
+        }
     },
     useProp: function () {
-        console.log('使用道具');
+        if (this.propLifeUp.getChildByName("outline_onTap").active && this.propPowerUp.getChildByName("outline_onTap").active) {
+            WECHAT.openVideoAd(() => {
+                this.hide();
+            }, () => {
+                wx.showToast({
+                    title: '视频未播放结束',
+                    icon: 'none',
+                    duration: 2000,
+                    mask: true
+                });
+            }, () => {
+                WECHAT.share(null, () => {
+                    this.hide();
+                }, () => {
+                    wx.showToast({
+                        title: '请分享到群',
+                        icon: 'none',
+                        duration: 2000,
+                        mask: true
+                    })
+                }, 'openId=' + USERINFO.openId);
+            });
+        } else if (this.propLifeUp.getChildByName("outline_onTap").active || this.propPowerUp.getChildByName("outline_onTap").active) {
+            WECHAT.share(null, () => {
+                this.hide();
+            }, () => {
+                wx.showToast({
+                    title: '请分享到群',
+                    icon: 'none',
+                    duration: 2000,
+                    mask: true
+                })
+            }, 'openId=' + USERINFO.openId);
+        } else {
+            wx.showToast({
+                title: '请选择开局道具',
+                icon: 'none',
+                duration: 2000,
+                mask: true
+            })
+        }
     },
     noprop: function () {
         console.log('不使用道具');
