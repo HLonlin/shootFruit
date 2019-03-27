@@ -76,52 +76,44 @@ cc.Class({
         this.node.position = this.outOfWorld;
     },
     tapLife: function () {
-        if (this.propLifeUp.getChildByName("outline_onTap").active) {
-            this.propLifeUp.getChildByName("outline_onTap").active = false;
-        } else {
-            this.propLifeUp.getChildByName("outline_onTap").active = true;
-        }
+        this.propLifeUp.getChildByName("outline_onTap").active = true;
+        this.propPowerUp.getChildByName("outline_onTap").active = false;
+        // if (this.propLifeUp.getChildByName("outline_onTap").active) {
+        //     this.propLifeUp.getChildByName("outline_onTap").active = false;
+        // } else {
+        //     this.propLifeUp.getChildByName("outline_onTap").active = true;
+        // }
     },
     tapPowe: function () {
-        if (this.propPowerUp.getChildByName("outline_onTap").active) {
-            this.propPowerUp.getChildByName("outline_onTap").active = false;
-        } else {
-            this.propPowerUp.getChildByName("outline_onTap").active = true;
-        }
+        this.propLifeUp.getChildByName("outline_onTap").active = false;
+        this.propPowerUp.getChildByName("outline_onTap").active = true;
+        // if (this.propPowerUp.getChildByName("outline_onTap").active) {
+        //     this.propPowerUp.getChildByName("outline_onTap").active = false;
+        // } else {
+        //     this.propPowerUp.getChildByName("outline_onTap").active = true;
+        // }
     },
     useProp: function () {
         var that = this;
-        if (this.propLifeUp.getChildByName("outline_onTap").active && this.propPowerUp.getChildByName("outline_onTap").active) {
-            WECHAT.openVideoAd(() => {
+        WECHAT.openVideoAd(() => {
+            if (that.propLifeUp.getChildByName("outline_onTap").active) {
                 USERINFO.heart = 2;
+                USERINFO.DoubleDamage = 1;
+            } else if (that.propPowerUp.getChildByName("outline_onTap").active) {
+                USERINFO.heart = 1;
                 USERINFO.DoubleDamage = 2;
-                that.fruit.getComponent('fruit').fruitInit();
-                that.arm.initStage();
-                this.hide();
-            }, () => {
-                wx.showToast({
-                    title: '视频未播放结束',
-                    icon: 'none',
-                    duration: 2000,
-                    mask: true
-                });
-            }, () => {
-                WECHAT.share(null, () => {
-                    USERINFO.heart = 2;
-                    USERINFO.DoubleDamage = 2;
-                    that.fruit.getComponent('fruit').fruitInit();
-                    that.arm.initStage();
-                    this.hide();
-                }, () => {
-                    wx.showToast({
-                        title: '请分享到群',
-                        icon: 'none',
-                        duration: 2000,
-                        mask: true
-                    })
-                }, 'openId=' + USERINFO.openId);
+            }
+            that.fruit.getComponent('fruit').fruitInit();
+            that.arm.initStage();
+            this.hide();
+        }, () => {
+            wx.showToast({
+                title: '视频未播放结束',
+                icon: 'none',
+                duration: 2000,
+                mask: true
             });
-        } else if (this.propLifeUp.getChildByName("outline_onTap").active || this.propPowerUp.getChildByName("outline_onTap").active) {
+        }, () => {
             WECHAT.share(null, () => {
                 if (that.propLifeUp.getChildByName("outline_onTap").active) {
                     USERINFO.heart = 2;
@@ -141,14 +133,66 @@ cc.Class({
                     mask: true
                 })
             }, 'openId=' + USERINFO.openId);
-        } else {
-            wx.showToast({
-                title: '请选择开局道具',
-                icon: 'none',
-                duration: 2000,
-                mask: true
-            })
-        }
+        });
+        // 多选道具：选择其中一个道具时以分享形式使用，选择两个道具时以视频形式使用
+        // if (this.propLifeUp.getChildByName("outline_onTap").active && this.propPowerUp.getChildByName("outline_onTap").active) {
+        //     WECHAT.openVideoAd(() => {
+        //         USERINFO.heart = 2;
+        //         USERINFO.DoubleDamage = 2;
+        //         that.fruit.getComponent('fruit').fruitInit();
+        //         that.arm.initStage();
+        //         this.hide();
+        //     }, () => {
+        //         wx.showToast({
+        //             title: '视频未播放结束',
+        //             icon: 'none',
+        //             duration: 2000,
+        //             mask: true
+        //         });
+        //     }, () => {
+        //         WECHAT.share(null, () => {
+        //             USERINFO.heart = 2;
+        //             USERINFO.DoubleDamage = 2;
+        //             that.fruit.getComponent('fruit').fruitInit();
+        //             that.arm.initStage();
+        //             this.hide();
+        //         }, () => {
+        //             wx.showToast({
+        //                 title: '请分享到群',
+        //                 icon: 'none',
+        //                 duration: 2000,
+        //                 mask: true
+        //             })
+        //         }, 'openId=' + USERINFO.openId);
+        //     });
+        // } else if (this.propLifeUp.getChildByName("outline_onTap").active || this.propPowerUp.getChildByName("outline_onTap").active) {
+        //     WECHAT.share(null, () => {
+        //         if (that.propLifeUp.getChildByName("outline_onTap").active) {
+        //             USERINFO.heart = 2;
+        //             USERINFO.DoubleDamage = 1;
+        //         } else if (that.propPowerUp.getChildByName("outline_onTap").active) {
+        //             USERINFO.heart = 1;
+        //             USERINFO.DoubleDamage = 2;
+        //         }
+        //         that.fruit.getComponent('fruit').fruitInit();
+        //         that.arm.initStage();
+        //         this.hide();
+        //     }, () => {
+        //         wx.showToast({
+        //             title: '请分享到群',
+        //             icon: 'none',
+        //             duration: 2000,
+        //             mask: true
+        //         })
+        //     }, 'openId=' + USERINFO.openId);
+        // } else {
+        //     wx.showToast({
+        //         title: '请选择开局道具',
+        //         icon: 'none',
+        //         duration: 2000,
+        //         mask: true
+        //     })
+        // }
     },
     noprop: function () {
         var that = this;

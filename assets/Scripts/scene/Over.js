@@ -88,9 +88,8 @@ cc.Class({
         HL.ajax.post(HL.ajax.sendScore, { score: HL.nodePoolState.gameScore, uid: USERINFO.uid, fruits_id: USERINFO.bulletsInUse }, ((e) => {
             // 请求成功
             if (e.code == 1) {
-                console.log('提交成功：', e.data);
+                // console.log('提交成功：', e.data);
                 USERINFO.highestScore = e.data.high_score;
-                localStorage.setItem('highestScore', USERINFO.highestScore);
             } else {
                 console.log('fail');
             }
