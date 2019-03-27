@@ -60,7 +60,13 @@ cc.Class({
 			type: cc.Node,
 			displayName: '钻石',
 			tooltip: '钻石'
-		}
+		},
+		tips_prop: {
+			default: null,
+			type: require('prop'),
+			displayName: '道具弹框',
+			tooltip: '道具弹框'
+		},
 	},
 	// 生命周期回调
 	onLoad: function () {
@@ -74,6 +80,7 @@ cc.Class({
 		this.initState();
 	},
 	initState: function () {
+		this.tips_prop.show();
 		// 重置分数
 		HL.nodePoolState.gameScore = 0;
 		// 重置复活次数

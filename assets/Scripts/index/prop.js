@@ -1,17 +1,29 @@
 cc.Class({
     extends: cc.Component,
     properties: {
-        bg_propPowerUp: {
+        propLifeUp: {
+            default: null,
+            type: cc.Node,
+            displayName: '提升生命',
+            tooltip: '生命提升道具'
+        },
+        propPowerUp: {
             default: null,
             type: cc.Node,
             displayName: '提升威力',
             tooltip: '威力提升道具'
         },
-        bg_propLifeUp: {
+        btn_useprop: {
             default: null,
             type: cc.Node,
-            displayName: '提升生命',
-            tooltip: '生命提升道具'
+            displayName: '使用道具',
+            tooltip: '使用道具按钮'
+        },
+        btn_noprop: {
+            default: null,
+            type: cc.Node,
+            displayName: '不用道具',
+            tooltip: '不使用道具'
         },
         duration: {
             default: 0.2,
@@ -29,24 +41,6 @@ cc.Class({
         this.actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(this.duration, 0), cc.scaleTo(this.duration, 2.0)), cbFadeOut);
         this.node.on('fade-in', this.startFadeIn, this);
         this.node.on('fade-out', this.startFadeOut, this);
-
-    },
-    randomProp: function () {
-        var randomNum = WECHAT.random(0, 2);
-        if (randomNum == 1) {
-            this.bg_propPowerUp.active = true;
-        } else {
-            this.bg_propLifeUp.active = true;
-        }
-    },
-    onUseProp_power: function () {
-        console.log('使用威力道具按钮');
-    },
-    onUseProp_Life: function () {
-        console.log('使用生命道具按钮');
-    },
-    init: function (home) {
-        this.home = home;
     },
     show: function () {
         this.node.active = true;
@@ -65,9 +59,21 @@ cc.Class({
         this.node.runAction(this.actionFadeOut);
     },
     onFadeInFinish: function () {
-        this.randomProp();
     },
     onFadeOutFinish: function () {
         this.node.position = this.outOfWorld;
+    },
+    tapPowe: function () {
+        console.log('tap威力！');
+    },
+    tapLife: function () {
+        console.log('tap生命！');
+    },
+    useProp: function () {
+        console.log('使用道具');
+    },
+    noprop: function () {
+        console.log('不使用道具');
+        this.hide();
     },
 });
