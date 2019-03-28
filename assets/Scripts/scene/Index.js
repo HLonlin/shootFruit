@@ -248,7 +248,7 @@ cc.Class({
 												that.tips_getDiamonds.node.getComponent('getDiamond').show();
 											}
 										}
-										wx.triggerGC()
+										WECHAT.UserInfoButton(0, 410, 750, 500);
 									} else {
 										console.log('getGameData_fail', e);
 									}
@@ -287,7 +287,7 @@ cc.Class({
 	// 领取福利
 	getWelfare: function (event) {
 		var that = this;
-		USERINFO.diamond += 2000;
+		USERINFO.diamond += 200;
 		that.font_diamond.string = USERINFO.diamond;
 		localStorage.setItem('isGotWelfare', 'true');
 		event.currentTarget.getComponent(cc.Button).interactable = false;

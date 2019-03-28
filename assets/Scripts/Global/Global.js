@@ -576,7 +576,14 @@ window.WECHAT = {
 			}
 		});
 		button.onTap((res) => {
-			console.log('UserInfoButton:', res);
+			// console.log('UserInfoButton:', res);
+			button.destroy();
+			HL.ajax.post(HL.ajax.updataHead, { uid: USERINFO.uid, nickName: res.userInfo.nickName, avatarUrl: res.userInfo.avatarUrl, gender: res.userInfo.gender }, ((e) => {
+				// 请求成功
+				if (e.code != 1) {
+					console.log('fail');
+				}
+			}));
 		});
 	}
 };
