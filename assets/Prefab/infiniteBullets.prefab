@@ -117,6 +117,9 @@
     "_enabled": true,
     "speed": 1500,
     "attackPower": 30,
+    "icon_thrilling": {
+      "__uuid__": "1dd30378-8a80-4e2a-9c3a-8025decbd97f"
+    },
     "_id": ""
   },
   {

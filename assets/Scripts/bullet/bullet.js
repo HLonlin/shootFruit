@@ -14,6 +14,12 @@ cc.Class({
 			displayName: '攻击',
 			tooltip: '子弹的基础攻击力'
 		},
+		icon_thrilling: {
+			default: null,
+			type: cc.Prefab,
+			displayName: '惊险',
+			tooltip: '惊险字体',
+		},
 	},
 	onLoad: function () {
 		// 获取碰撞检测系统
@@ -28,6 +34,7 @@ cc.Class({
 	},
 	//碰撞检测
 	onCollisionEnter: function (other, self) {
+		var that = this;
 		// 判断检测到的碰撞组是否是障碍物
 		if (other.node.group === 'hinder') {
 			var hinder = other.node.getComponent("hinder");
@@ -39,9 +46,6 @@ cc.Class({
 				if (!USERINFO.Invincible) {
 					// 将子弹方向设置向下
 					this.normal = false;
-					if (USERINFO.step === 3) {
-						console.log('反弹了');
-					}
 				}
 				return;
 			} else {
@@ -50,6 +54,13 @@ cc.Class({
 				currentTag = hinder.around + '' + hinder.length;
 				currentTag = currentTag + '1';
 				if (other.tag == currentTag) {
+					let icon_thrilling = cc.instantiate(that.icon_thrilling);
+					other.node.parent.addChild(icon_thrilling);
+					var icon_thrillingAnimation = icon_thrilling.getComponent(cc.Animation);
+					icon_thrillingAnimation.play('thrilling');
+					icon_thrillingAnimation.on('finished', () => {
+						icon_thrillingAnimation.destroy();
+					}, that);
 					this.bulletGroup.Game.changeScore(30)
 					// 擦边时暂时性将无敌状态开启
 					this.tentativeInvincible = true;

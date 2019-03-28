@@ -91,12 +91,6 @@ cc.Class({
 			displayName: '子弹库',
 			tooltip: '子弹库弹出框'
 		},
-		bomb: {
-			default: null,
-			type: cc.Node,
-			displayName: '爆炸',
-			tooltip: '爆炸动画'
-		}
 	},
 	onLoad: function () {
 		// 获取碰撞检测系统
@@ -131,9 +125,6 @@ cc.Class({
 		if (other.node.group !== 'bullet' || this.fruitHp <= 0) {
 			return;
 		}
-		// var bomb = this.bomb.getComponent(cc.Animation);
-		// bomb.play('bomb');
-
 		var anim = self.node.getChildByName("fruit_wave").getComponent(cc.Animation);
 		let animName = self.node.getComponent(cc.Sprite).spriteFrame.name;
 		if (animName != null) anim.play(animName);

@@ -80,6 +80,7 @@ cc.Class({
 		this.initState();
 	},
 	initState: function () {
+		console.log('关卡信息：', USERINFO.Data_game[2].json);
 		this.tips_prop.show();
 		// 重置分数
 		HL.nodePoolState.gameScore = 0;
