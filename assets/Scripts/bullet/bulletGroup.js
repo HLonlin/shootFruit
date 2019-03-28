@@ -62,7 +62,9 @@ cc.Class({
 		let newNode = HL.nodePool.genNewNode(that[poolName], that.prefab, that.node);
 		newNode.setPosition(that.getBulletPosition(that.position));
 		newNode.getComponent('bullet').bulletGroup = that;
-		newNode.getComponent(cc.Sprite).spriteFrame = USERINFO.bulletShop[USERINFO.bulletsInUse].bullet;
+		if (USERINFO.bulletShop[USERINFO.bulletsInUse] != undefined) {
+			newNode.getComponent(cc.Sprite).spriteFrame = USERINFO.bulletShop[USERINFO.bulletsInUse].bullet;
+		}
 		if (USERINFO.DoubleDamage == 2) {
 			newNode.setScale(1.5);
 		} else {

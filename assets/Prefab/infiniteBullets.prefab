@@ -17,7 +17,7 @@
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 2,
+    "_level": 1,
     "_components": [
       {
         "__id__": 2
@@ -52,8 +52,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 385,
-      "y": 349,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -117,7 +117,6 @@
     "_enabled": true,
     "speed": 1500,
     "attackPower": 30,
-    "page_Game": null,
     "_id": ""
   },
   {

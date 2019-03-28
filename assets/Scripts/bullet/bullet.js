@@ -39,6 +39,9 @@ cc.Class({
 				if (!USERINFO.Invincible) {
 					// 将子弹方向设置向下
 					this.normal = false;
+					if (USERINFO.step === 3) {
+						console.log('反弹了');
+					}
 				}
 				return;
 			} else {
