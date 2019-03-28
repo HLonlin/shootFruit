@@ -23,12 +23,6 @@ cc.Class({
 			type: require('tips'),
 			displayName: '结束页面',
 		},
-		StartGame: {
-			default: null,
-			type: cc.Node,
-			displayName: '开始游戏',
-			tooltip: '开始游戏'
-		},
 		bulletShop: {
 			default: null,
 			type: require('bulletShop'),
@@ -237,8 +231,6 @@ cc.Class({
 									// 请求成功
 									if (e.code == 1) {
 										USERINFO.init(e.data.info);
-										// 开始动作
-										that.startAction();
 										// 子弹库
 										that.bulletShop.init();
 										// 初始化界面
@@ -291,21 +283,6 @@ cc.Class({
 		that.initPowerUi();
 		that.initCritUi();
 
-	},
-	startAction: function () {
-		var that = this;
-		that.action_StartGame();
-	},
-	// 重复缩放动作
-	action_StartGame: function () {
-		var taht = this;
-		var seq = cc.ActionInstant;
-		seq = cc.repeatForever(
-			cc.sequence(
-				cc.scaleTo(0.75, 0.85),
-				cc.scaleTo(0.75, 1)
-			));
-		taht.StartGame.runAction(seq);
 	},
 	// 领取福利
 	getWelfare: function (event) {
