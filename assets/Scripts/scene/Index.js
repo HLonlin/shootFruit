@@ -419,6 +419,10 @@ cc.Class({
 		var bulletPower = USERINFO.bulletShop[USERINFO.bulletsInUse].power;
 		var fire = Math.floor(power * (1 - crit) + 2 * power * crit + bulletPower);
 		this.powerNum.string = '<outline color=#703d00 width=2><color=#ffffff>战斗力 ' + fire + '</color></outline>';
+		if (USERINFO.armpoweLevel == 19) {
+			this.power_price.string = '<outline color=#2b6393 width=2><color=#ffffff>已满级</color></outline>';
+			this.power_price.node.parent.parent.getComponent(cc.Button).interactable = false;
+		}
 	},
 	updatalevel_crit: function () {
 		// 暴击
@@ -443,6 +447,10 @@ cc.Class({
 		var bulletPower = USERINFO.bulletShop[USERINFO.bulletsInUse].power;
 		var fire = Math.floor(power * (1 - crit) + 2 * power * crit + bulletPower);
 		this.powerNum.string = '<outline color=#703d00 width=2><color=#ffffff>战斗力 ' + fire + '</color></outline>';
+		if (USERINFO.armpoweLevel == 19) {
+			this.crit_price.string = '<outline color=#2b6393 width=2><color=#ffffff>已满级</color></outline>';
+			this.crit_price.node.parent.parent.getComponent(cc.Button).interactable = false;
+		}
 	},
 	// 显示广告
 	openAd: function () {

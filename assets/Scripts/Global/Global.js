@@ -166,13 +166,13 @@ window.USERINFO = {
 	level: 1,//关卡
 	armLevel: 0,//武器威力和暴击的平均等级、决定签到奖励的等级
 	weekDate: new Date().getDate(),//签到等级刷新日期
-	coin: 100,//拥有金币数
+	coin: 99999,//拥有金币数
 	diamond: 100,//拥有钻石数
 	durian: 0,//榴莲蛋剩余次数
 	highestScore: 0,//最高分
 	bulletsInUse: 0,//正在使用的子弹编号
-	armCritLevel: 0,// 武器暴击等级
-	armpoweLevel: 0,// 武器威力等级
+	armCritLevel: 19,// 武器暴击等级
+	armpoweLevel: 19,// 武器威力等级
 	bulletShop: {},// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
 	Invincible: false,//无敌状态
 	luckyNum: 0,//已经抽奖次数
