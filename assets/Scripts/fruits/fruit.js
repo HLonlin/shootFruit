@@ -171,7 +171,7 @@ cc.Class({
 		// 根据武器暴击率计算是否暴击
 		var attackType = this.isCrit(USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit);
 		if (!attackType) {
-			// 普通伤害=子弹威力
+			// 普通伤害=子弹威力 + 武器威力
 			let icon_fire = cc.instantiate(that.icon_fire);
 			icon_fire.getComponent(cc.Label).string = USERINFO.bulletShop[USERINFO.bulletsInUse].power * USERINFO.DoubleDamage;
 			that.node.parent.addChild(icon_fire);
@@ -180,7 +180,7 @@ cc.Class({
 			icon_fireAnimation.on('finished', () => {
 				icon_fire.destroy();
 			}, that);
-			return USERINFO.bulletShop[USERINFO.bulletsInUse].power;
+			return (USERINFO.bulletShop[USERINFO.bulletsInUse].power + USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Power);
 		} else {
 			// 暴击伤害=(子弹威力 + 武器威力) * 2
 			let icon_crit = cc.instantiate(that.icon_crit);

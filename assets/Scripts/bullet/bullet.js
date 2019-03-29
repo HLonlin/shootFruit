@@ -30,7 +30,6 @@ cc.Class({
 		this.normal = true;
 		// 暂时性无敌状态
 		this.tentativeInvincible = false;
-
 	},
 	//碰撞检测
 	onCollisionEnter: function (other, self) {
@@ -61,7 +60,7 @@ cc.Class({
 					icon_thrillingAnimation.on('finished', () => {
 						icon_thrillingAnimation.destroy();
 					}, that);
-					this.bulletGroup.Game.changeScore(30)
+					this.bulletGroup.Game.changeScore(100);
 					// 擦边时暂时性将无敌状态开启
 					this.tentativeInvincible = true;
 				}
