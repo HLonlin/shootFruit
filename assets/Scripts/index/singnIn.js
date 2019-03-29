@@ -54,7 +54,25 @@ cc.Class({
             type: cc.Label,
             displayName: '钻石',
             tooltip: '用户拥有钻石'
-        }
+        },
+        btn_openDurian: {
+            default: null,
+            type: cc.Button,
+            displayName: '开启榴莲按钮',
+            tooltip: '开启榴莲按钮'
+        },
+        redPoint_durian: {
+            default: null,
+            type: cc.Sprite,
+            displayName: '榴莲红点',
+            tooltip: '榴莲红点'
+        },
+        font_durianNum: {
+            default: null,
+            type: cc.Label,
+            displayName: '榴莲蛋',
+            tooltip: '榴莲蛋抽奖次数'
+        },
     },
     onLoad() {
         this.today = USERINFO.today || new Date().getDate(); //上一次刷新签到状态的日期
@@ -69,25 +87,9 @@ cc.Class({
         }
         this.Day = new Date().getDay() == 0 ? 7 : new Date().getDay();
         this.Day -= 1;
-
     },
     start() {
         this.initUi();
-    },
-    initData: function () {
-        // 每7天检测一次是否需要更新签到奖励等级
-        // USERINFO.weekDate = new Date().getDate() - USERINFO.weekDate >= 7 ? new Date().getDate() : USERINFO.weekDate;
-        if (new Date().getDate() - USERINFO.weekDate >= 7) {
-            USERINFO.weekDate = new Date().getDate();
-            USERINFO.armLevel = (USERINFO.armCritLevel + USERINFO.armpoweLevel) / 2;
-        }
-        // 根据武器等级（签到奖励等级）刷新签到奖励
-        for (var i = 0, max = USERINFO.Data_game[3].json.length; i < max; i++) {
-            if (USERINFO.armLevel <= this.singnData[i].level) {
-                console.log('this.singnData[i]:', this.singnData[i]);
-            }
-        }
-
     },
     initUi: function () {
         if (this.signInState == 1) {
@@ -104,6 +106,9 @@ cc.Class({
                 var icon_singnCoin = this.dayArr[i].children[0].getChildByName("icon_singnCoin");
                 if (icon_singnCoin != null) {
                     icon_singnCoin.getComponent(cc.Sprite).spriteFrame = this.singnReward[i].res;
+                    if (this.singnReward[i].res.name == 'tubiao_liulian') {
+                        icon_singnCoin.setScale(0.75);
+                    }
                 }
             }
             // 当天
@@ -118,6 +123,9 @@ cc.Class({
                     var icon_singnCoin = this.dayArr[i].children[1].getChildByName("icon_singnCoin");
                     if (icon_singnCoin != null) {
                         icon_singnCoin.getComponent(cc.Sprite).spriteFrame = this.singnReward[i].res;
+                        if (this.singnReward[i].res.name == 'tubiao_liulian') {
+                            icon_singnCoin.setScale(0.75);
+                        }
                     }
                     // 奖励数目
                     var font_singnNum = this.dayArr[i].children[1].getChildByName("font_singnNum");
@@ -130,6 +138,9 @@ cc.Class({
                     var icon_singnCoin = this.dayArr[i].children[0].getChildByName("icon_singnCoin");
                     if (icon_singnCoin != null) {
                         icon_singnCoin.getComponent(cc.Sprite).spriteFrame = this.singnReward[i].res;
+                        if (this.singnReward[i].res.name == 'tubiao_liulian') {
+                            icon_singnCoin.setScale(0.75);
+                        }
                     }
                 }
             }
@@ -141,6 +152,9 @@ cc.Class({
                 var icon_singnCoin = this.dayArr[i].children[2].getChildByName("icon_singnCoin");
                 if (icon_singnCoin != null) {
                     icon_singnCoin.getComponent(cc.Sprite).spriteFrame = this.singnReward[i].res;
+                    if (this.singnReward[i].res.name == 'tubiao_liulian') {
+                        icon_singnCoin.setScale(0.75);
+                    }
                 }
                 // 奖励数目
                 var font_singnNum = this.dayArr[i].children[2].getChildByName("font_singnNum");
@@ -162,10 +176,18 @@ cc.Class({
             } else if (res == 'tubiao_zuanshi00') {
                 USERINFO.diamond += num;
                 that.font_diamNums.string = USERINFO.diamond;
-            } else if (res == 'tubiao_lihe0201') {
-                console.log('奖励礼盒');
             } else if (res == 'tubiao_liulian') {
                 USERINFO.durian += num;
+                if (USERINFO.durian == 0) {
+                    that.btn_openDurian.interactable = true;
+                    that.redPoint_durian.node.active = false;
+                } else {
+                    that.btn_openDurian.interactable = false;
+                    that.redPoint_durian.node.active = true;
+                    that.font_durianNum.string = USERINFO.durian;
+                }
+            } else if (res == 'tubiao_lihe0201') {
+                console.log('奖励礼盒');
             }
             that.signInState = that.signInState + 1;
             // 保存最新签到状态
