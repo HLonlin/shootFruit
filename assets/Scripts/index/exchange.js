@@ -70,9 +70,11 @@ cc.Class({
             var color = new cc.Color(255, 0, 0);
             this.DiamondNum.node.color = color;
         }
+        WECHAT.showBannerAd();
     },
     hide: function () {
         this.node.emit('fade-out');
+        WECHAT.closeBannerAd();
     },
     startFadeIn: function () {
         this.node.position = cc.v2(0, 0);

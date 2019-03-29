@@ -62,9 +62,11 @@ cc.Class({
     show: function () {
         this.node.active = true;
         this.node.emit('fade-in');
+        WECHAT.showBannerAd();
     },
     hide: function () {
         this.node.emit('fade-out');
+        WECHAT.closeBannerAd();
     },
     startFadeIn: function () {
         this.node.position = cc.v2(0, 0);

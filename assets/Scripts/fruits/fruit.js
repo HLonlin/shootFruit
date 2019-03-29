@@ -91,6 +91,18 @@ cc.Class({
 			displayName: '子弹库',
 			tooltip: '子弹库弹出框'
 		},
+		icon_crit: {
+			default: null,
+			type: cc.Prefab,
+			displayName: '暴击',
+			tooltip: '暴击字体',
+		},
+		icon_fire: {
+			default: null,
+			type: cc.Prefab,
+			displayName: '伤害',
+			tooltip: '伤害字体',
+		},
 	},
 	onLoad: function () {
 		// 获取碰撞检测系统
@@ -155,13 +167,30 @@ cc.Class({
 	},
 	// 计算伤害
 	injuryValue: function () {
+		var that = this;
 		// 根据武器暴击率计算是否暴击
 		var attackType = this.isCrit(USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit);
 		if (!attackType) {
 			// 普通伤害=子弹威力
+			let icon_fire = cc.instantiate(that.icon_fire);
+			icon_fire.getComponent(cc.Label).string = USERINFO.bulletShop[USERINFO.bulletsInUse].power * USERINFO.DoubleDamage;
+			that.node.parent.addChild(icon_fire);
+			var icon_fireAnimation = icon_fire.getComponent(cc.Animation);
+			icon_fireAnimation.play('fire');
+			icon_fireAnimation.on('finished', () => {
+				icon_fire.destroy();
+			}, that);
 			return USERINFO.bulletShop[USERINFO.bulletsInUse].power;
 		} else {
 			// 暴击伤害=(子弹威力 + 武器威力) * 2
+			let icon_crit = cc.instantiate(that.icon_crit);
+			icon_crit.getChildByName('font_num').getComponent(cc.Label).string = ((USERINFO.bulletShop[USERINFO.bulletsInUse].power + USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Power) * 2) * USERINFO.DoubleDamage;
+			that.node.parent.addChild(icon_crit);
+			var icon_critAnimation = icon_crit.getComponent(cc.Animation);
+			icon_critAnimation.play('crit');
+			icon_critAnimation.on('finished', () => {
+				icon_crit.destroy();
+			}, that);
 			return (USERINFO.bulletShop[USERINFO.bulletsInUse].power + USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Power) * 2;
 		}
 	},
@@ -189,8 +218,10 @@ cc.Class({
 		// 判断本局是否奖励子弹
 		if (this.level.bullet != 0) {
 			this.page_newBullet.show();
+			WECHAT.showBannerAd();
 			setTimeout(function () {
 				that.page_newBullet.hide();
+				WECHAT.closeBannerAd();
 				that.page_Over.node.getComponent('Over').fadein_victory();
 			}, 2000);
 		} else {

@@ -110,12 +110,14 @@ cc.Class({
         this.victoryDiam_zIndex = this.font_diamond.zIndex;
         this.tips_victory.getComponent('tips').show();
         this.showIcon();
+        WECHAT.showBannerAd();
     },
     fadeOut_victory: function () {
         this.hideIcon();
         this.tips_victory.getComponent('tips').hide();
         this.font_coin.zIndex = this.victoryCoin_zIndex;
         this.font_diamond.zIndex = this.victoryDiam_zIndex;
+        WECHAT.closeBannerAd();
     },
     fadein_revive: function () {
         this.font_coin.opacity = 255;
@@ -125,6 +127,7 @@ cc.Class({
         this.tips_revive.getComponent('tips').show();
         this.panel_levelUp.node.getComponent('fadeTab').fadeToggle();
         this.showIcon();
+        WECHAT.showBannerAd();
     },
     fadeOut_revive: function (data, type) {
         if (type = 'skip') {
@@ -164,6 +167,7 @@ cc.Class({
                 }, 'querys1=1');
             });
         }
+        WECHAT.closeBannerAd();
     },
     fadein_over: function () {
         this.submitScore();
@@ -174,6 +178,7 @@ cc.Class({
         this.overCoin_zIndex = this.font_coin.zIndex;
         this.overDiam_zIndex = this.font_diamond.zIndex;
         this.tips_over.getComponent('tips').show();
+        WECHAT.showBannerAd();
     },
     fadeOut_over: function () {
         this.hideIcon();
@@ -182,6 +187,7 @@ cc.Class({
         this.tips_over.getComponent('tips').hide();
         this.font_coin.zIndex = this.victoryCoin_zIndex;
         this.font_diamond.zIndex = this.victoryDiam_zIndex;
+        WECHAT.closeBannerAd();
     },
     onLoad() {
         this.init();

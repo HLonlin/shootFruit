@@ -304,6 +304,9 @@ cc.Class({
 		that.tips_singnIn.show();
 	},
 	// 开启榴莲蛋
+	closeDurian: function () {
+		WECHAT.closeBannerAd();
+	},
 	openDurian: function () {
 		var that = this;
 		if (USERINFO.durian > 0) {
@@ -346,6 +349,7 @@ cc.Class({
 			that.icon_luckyReward.height = luckyRewardNum * 115
 			USERINFO.luckyNum = USERINFO.luckyNum + 1 >= 20 ? 15 : USERINFO.luckyNum + 1;
 			that.tips_openDurian.show();
+			WECHAT.showBannerAd();
 		} else {
 			if (cc.sys.platform === cc.sys.WECHAT_GAME) {
 				WECHAT.openVideoAd(() => {

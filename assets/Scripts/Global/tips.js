@@ -38,6 +38,7 @@ cc.Class({
         this.node.runAction(this.actionFadeOut);
     },
     onFadeInFinish: function () {
+        
     },
     onFadeOutFinish: function () {
         this.node.position = this.outOfWorld;
