@@ -248,7 +248,7 @@ cc.Class({
 												that.tips_getDiamonds.node.getComponent('getDiamond').show();
 											}
 										}
-										WECHAT.UserInfoButton(0, 410, 750, 500);
+										WECHAT.UserInfoButton(0, 410, 750, 700);
 									} else {
 										console.log('getGameData_fail', e);
 									}

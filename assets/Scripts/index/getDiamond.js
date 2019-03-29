@@ -18,7 +18,25 @@ cc.Class({
             type: cc.Node,
             displayName: '领取按钮',
             tooltip: '领取钻石按钮'
-        }
+        },
+        tips_reward: {
+            default: null,
+            type: require('tips'),
+            displayName: '奖励弹框',
+            tooltip: '获得奖励弹出框'
+        },
+        icon_luckyReward: {
+            default: null,
+            type: cc.Node,
+            displayName: '奖励box',
+            tooltip: '奖励box'
+        },
+        item_diamond: {
+            default: null,
+            type: cc.Prefab,
+            displayName: '钻石奖励',
+            tooltip: '抽奖奖励预制'
+        },
     },
     onLoad: function () {
         this.GotDiamondDay = USERINFO.GotDiamondDay || new Date().getDate(); //上一次刷新领取钻石状态的日期
@@ -83,7 +101,8 @@ cc.Class({
             USERINFO.isGotDiamonds = 1;
             that.btn_getDiamond.getComponent(cc.Button).interactable = false;
             that.btn_getDiamond.getChildByName('font_share').getComponent(cc.RichText).string = "<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>";
-            USERINFO.save()
+            USERINFO.save();
+            that.onGetReword();
         } else {
             WECHAT.sharer(null, () => {
                 wx.showModal({
@@ -101,5 +120,16 @@ cc.Class({
                 })
             }, 'openId=' + USERINFO.openId + '&type=getDiamond');
         }
+    },
+    onGetReword: function () {
+        var that = this;
+        for (var i = 0, max = that.icon_luckyReward.children.length; i < max; i++) {
+            that.icon_luckyReward.children[i].destroy();
+        }
+        let item_diamond = cc.instantiate(that.item_diamond);
+        item_diamond.getChildByName("font_rewardNum").getComponent(cc.Label).string = 'x 40';
+        that.icon_luckyReward.addChild(item_diamond);
+        that.icon_luckyReward.height = 115
+        that.tips_reward.show();
     }
 });
