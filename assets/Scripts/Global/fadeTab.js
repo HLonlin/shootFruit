@@ -44,6 +44,12 @@ cc.Class({
             displayName: '主页武器',
             tooltip: '主页武器动画'
         },
+        index_startgame: {
+            default: null,
+            type: cc.Node,
+            displayName: '主页开始按钮',
+            tooltip: '主页开始按钮'
+        },
         index_bullet: {
             default: null,
             type: cc.Node,
@@ -63,9 +69,13 @@ cc.Class({
             this.node.active = true;
             this.node.emit('fade-in');
             this.fade = true;
+            this.index_arm.getComponent(cc.Button).interactable = false;
+            this.index_startgame.getComponent(cc.Button).interactable = false;
         } else {
             this.node.emit('fade-out');
             this.fade = false;
+            this.index_arm.getComponent(cc.Button).interactable = true;
+            this.index_startgame.getComponent(cc.Button).interactable = true;
         }
     },
     fadeOut: function () {

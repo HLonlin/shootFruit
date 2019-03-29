@@ -155,6 +155,12 @@ cc.Class({
 			displayName: '武器暴击价格',
 			tooltip: '武器暴击价格'
 		},
+		powerNum: {
+			default: null,
+			type: cc.RichText,
+			displayName: '首页战斗力',
+			tooltip: '首页战斗力'
+		},
 		icon_luckyReward: {
 			default: null,
 			type: cc.Node,
@@ -282,7 +288,6 @@ cc.Class({
 		// 升级面板
 		that.initPowerUi();
 		that.initCritUi();
-
 	},
 	// 领取福利
 	getWelfare: function (event) {
@@ -404,6 +409,12 @@ cc.Class({
 		this.font_powerLevel.string = 'Lv.' + (USERINFO.armpoweLevel + 1);
 		this.font_powerNum.string = USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Power;
 		this.power_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Price + '</color></outline>';
+		// 武器攻击力*（1-暴击率）+2*武器攻击力*暴击率+子弹威力
+		var power = USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Power;
+		var crit = USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Crit;
+		var bulletPower = USERINFO.bulletShop[USERINFO.bulletsInUse].power;
+		var fire = Math.floor(power * (1 - crit) + 2 * power * crit + bulletPower);
+		this.powerNum.string = '<outline color=#703d00 width=2><color=#ffffff>战斗力 ' + fire + '</color></outline>';
 	},
 	updatalevel_crit: function () {
 		// 暴击
@@ -422,6 +433,12 @@ cc.Class({
 		this.font_critLevel.string = 'Lv.' + (USERINFO.armCritLevel + 1);
 		this.font_critNum.string = Math.floor(USERINFO.Data_game[0].json[USERINFO.armCritLevel].Crit * 100) + '%';
 		this.crit_price.string = '<outline color=#2b6393 width=2><color=#ffffff>' + USERINFO.Data_game[0].json[USERINFO.armCritLevel].Price + '</color></outline>';
+		// 武器攻击力*（1-暴击率）+2*武器攻击力*暴击率+子弹威力
+		var power = USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Power;
+		var crit = USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Crit;
+		var bulletPower = USERINFO.bulletShop[USERINFO.bulletsInUse].power;
+		var fire = Math.floor(power * (1 - crit) + 2 * power * crit + bulletPower);
+		this.powerNum.string = '<outline color=#703d00 width=2><color=#ffffff>战斗力 ' + fire + '</color></outline>';
 	},
 	// 显示广告
 	openAd: function () {
