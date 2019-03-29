@@ -173,7 +173,7 @@ cc.Class({
 		if (!attackType) {
 			// 普通伤害=子弹威力 + 武器威力
 			let icon_fire = cc.instantiate(that.icon_fire);
-			icon_fire.getComponent(cc.Label).string = USERINFO.bulletShop[USERINFO.bulletsInUse].power * USERINFO.DoubleDamage;
+			icon_fire.getComponent(cc.Label).string = (USERINFO.bulletShop[USERINFO.bulletsInUse].power + USERINFO.Data_game[0].json[USERINFO.armpoweLevel].Power) * USERINFO.DoubleDamage;
 			that.node.parent.addChild(icon_fire);
 			var icon_fireAnimation = icon_fire.getComponent(cc.Animation);
 			icon_fireAnimation.play('fire');
