@@ -29,12 +29,6 @@ cc.Class({
 			displayName: '子弹库',
 			tooltip: '子弹库弹出框'
 		},
-		tips_welfare: {
-			default: null,
-			type: require('tips'),
-			displayName: '福利弹出框',
-			tooltip: '消息弹出框'
-		},
 		tips_openDurian: {
 			default: null,
 			type: require('tips'),
@@ -207,9 +201,9 @@ cc.Class({
 			});
 			wx.onShow((res) => {
 				USERINFO.initSync.query = res.query;
+				USERINFO.initSync.scene = res.scene;
 				// 领钻石弹出
 				if (USERINFO.initSync.query.type == 'getDiamond') {
-					console.log('USERINFO.isGotDiamonds:', USERINFO.isGotDiamonds);
 					if (USERINFO.isGotDiamonds == 0) {
 						that.tips_getDiamonds.node.getComponent('getDiamond').show();
 					}
@@ -222,7 +216,6 @@ cc.Class({
 		USERINFO.Data_game = this.Data_game;
 		USERINFO.bulletShop = this.bulletShop.fruit;
 		USERINFO.initSync = USERINFO.getInitScene();
-		// console.log('USERINFO.initSync:', USERINFO.initSync)
 		// 登录并获取用户信息
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
 			wx.login({

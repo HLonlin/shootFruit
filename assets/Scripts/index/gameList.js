@@ -65,7 +65,10 @@ cc.Class({
             this.itemsArr[i].on('touchend', function (event) {
                 var index = event.currentTarget.index;
                 if (WECHAT.GameList[index] != undefined) {
-                    console.log('跳转到小程序：', WECHAT.GameList[index].appid, 'index:', index);
+                    wx.navigateToMiniProgram({
+                        appId: WECHAT.GameList[index].appid,
+                        fail: (res) => { console.log('跳转失败', res) }
+                    });
                 }
             }, this);
         }

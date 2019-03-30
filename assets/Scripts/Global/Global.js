@@ -360,6 +360,8 @@ window.WECHAT = {
 			// 请求成功
 			// console.log('获取流量主列表success', res);
 			if (res.code == 1) {
+				// 审核状态、当审核中关闭分享
+				USERINFO.shareState = res.data.edition_1;
 				that.createBanner(res.data);
 				that.createVideo(res.data);
 				that.INIT_STATUS = 2
@@ -489,6 +491,9 @@ window.WECHAT = {
 	},
 	// 分享卡
 	share: function (index, success, fail, querys) {
+		if (USERINFO.shareState == 1) {
+			return;
+		}
 		var that = this;
 		var randomNum = (index != null) ? index : that.random(1, 3) - 1;
 		// 本地分享图
@@ -522,6 +527,9 @@ window.WECHAT = {
 		})
 	},
 	sharer: function (index, success, fail, querys) {
+		if (USERINFO.shareState == 1) {
+			return;
+		}
 		var that = this;
 		var randomNum = (index != null) ? index : that.random(1, 3) - 1;
 		that.shareImage = [
