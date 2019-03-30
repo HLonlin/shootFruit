@@ -166,13 +166,13 @@ window.USERINFO = {
 	level: 1,//关卡
 	armLevel: 0,//武器威力和暴击的平均等级、决定签到奖励的等级
 	weekDate: new Date().getDate(),//签到等级刷新日期
-	coin: 99999,//拥有金币数
+	coin: 100,//拥有金币数
 	diamond: 100,//拥有钻石数
 	durian: 0,//榴莲蛋剩余次数
 	highestScore: 0,//最高分
 	bulletsInUse: 0,//正在使用的子弹编号
-	armCritLevel: 19,// 武器暴击等级
-	armpoweLevel: 19,// 武器威力等级
+	armCritLevel: 0,// 武器暴击等级
+	armpoweLevel: 0,// 武器威力等级
 	bulletShop: {},// 子弹库解锁情况：0未解锁、1已解锁未购买、2已购买
 	Invincible: false,//无敌状态
 	luckyNum: 0,//已经抽奖次数
@@ -182,6 +182,7 @@ window.USERINFO = {
 	GotDiamondDay: new Date().getDate(),// 领取钻石对话框领取钻石刷新日期
 	exchange_getDiamond: 2,//兑换钻石对话框领取钻石剩余次数
 	exchange_DiamondDay: new Date().getDate(),//兑换钻石对话框领取钻石刷新日期
+	isgot: 0,//是否领取了福利
 	initScene: null,// 初始场景值，用于区分从哪进入游戏
 	// 同步数据到本地
 	init: function (data) {
@@ -206,8 +207,9 @@ window.USERINFO = {
 		that.signInState = data.signInState || that.signInState;
 		that.isGotDiamonds = data.isGotDiamonds || that.isGotDiamonds;//领取钻石对话框是否领取过钻石 0未领取、1已领取
 		that.GotDiamondDay = data.GotDiamondDay || that.GotDiamondDay;//领取钻石对话框领取钻石刷新日期
-		that.exchange_getDiamond = data.exchange_getDiamond //兑换钻石对话框领取钻石剩余次数
-		that.exchange_DiamondDay = data.exchange_DiamondDay //兑换钻石对话框领取钻石刷新日期
+		that.exchange_getDiamond = data.exchange_getDiamond; //兑换钻石对话框领取钻石剩余次数
+		that.exchange_DiamondDay = data.exchange_DiamondDay; //兑换钻石对话框领取钻石刷新日期
+		that.isgot = data.isgot || 0;//是否领取了福利
 	},
 	save: function () {
 		var bulletShop = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -233,6 +235,7 @@ window.USERINFO = {
 			GotDiamondDay: USERINFO.GotDiamondDay,//领取钻石对话框领取钻石刷新日期
 			exchange_getDiamond: USERINFO.exchange_getDiamond,//兑换钻石对话框领取钻石剩余次数
 			exchange_DiamondDay: USERINFO.exchange_DiamondDay,//兑换钻石对话框领取钻石刷新日期
+			isgot: USERINFO.isgot//是否领取福利
 		}
 		var info = JSON.stringify(data);
 		HL.ajax.post(HL.ajax.setGameData, { uid: USERINFO.uid, info: info }, ((e) => {

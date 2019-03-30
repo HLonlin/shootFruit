@@ -222,6 +222,7 @@ cc.Class({
 		USERINFO.Data_game = this.Data_game;
 		USERINFO.bulletShop = this.bulletShop.fruit;
 		USERINFO.initSync = USERINFO.getInitScene();
+		// console.log('USERINFO.initSync:', USERINFO.initSync)
 		// 登录并获取用户信息
 		if (cc.sys.platform === cc.sys.WECHAT_GAME) {
 			wx.login({

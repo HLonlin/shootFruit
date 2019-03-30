@@ -27,11 +27,11 @@ cc.Class({
         },
     },
     onLoad() {
-        this.isgot = localStorage.getItem('isGotWelfare') || 'false';
-        if (this.isgot == 'true') {
+        // this.isgot = localStorage.getItem('isGotWelfare') || 'false';
+        if (USERINFO.isgot === 1) {
             this.btn_getWelfare.getComponent(cc.Button).interactable = false;
             this.btn_getWelfare.node.getChildByName("font_getWelfare").getComponent(cc.RichText).string = '<outline color=#9e5d00 width=2><color=#ffffff>已领取</color>';
-        } else if (USERINFO.initSync.scene == '1001' || USERINFO.initSync.scene == '1103' || USERINFO.initSync.scene == '1104' || USERINFO.initSync.scene == '1089') {
+        } else if (USERINFO.initSync.scene == '1104') {
             this.btn_getWelfare.getComponent(cc.Button).interactable = true;
         } else {
             this.btn_getWelfare.getComponent(cc.Button).interactable = false;
@@ -40,6 +40,7 @@ cc.Class({
     },
     onGetReword: function () {
         var that = this;
+        USERINFO.isgot = 1;
         for (var i = 0, max = that.icon_luckyReward.children.length; i < max; i++) {
             that.icon_luckyReward.children[i].destroy();
         }

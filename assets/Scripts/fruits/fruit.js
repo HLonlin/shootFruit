@@ -227,7 +227,7 @@ cc.Class({
 		} else {
 			this.page_Over.node.getComponent('Over').fadein_victory();
 		}
-		USERINFO.level += 1;
+		USERINFO.level = USERINFO.level + 1 >= 34 ? 30 : USERINFO.level + 1;
 		if (HL.nodePoolState.gameScore > USERINFO.highestScore) {
 			USERINFO.highestScore = HL.nodePoolState.gameScore;
 		}
@@ -257,6 +257,8 @@ cc.Class({
 					this.font_coin.string = USERINFO.coin;
 					USERINFO.bulletShop[this.level.bullet - 1].state = 2;
 					USERINFO.bulletsInUse = this.level.bullet - 1;
+					reward_bullet.getChildByName('btn_buyBullet').getChildByName('font_price').getComponent(cc.RichText).string = '<outline color=#39A3FF width=2><color=#ffffff>已买</color></outline>';
+					reward_bullet.getChildByName('btn_buyBullet').getComponent(cc.Button).interactable = false;
 					wx.showToast({
 						title: '子弹已购买',
 						icon: 'none',

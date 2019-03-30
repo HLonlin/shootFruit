@@ -93,7 +93,7 @@ cc.Class({
     // 兑换领取钻石
     exchange_getDiamond: function () {
         if (USERINFO.exchange_getDiamond > 0) {
-            WECHAT.share(null, () => {
+            WECHAT.openVideoAd(() => {
                 USERINFO.exchange_getDiamond -= 1;
                 USERINFO.diamond += 50;
                 this.font_userDiamond.string = USERINFO.diamond;
@@ -104,13 +104,45 @@ cc.Class({
                 }
                 USERINFO.save();
             }, () => {
-                wx.showToast({
-                    title: '请分享到群',
-                    icon: 'none',
-                    duration: 2000,
-                    mask: true
-                })
-            }, 'openId=' + USERINFO.openId);
+                console.log('中途退出视频');
+            }, () => {
+                WECHAT.share(null, () => {
+                    USERINFO.exchange_getDiamond -= 1;
+                    USERINFO.diamond += 50;
+                    this.font_userDiamond.string = USERINFO.diamond;
+                    this.DiamondNum.string = "剩余" + USERINFO.exchange_getDiamond + "次机会";
+                    if (USERINFO.exchange_getDiamond <= 0) {
+                        var color = new cc.Color(255, 0, 0);
+                        this.DiamondNum.node.color = color;
+                    }
+                    USERINFO.save();
+                }, () => {
+                    wx.showToast({
+                        title: '请分享到群',
+                        icon: 'none',
+                        duration: 2000,
+                        mask: true
+                    })
+                }, 'querys1=1');
+            });
+            // WECHAT.share(null, () => {
+            //     USERINFO.exchange_getDiamond -= 1;
+            //     USERINFO.diamond += 50;
+            //     this.font_userDiamond.string = USERINFO.diamond;
+            //     this.DiamondNum.string = "剩余" + USERINFO.exchange_getDiamond + "次机会";
+            //     if (USERINFO.exchange_getDiamond <= 0) {
+            //         var color = new cc.Color(255, 0, 0);
+            //         this.DiamondNum.node.color = color;
+            //     }
+            //     USERINFO.save();
+            // }, () => {
+            //     wx.showToast({
+            //         title: '请分享到群',
+            //         icon: 'none',
+            //         duration: 2000,
+            //         mask: true
+            //     })
+            // }, 'openId=' + USERINFO.openId);
         } else {
             console.log('次数不足');
         }
